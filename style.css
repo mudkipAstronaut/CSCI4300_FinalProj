@@ -1,6 +1,7 @@
 body {
 	margin-top: 0px;
 	margin-left: 0px;
+	margin-right: 0px;
 }
 
 /*.desktop-nav {
@@ -32,7 +33,6 @@ a {
 
 header {
 	width: 100%;
-	position: fixed;  
 	/*
 	left: 0;  
 	right: 0;  
@@ -60,4 +60,30 @@ header * {
 
 #navSearch:hover {
 	
+}
+
+.pEntry img{
+    width: 150px;
+    length: 150px;
+    margin-right: 1em;
+    float: left;
+}
+.pEntry p{
+    font-size: 0.7em;
+}
+.pEntry{
+    margin: 1em;
+}
+#results{
+    display: grid;
+}
+
+#filters{
+    float:left;
+    margin: 1em;
+    display: grid;
+}
+#filters ul, li{
+    padding: 0;
+    list-style-type: none;
 }
