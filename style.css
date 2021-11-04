@@ -4,11 +4,6 @@ body {
 	margin-right: 0px;
 }
 
-/*.desktop-nav {
-	width: 100%;
-	display: block;
-} */
-
 .top_navbar {
 	background-color: #99EEFF;
 }
@@ -64,7 +59,7 @@ header * {
 	/* pointer-events: none; */
 }
 
-#navSearch:hover {
+#navSearchButton: {
 	
 }
 
