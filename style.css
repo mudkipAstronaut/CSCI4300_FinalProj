@@ -95,7 +95,7 @@ header * {
 }
 
 
-/* =================================================================== */
+/* Homepage */
 
 * {box-sizing: border-box}
 body {font-family: Verdana, sans-serif; margin:0}
@@ -211,7 +211,58 @@ img {vertical-align: middle;}
   to {opacity: 1}
 }
 
-/* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
+}
+
+/* Wishlist */
+
+#wishlist-container {
+	display: table;
+	margin: 0 auto;
+}
+
+#wishlist-container a {
+  color: black;
+  text-decoration: underline
+}
+
+.wishlistEntry {
+	display: table;
+	background-color: #99EEFF;
+	border: 2px solid slateblue;
+	margin: 5px;
+	width: 800px;
+	height: 20px;
+	cursor: pointer;
+}
+.wishlistEntry img {
+	width: 150px;
+	float: left;
+}
+
+.wishlist-aboveNotes {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.wishlist-Notes {
+	display: table;
+}
+
+.travelNotesHeader {
+	font-size: 20px;
+	padding: 0px;
+	margin: 0px 0px 0px 5px;
+}
+
+.wishlist-textarea {
+	margin: 5px;
+	width: 750px;
+	max-width: 750px;
+	min-height: 50px;
+}
+
+.wishlist-saveNotes {
+	margin: 0px 0px 5px 5px;
 }
