@@ -10,58 +10,71 @@ body {
 
 
 .top_navlist {
-	display: inline;
+	/* display: inline; */
+	margin: 0;
 } 
 
-li.top_navlist:hover {
+ul.top_navlist {
+	list-style-type: none;	
+	overflow: hidden;
+	font-family: sans-serif;
+}
+
+ul.top_navlist li:hover {
 	background-color: #BEFFFF;
 }
 
-li.top_navlist:active {
+ul.top_navlist li:active {
 	background-color: #BEFFFF;
 }
 
-li.top_navlist {
-	padding-left: 2%;
-	padding-right: 2%;
-	padding-bottom: 1px;
+ul.top_navlist li {
+	float: left;
+}	
+
+ul.top_navlist li.right {
+	float: left;
+}
+
+ul.top_navlist li a{
+	display: block;
+	text-decoration: none;
+	padding: 0px 10px;
+	/* padding-left: 2%; */
+	/* padding-right: 2%; */
+	/* padding-bottom: 1px; */
 }
 
 a {
-	text-decoration: none;
 }
 
 header {
 	width: 100%;
-	/*
-	left: 0;  
-	right: 0;  
-	top: 5px;  
-	height: 30px;  */
-	display: flex;  
+	/* left: 0;   */
+	/* right: 0;   */
+	/* top: 5px;   */
+	/* height: 30px;   */
 	align-items: center;  
 }
 
-header * {
-	display: inline;
-}
-
 #topLevel {
-	width: 100%;
+	/* width: 100%; */
 	padding-bottom: 3px;
 	padding-top: 3px;
 }
 
 #navSearch {
-	padding-left: 0%;
-	padding-right: 0%;
-	padding-bottom: 0%;
+	/* padding-left: 0%; */
+	/* padding-right: 0%; */
+	/* padding-bottom: 0%; */
 	/* pointer-events: none; */
 }
 
 #navSearchButton: {
 	
 }
+
+/* php shit */
 
 .pEntry img{
     width: 150px;
