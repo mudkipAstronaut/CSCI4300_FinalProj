@@ -2,6 +2,10 @@
 <html>
 <head>
 <style>
+ul {
+	padding-left: 10px;
+}
+
 input {
 	margin: 0;
 	border: 1px outset blue;	
