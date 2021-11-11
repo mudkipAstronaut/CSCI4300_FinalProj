@@ -5,19 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
 <body>
 <header>
-<div id="topLevel" class="top_navbar">
-<nav class="desktop-nav">
-  <div style="display:inline" class="top_navbar">
-    <ul class="top_navlist">
-      <li id="icon" class="top_navlist"><a href="home.html"><span>WooHoo</span></a></li>
-      <li id="navSearch" class="top_navlist"><input placeholder="Type Something Here"/></li>
-      <li class="top_navlist"><a href="">Search</a></li>
-      <li class="top_navlist"><a href="">Wishlist</a></li>
-      <li class="top_navlist"><a href="">Login</a></li>
-    </ul>
-  </div>
-</nav>
-</div>
+<?php include('header.php'); ?>
 </header>
 
 

@@ -43,7 +43,7 @@ input[type="submit"]:hover {
 				}
 			</script>
 			<li class="right"><a href="">Login</a></li>
-			<li class="right"><a href="">Wishlist</a></li>
+			<li class="right"><a href="wishlist.php">Wishlist</a></li>
 			<!-- <li class="top_navlist" style="float:right; margin-right:5px; "><a href="">Login</a></li> -->
 		</ul>		
 	</div>
