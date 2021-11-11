@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+input {
+	margin: 0;
+	border: 1px outset blue;	
+}
+
+input[type="submit"] {
+	cursor: pointer;
+	margin-left: 1px;
+	background-color: rgb(255, 215, 0);
+}
+
+input[type="submit"]:hover {
+	background-color: rgb(255, 245, 0);
+}
+</style>
+</head>
 <nav>
 	<div id="topLevel" class="top_navbar">
 	<div style="display:inline" class="top_navbar">
@@ -9,7 +27,7 @@
 				<li id="navSearch" >
 				<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
 				<input type="search" name="query" placeholder="Type Something Here"
-				/><input style="margin:0;" type="submit" value="Search" /></li>
+				/><input type="submit" value="Search" /></li>
 			</form>
 			<script>
 				function validate() {
