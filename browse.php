@@ -2,13 +2,12 @@
 require('database.php');
 
 //get a default value for an empty search
-$count = filter_input(INPUT_GET, 'country');
-if($count == NULL || $count == FALSE){
-$count = 'USA';
+$search = filter_input(INPUT_POST, 'query');
+if($search == NULL || $search == FALSE){
+$search = 'USA';
 }
-
 //Get all places with country
-$queryAllCategories = 'SELECT * FROM places WHERE country=":count"';
+$queryAllCategories = 'SELECT * FROM places WHERE country=":search"';
 $s1 =  $db->prepare($queryAllCategories);
 $s1->execute();
 $categories = $s1->fetchAll();
