@@ -1,19 +1,18 @@
 <?php
-include('database.php');
+require('database.php');
 
 //get a default value for an empty search
-//$category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
-//if($category_id == NULL || $category_id == FALSE){
-//$category_id = 1;
-//}
-//Get name for selected category
-//$queryCategory = 'SELECT * FROM categories WHERE categoryID=:category_id';
-//$statement1 = $db->prepare($queryCategory);
-//$statement1->bindValue(':category_id', $category_id);
-//$statement1->execute();
-//$category = $statement1->fetch();
-//$category_name = $category['categoryName'];
-//$statement1->closeCursor();
+$count = filter_input(INPUT_GET, 'country');
+if($count == NULL || $count == FALSE){
+$count = 'USA';
+}
+
+//Get all places with country
+$queryAllCategories = 'SELECT * FROM places WHERE country=":count"';
+$s1 =  $db->prepare($queryAllCategories);
+$s1->execute();
+$categories = $s1->fetchAll();
+$s1->closeCursor();
 
 ?>
 
@@ -81,7 +80,7 @@ include('database.php');
     <h2>City, Country</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor id eu nisl nunc mi ipsum faucibus vitae aliquet. Laoreet suspendisse interdum consectetur libero id faucibus nisl. Massa tincidunt dui ut ornare. Eu consequat ac felis donec et odio. Nunc non blandit massa enim nec dui. Blandit cursus risus at ultrices mi. Enim diam vulputate ut pharetra sit amet aliquam id. Vitae et leo duis ut diam quam. Mauris vitae ultricies leo integer malesuada nunc vel risus. Orci phasellus egestas tellus rutrum. Nisi quis eleifend quam adipiscing vitae proin sagittis. Sagittis orci a scelerisque purus semper eget duis.</p>
   </div>
-
+  
   <div class="pEntry">
     <div>
       <img src="place_imgs/london.jpg" alt="interesting">
