@@ -6,8 +6,10 @@
 		<ul class="top_navlist" >
 			<li id="icon" ><a href="index.php"><span>WooHoo</span></a></li>
 			<form method="POST" name="searchBar" action="browse.php" onsubmit="return validate()">
-				<li id="navSearch" ><input type="search" name="query" placeholder="Type Something Here"/>	
-				<input type="submit" value="Search" /> </li>
+				<li id="navSearch" >
+				<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
+				<input type="search" name="query" placeholder="Type Something Here"
+				/><input style="margin:0;" type="submit" value="Search" /></li>
 			</form>
 			<script>
 				function validate() {
