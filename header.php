@@ -1,38 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
 <style>
-ul {
-	padding-left: 10px;
-}
+	#navSearch form input {		
+		border: 1px outset blue;
+		height: 24px;
+	}
 
-input {
-	margin: 0;
-	border: 1px outset blue;	
-}
+	#navSearch form input[type="submit"] {
+		cursor: pointer;
+		background-color: rgb(255, 215, 0);
+	}
 
-input[type="submit"] {
-	cursor: pointer;
-	margin-left: 1px;
-	background-color: rgb(255, 215, 0);
-}
+	#navSearch form input[type="submit"]:hover {
+		background-color: rgb(255, 245, 0);
+	}
+	
+	.top_navbar {
+		background-color: #99EEFF;
+	}
 
-input[type="submit"]:hover {
-	background-color: rgb(255, 245, 0);
-}
+
+	.top_navlist {
+		margin: 0;
+	} 
+
+	ul.top_navlist {
+		list-style-type: none;	
+		overflow: hidden;
+		font-family: sans-serif;	
+		padding-left: 10px;
+		display: flex;
+		align-item: center;
+	}
+
+	ul.top_navlist li:hover {
+		background-color: #BEFFFF;
+	}
+
+	ul.top_navlist li:active {
+		background-color: #BEFFFF;
+	}
+
+	ul.top_navlist li {
+		float: left;
+		vertical-align: middle;
+		// display: flex;
+		// align-item: center;			
+	}	
+
+	ul.top_navlist li a{
+		display: block;				
+		text-decoration: none;
+		padding: 0px 10px;
+		padding-top: 2.5px;
+	}
+
+	header {
+		width: 100%;
+		align-items: center;  
+	}
+
+	#topLevel {
+		padding-bottom: 3px;
+		padding-top: 3px;
+		border-bottom: 2px solid slateblue;
+	}
+	
+	
 </style>
-</head>
+
 <nav>
 	<div id="topLevel" class="top_navbar">
 	<div style="display:inline" class="top_navbar">
 		<ul class="top_navlist" >
 			<li id="icon" ><a href="index.php"><span>WooHoo</span></a></li>
-			<form method="POST" name="searchBar" action="browse.php" onsubmit="return validate()">
-				<li id="navSearch" >
+			<li id="navSearch" >
+				<form method="POST" name="searchBar" action="browse.php" onsubmit="return validate()">
 				<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
 				<input type="search" name="query" placeholder="Type Something Here"
-				/><input type="submit" value="Search" /></li>
-			</form>
+				/><input style="margin-left: 1px;" type="submit" value="Search" />
+				</form>
+			</li>			
 			<script>
 				function validate() {
 					var query = document.searchBar.query.value;
@@ -42,11 +88,10 @@ input[type="submit"]:hover {
 					return true;
 				}
 			</script>
-			<li class="right"><a href="">Login</a></li>
-			<li class="right"><a href="wishlist.php">Wishlist</a></li>
+			<li><a href="">Login</a></li>
+			<li><a href="wishlist.php">Wishlist</a></li>
 			<!-- <li class="top_navlist" style="float:right; margin-right:5px; "><a href="">Login</a></li> -->
 		</ul>		
 	</div>
 	</div>
 </nav>
-</html>

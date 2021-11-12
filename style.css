@@ -1,80 +1,16 @@
+/* ============== */
+/* General */
+/* ============== */
+
 body {
 	margin-top: 0px;
 	margin-left: 0px;
 	margin-right: 0px;
 }
 
-.top_navbar {
-	background-color: #99EEFF;
-}
-
-
-.top_navlist {
-	/* display: inline; */
-	margin: 0;
-} 
-
-ul.top_navlist {
-	list-style-type: none;	
-	overflow: hidden;
-	font-family: sans-serif;
-}
-
-ul.top_navlist li:hover {
-	background-color: #BEFFFF;
-}
-
-ul.top_navlist li:active {
-	background-color: #BEFFFF;
-}
-
-ul.top_navlist li {
-	float: left;
-}	
-
-ul.top_navlist li.right {
-	float: left;
-}
-
-ul.top_navlist li a{
-	display: block;
-	text-decoration: none;
-	padding: 0px 10px;
-	/* padding-left: 2%; */
-	/* padding-right: 2%; */
-	/* padding-bottom: 1px; */
-}
-
-a {
-}
-
-header {
-	width: 100%;
-	/* left: 0;   */
-	/* right: 0;   */
-	/* top: 5px;   */
-	/* height: 30px;   */
-	align-items: center;  
-}
-
-#topLevel {
-	/* width: 100%; */
-	padding-bottom: 3px;
-	padding-top: 3px;
-}
-
-#navSearch {
-	/* padding-left: 0%; */
-	/* padding-right: 0%; */
-	/* padding-bottom: 0%; */
-	/* pointer-events: none; */
-}
-
-#navSearchButton: {
-	
-}
-
+/* ============== */
 /* php shit */
+/* ============== */
 
 .pEntry img{
     width: 150px;
@@ -102,14 +38,16 @@ header {
     list-style-type: none;
 }
 
-
+/* ============== */
 /* Homepage */
+/* ============== */
 
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-.popularPlace {	display: none
-}
 
+* { box-sizing: border-box } 
+
+body { font-family: Verdana, sans-serif; margin:0 }
+
+.popularPlace {	display: none}
 
 img {vertical-align: middle;}
 
@@ -223,7 +161,9 @@ img {vertical-align: middle;}
   .prev, .next,.text {font-size: 11px}
 }
 
+/* ============== */
 /* Wishlist */
+/* ============== */
 
 #wishlist-container {
 	display: table;
