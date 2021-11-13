@@ -1,6 +1,6 @@
 <?php
 if(isset($_COOKIE['mycookie'])) {
-	header('Location: home.php');
+	header('Location: index.php');
 }
 
 ?>
@@ -12,7 +12,7 @@ if(isset($_COOKIE['mycookie'])) {
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<header><h1 class="productManager">Login</h1></header>
+	<header><h1 class="loginHeader">Login</h1></header>
 	<main>
 		<form action="check.php" method="post" id="login_form">
 			<label class="addLabel">Username:</label>
