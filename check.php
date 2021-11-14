@@ -13,8 +13,8 @@ if($data->rowCount()>0) {
 	if($check=='1') {
 		setcookie("mycookie", TRUE, time()+60);
 	}
-	header('Location: home.php');
+	header('Location: index.php');
 } else {
-	header('Location: error.php');
+	header('Location: invalidLogin.php');
 }
 ?>
