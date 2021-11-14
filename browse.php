@@ -7,10 +7,11 @@ if($search == NULL || $search == FALSE){
 $search = 'USA';
 }
 //Get all places with country
-$queryAllCategories = 'SELECT * FROM places WHERE country=":search"';
-$s1 =  $db->prepare($queryAllCategories);
+$querySearch = "SELECT * FROM places WHERE country LIKE :search OR city LIKE :search OR placeName LIKE :search";
+$s1 = $db->prepare($querySearch);
+$s1->bindValue(':search', $search);
 $s1->execute();
-$categories = $s1->fetchAll();
+$results = $s1->fetchAll();
 $s1->closeCursor();
 
 ?>
@@ -60,29 +61,18 @@ $s1->closeCursor();
 </div>
 
 <div id="results">
+  <?php foreach($results as $res): ?>
   <div class="pEntry">
     <div>
       <img src="place_imgs/london.jpg" alt="interesting">
     </div>
-    <h2>City, Country</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor id eu nisl nunc mi ipsum faucibus vitae aliquet. Laoreet suspendisse interdum consectetur libero id faucibus nisl. Massa tincidunt dui ut ornare. Eu consequat ac felis donec et odio. Nunc non blandit massa enim nec dui. Blandit cursus risus at ultrices mi. Enim diam vulputate ut pharetra sit amet aliquam id. Vitae et leo duis ut diam quam. Mauris vitae ultricies leo integer malesuada nunc vel risus. Orci phasellus egestas tellus rutrum. Nisi quis eleifend quam adipiscing vitae proin sagittis. Sagittis orci a scelerisque purus semper eget duis.</p>
+    <h2><?php echo$res['placeName']; ?></h2>
+    <h3><?php echo $res['city']; ?>, <?php echo $res['country']; ?></h3>
+    <p>
+     <?php echo $res['description']; ?>
+    </p>
   </div>
-  
-  <div class="pEntry">
-    <div>
-      <img src="place_imgs/london.jpg" alt="interesting">
-    </div>
-    <h2>City, Country</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor id eu nisl nunc mi ipsum faucibus vitae aliquet. Laoreet suspendisse interdum consectetur libero id faucibus nisl. Massa tincidunt dui ut ornare. Eu consequat ac felis donec et odio. Nunc non blandit massa enim nec dui. Blandit cursus risus at ultrices mi. Enim diam vulputate ut pharetra sit amet aliquam id. Vitae et leo duis ut diam quam. Mauris vitae ultricies leo integer malesuada nunc vel risus. Orci phasellus egestas tellus rutrum. Nisi quis eleifend quam adipiscing vitae proin sagittis. Sagittis orci a scelerisque purus semper eget duis.</p>
-  </div>
-
-  <div class="pEntry">
-    <div>
-      <img src="place_imgs/london.jpg" alt="interesting">
-    </div>
-    <h2>City, Country</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tempor id eu nisl nunc mi ipsum faucibus vitae aliquet. Laoreet suspendisse interdum consectetur libero id faucibus nisl. Massa tincidunt dui ut ornare. Eu consequat ac felis donec et odio. Nunc non blandit massa enim nec dui. Blandit cursus risus at ultrices mi. Enim diam vulputate ut pharetra sit amet aliquam id. Vitae et leo duis ut diam quam. Mauris vitae ultricies leo integer malesuada nunc vel risus. Orci phasellus egestas tellus rutrum. Nisi quis eleifend quam adipiscing vitae proin sagittis. Sagittis orci a scelerisque purus semper eget duis.</p>
-  </div>
+  <?php endforeach; ?>
 </div>
 </body>
 </html>
