@@ -72,25 +72,6 @@
 	<div style="display:inline" class="top_navbar">
 		<ul class="top_navlist" >
 			<li id="icon" ><a href="index.php"><span>WooHoo</span></a></li>
-			<li id="navSearch" >
-				<form method="POST" name="searchBar" action="browse.php" onsubmit="return validate()">
-				<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
-				<input type="search" name="query" placeholder="Type Something Here"
-				/><input style="margin-left: 1px;" type="submit" value="Search" />
-				</form>
-			</li>			
-			<script>
-				function validate() {
-					var query = document.searchBar.query.value;
-					if (query == "" || query === null) {
-						return false;
-					}
-					return true;
-				}
-			</script>
-			<li><a href="login.php">Login</a></li>
-			<li><a href="wishlist.php">Wishlist</a></li>
-			<!-- <li class="top_navlist" style="float:right; margin-right:5px; "><a href="">Login</a></li> -->
 		</ul>		
 	</div>
 	</div>
