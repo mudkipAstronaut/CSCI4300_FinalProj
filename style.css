@@ -223,3 +223,18 @@ img {vertical-align: middle;}
 .wishlist-saveNotes {
 	margin: 0px 0px 5px 5px;
 }
+
+#wishlist-empty {
+	display: table;
+	margin: 0 auto;
+}
+
+.wishlist-empty-text {
+	display: table;
+	text-align: center;
+	background-color: #99EEFF;
+	border: 2px solid slateblue;
+	margin: 5px;
+	width: 800px;
+	height: 20px;
+}

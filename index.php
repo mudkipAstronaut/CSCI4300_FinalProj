@@ -1,3 +1,21 @@
+<?php
+require('database.php');
+
+$places_place_id = filter_input(INPUT_GET, 'places.placeID',FILTER_VALIDATE_INT);
+$wishlist_place_id = filter_input(INPUT_GET, 'wishlist.placeID',FILTER_VALIDATE_INT);
+
+$queryPopular = "SELECT placeName,COUNT(*) AS Count FROM wishlist,places WHERE places.placeID = wishlist.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5";
+$statement1 = $db ->prepare($queryPopular);
+$statement1 -> bindValue(':places.placeID', $places_place_id);
+$statement1 -> bindValue(':wishlist.placeID', $wishlist_place_id);
+$statement1 -> execute();
+$places = $statement1 -> fetch();
+//$place_name = $places['placeName'];
+echo $queryPopular;
+$statement1 -> closeCursor();
+
+?>
+
 <!DOCTYPE html> 
 <html>
 <link rel="stylesheet" href="style.css"/>
@@ -21,23 +39,7 @@
   </div>
 </div>
 
-<div class="popularPlace fade">
-  <div class="numbertext">2 / 3</div>
-  <a href=""><img alt="Location" src="place_imgs/london.jpg"></a>
-  <div class="popularText">
-	<a href=""> City2, Country </a> *****
-	Add To Wishlist
-  </div>
-</div>
 
-<div class="popularPlace fade">
-  <div class="numbertext">3 / 3</div>
-  <a href=""><img alt="Location" src="place_imgs/london.jpg"></a>
-  <div class="popularText">
-	<a href=""> City3, Country </a> *****
-	Add To Wishlist
-  </div>
-</div>
 
 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 <a class="next" onclick="plusSlides(1)">&#10095;</a>
