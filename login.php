@@ -1,0 +1,78 @@
+<?php
+
+	require('database.php');
+
+	// define variables and set to empty values
+    $nameErr = $passwordErr = "";
+    $name = $password = "";
+
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		// get name
+		if (empty($_POST['username'])) {
+			$nameErr = "*Name is required";
+		} else {
+			$name=$_POST['username'];
+		}
+
+		// get password
+		if (empty($_POST['password'])) {
+			$passwordErr = "*Password is required";
+		} else {
+			$password=$_POST['password'];
+		}
+
+		// get rememberme
+		if (!empty($_POST['check'])) {
+			$check=$_POST['check'];
+		}
+
+		//Check if there are no errors
+		if (empty($nameErr) && empty($passwordErr)) {
+
+			$query="SELECT * FROM users WHERE username='$name' AND password='$password'";
+		
+			$data=$db->query($query);
+			if ($data->rowCount() >0) {
+				if ($check=='1') {
+					setcookie("mycookie", TRUE, time()+6);
+				}
+				header('Location: ../CSCI4300_FinalProj');
+			}
+			else {
+				header('Location: loginInvalid.php');
+			}
+		}
+	}
+
+if(isset($_COOKIE['mycookie'])) {
+	header('Location: ../CSCI4300_FinalProj');
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<?php include('loginHeader.php'); ?>
+</head>
+<body>
+	<main>
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+		<div class="login">
+			<header><h1 class="loginHeader">Login</h1></header>
+			<label class="username">Username:</label>
+			<input type="text" name="username" class="loginInput" style="margin: 10px 0px 0px 40px" require>
+			<span class="error"><?php echo $nameErr; ?></span> <br>
+			<label class="password">Password:</label>
+			<input type="password" name="password" class="loginInput" style="margin: 10px 0px 0px 47px" require>
+			<span class="error"><?php echo $passwordErr; ?></span> <br>
+			<label class="rememberMe">Remeber me</label>
+			<input type="checkbox" class="rememberMe" value="1" name="check"><br>
+			<input type="submit" class="loginButton" value="Login" id="submit">
+			<p class="registerredir">Not a member yet? <a href="register.php" class="registerredirlink">Register now!</a></p>
+		</div>
+		</form>
+	</main>
+</body>
+</html>
