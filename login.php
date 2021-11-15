@@ -54,7 +54,7 @@ if(isset($_COOKIE['mycookie'])) {
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<?php include('loginHeader.php'); ?>
+	<?php include('header.php'); ?>
 </head>
 <body>
 	<main>
