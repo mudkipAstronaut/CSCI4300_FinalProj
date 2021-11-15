@@ -67,7 +67,7 @@
 			<label class="password">Password:</label>
 			<input type="password" name="password" class="loginInput" style="margin: 10px 0px 0px 47px" require>
             <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $passwordErr; ?></span> <br>
-			<input type="submit" class="loginButton" value="Submit" id="submit">
+			<input type="submit" class="loginButton" value="Register" id="submit">
 			<p class="registerredir">Already have an account? <a href="login.php" class="registerredirlink">Login!</a></p>
 		</div>
 		</form>
