@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 require('database.php');
 
 //get a default value for an empty search
