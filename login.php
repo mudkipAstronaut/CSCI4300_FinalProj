@@ -34,8 +34,9 @@
 			$data=$db->query($query);
 			if ($data->rowCount() >0) {
 				if ($check=='1') {
-					setcookie("mycookie", TRUE, time()+6);
+					setcookie("rememberme", TRUE, time()+3600);
 				}
+				setcookie("loggedin", TRUE, time()+3600);
 				header('Location: ../CSCI4300_FinalProj');
 			}
 			else {
@@ -44,7 +45,7 @@
 		}
 	}
 
-if(isset($_COOKIE['mycookie'])) {
+if(isset($_COOKIE['rememberme'])) {
 	header('Location: ../CSCI4300_FinalProj');
 }
 
