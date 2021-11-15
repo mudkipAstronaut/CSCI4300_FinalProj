@@ -60,13 +60,13 @@
 			<header><h1 class="loginHeader">Register</h1></header>
 			<label class="username">Username:</label>
 			<input type="text" name="username" class="loginInput" style="margin: 10px 0px 0px 40px" require>
-            <span class="error"><?php echo $nameErr; ?></span> <br>
+            <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $nameErr; ?></span> <br>
             <label class="email">Email:</label>
 			<input type="text" name="email" class="loginInput" style="margin: 10px 0px 0px 78px" require>
-            <span class="error"><?php echo $emailErr; ?></span> <br>
+            <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $emailErr; ?></span> <br>
 			<label class="password">Password:</label>
 			<input type="password" name="password" class="loginInput" style="margin: 10px 0px 0px 47px" require>
-            <span class="error"><?php echo $passwordErr; ?></span> <br>
+            <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $passwordErr; ?></span> <br>
 			<input type="submit" class="loginButton" value="Submit" id="submit">
 			<p class="registerredir">Already have an account? <a href="login.php" class="registerredirlink">Login!</a></p>
 		</div>
