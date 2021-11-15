@@ -3,7 +3,7 @@ require('database.php');
 
 $user_id = filter_input(INPUT_GET, 'userID');
 
-$queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description FROM wishlist,places WHERE wishlist.userID=1 AND wishlist.placeID=places.placeID;";
+$queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description FROM wishlist,places WHERE wishlist.userID=4 AND wishlist.placeID=places.placeID;";
 $statement1 = $db ->prepare($queryWishlist);
 $statement1 -> execute();
 $places = $statement1->fetchAll();
