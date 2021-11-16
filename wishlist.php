@@ -49,14 +49,14 @@ $statement1 -> closeCursor();
 <?php endforeach; ?>
 </div>
 
+<?php if (count($places) == 0) : ?>
 <div id="wishlist-empty">
   <div class="wishlist-empty-text">
-    <?php if (count($places) == 0) : ?>
       <p> It seems that your wishlist is empty. </p>
 	  <p> Try searching for some places that interest you. </p>
-    <?php endif; ?>
   </div>
 </div>
+<?php endif; ?>
 
 <script>
   const dragArea = document.querySelector("#wishlist-container");
