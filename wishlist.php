@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 require('database.php');
 
 $user_id = filter_input(INPUT_GET, 'userID');

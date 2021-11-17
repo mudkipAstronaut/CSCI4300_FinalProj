@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 require('database.php');
 
 $places_place_id = filter_input(INPUT_GET, 'places.placeID',FILTER_VALIDATE_INT);
@@ -17,7 +20,6 @@ $highlyRatedPlaces = $statement2->fetchAll();
 $statement2 -> closeCursor();
 
 ?>
-
 <!DOCTYPE html> 
 <html>
 <link rel="stylesheet" href="style.css"/>

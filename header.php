@@ -99,21 +99,22 @@
 			</script>
 			<!-- don't link to login if user is logging in or logged in-->
 			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'login.php') &&
-				!isset($_COOKIE['loggedin'])) : ?>			
+				!isset($_SESSION["loggedin"])) : ?>			
 				<li><a href="login.php">Login</a></li>
 			<?php endif; ?>	
 			
 			<!-- link to wishlist if logged in and not viewing wishlist -->
 			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'wishlist.php') &&
-				isset($_COOKIE['loggedin'])) : ?>
+				isset($_SESSION["loggedin"])) : ?>
 				<li><a href="wishlist.php">Wishlist</a></li>
 			<?php endif; ?>
 			
 			<!-- display logout option while user is logged in -->
-			<?php if(isset($_COOKIE['loggedin'])) : ?>
+			<?php if(isset($_SESSION["loggedin"])) : ?>
 				<!-- Delete cookie and update header -->
 				<?php if(isset($_GET['logout'])) {
-					setcookie("loggedin", TRUE, time()-100);
+					session_unset();
+					session_destroy();
 					setcookie("rememberme", TRUE, time()-100);
 					header('Location: ../CSCI4300_FinalProj');
 					}?>

@@ -1,5 +1,7 @@
 <?php
-
+session_start();
+?>
+<?php
 	require('database.php');
 
 	// define variables and set to empty values
@@ -36,7 +38,7 @@
 				if ($check=='1') {
 					setcookie("rememberme", TRUE, time()+3600);
 				}
-				setcookie("loggedin", TRUE, time()+60);
+				$_SESSION["loggedin"] = TRUE;
 				header('Location: ../CSCI4300_FinalProj');
 			}
 			else {
@@ -45,10 +47,10 @@
 		}
 	}
 
-if(isset($_COOKIE['rememberme'])) {
-	setcookie("loggedin", TRUE, time()+60);
-	header('Location: ../CSCI4300_FinalProj');
-}
+	if(isset($_COOKIE['rememberme'])) {
+		$_SESSION["loggedin"] = TRUE;
+		header('Location: ../CSCI4300_FinalProj');
+	}
 
 ?>
 

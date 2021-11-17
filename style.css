@@ -32,10 +32,15 @@ body {
     float:left;
     margin: 1em;
     display: grid;
+    background-color: skyblue;
+    padding: 0.5em;
 }
 #filters ul, li{
     padding: 0;
     list-style-type: none;
+}
+#filters h3{
+    margin-bottom: 0;
 }
 
 /* ============== */
