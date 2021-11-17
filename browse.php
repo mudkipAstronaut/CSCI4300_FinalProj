@@ -6,13 +6,13 @@ require('database.php');
 
 //get a default value for an empty search
 $search = filter_input(INPUT_POST, 'query');
-if($search == NULL || $search == FALSE){
-$search = 'USA';
+if(!isset($search)){
+$search = '';
 }
+
 //Get all places with country
-$querySearch = "SELECT * FROM places WHERE country LIKE :search OR city LIKE :search OR placeName LIKE :search";
+$querySearch = "SELECT * FROM places WHERE country LIKE '%$search%' OR city LIKE '%$search%' OR placeName LIKE '%$search%' OR description LIKE '%$search%'";
 $s1 = $db->prepare($querySearch);
-$s1->bindValue(':search', $search);
 $s1->execute();
 $results = $s1->fetchAll();
 $s1->closeCursor();
