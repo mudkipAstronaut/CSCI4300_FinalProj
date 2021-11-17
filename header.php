@@ -1,17 +1,26 @@
 <style>
 	#navSearch form input {		
-		border: 1px outset blue;
+		border: 1.5px outset slateblue;
 		height: 24px;
 	}
 
 	#navSearch form input[type="submit"] {
 		cursor: pointer;
-		background-color: rgb(255, 215, 0);
+		background-color: rgb(255, 215, 0);		
 	}
 
 	#navSearch form input[type="submit"]:hover {
 		background-color: rgb(255, 245, 0);
 	}
+	
+	/* signout button will look the same as a nav link */
+	#logoutBtn{
+		background: none;
+		border: none;
+		cursor: pointer;	
+		color: rgb(0, 102, 204);	
+		font-size: 1em;
+	} 
 	
 	.top_navbar {
 		background-color: #99EEFF;
@@ -46,11 +55,12 @@
 		// align-item: center;			
 	}	
 
-	ul.top_navlist li a{
+	ul.top_navlist li a, #logoutBtn {
 		display: block;				
 		text-decoration: none;
-		padding: 0px 10px;
-		padding-top: 2.5px;
+		padding: 2.5px 10px 0 10px;
+		font-family: arial;
+		font-size: 1em;
 	}
 
 	header {
@@ -62,9 +72,7 @@
 		padding-bottom: 3px;
 		padding-top: 3px;
 		border-bottom: 2px solid slateblue;
-	}
-	
-	
+	}		
 </style>
 
 <nav>
@@ -78,7 +86,8 @@
 				<input type="search" name="query" placeholder="Type Something Here"
 				/><input style="margin-left: 1px;" type="submit" value="Search" />
 				</form>
-			</li>			
+			</li>	
+			<!-- JavaScript checks if searchbar is empty before starting a search -->
 			<script>
 				function validate() {
 					var query = document.searchBar.query.value;
@@ -86,11 +95,30 @@
 						return false;
 					}
 					return true;
-				}
+				}				
 			</script>
-			<li><a href="">Login</a></li>
-			<li><a href="wishlist.php">Wishlist</a></li>
-			<!-- <li class="top_navlist" style="float:right; margin-right:5px; "><a href="">Login</a></li> -->
+			<!-- don't link to login if user is logging in or logged in-->
+			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'login.php') &&
+				!isset($_COOKIE['loggedin'])) : ?>			
+				<li><a href="login.php">Login</a></li>
+			<?php endif; ?>	
+			
+			<!-- link to wishlist if logged in and not viewing wishlist -->
+			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'wishlist.php') &&
+				isset($_COOKIE['loggedin'])) : ?>
+				<li><a href="wishlist.php">Wishlist</a></li>
+			<?php endif; ?>
+			
+			<!-- display logout option while user is logged in -->
+			<?php if(isset($_COOKIE['loggedin'])) : ?>
+				<!-- Delete cookie and update header -->
+				<?php if(isset($_GET['logout'])) {
+					setcookie("loggedin", TRUE, time()-100);
+					setcookie("rememberme", TRUE, time()-100);
+					header('Location: ../CSCI4300_FinalProj');
+					}?>
+				<li><a href="?logout">Logout</a></li>
+			<?php endif; ?>	
 		</ul>		
 	</div>
 	</div>

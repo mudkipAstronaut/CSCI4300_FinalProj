@@ -11,7 +11,10 @@ $data=$db->query($query);
 
 if($data->rowCount()>0) {
 	if($check=='1') {
-		setcookie("mycookie", TRUE, time()+60);
+		//setting cookie to zero should make it last as long as the browser is open
+		setcookie("mycookie", TRUE, 0);
+	} else {
+		setcookie("mycookie", TRUE, time()+60*5);
 	}
 	header('Location: index.php');
 } else {
