@@ -39,6 +39,13 @@ session_start();
 					setcookie("rememberme", TRUE, time()+3600);
 				}
 				$_SESSION["loggedin"] = TRUE;
+				// add user id to cookies
+				$idquery = "SELECT userID FROM users WHERE username='$name'";
+				$row = $db->prepare($idquery);
+				$row->execute();
+				$id = $row->fetch();
+				$row->closeCursor();
+				$_SESSION["uid"] = $id['userID'];
 				header('Location: ../CSCI4300_FinalProj');
 			}
 			else {
@@ -48,6 +55,13 @@ session_start();
 	}
 
 	if(isset($_COOKIE['rememberme'])) {
+		// add user id to cookies
+		$idquery = "SELECT userID FROM users WHERE username='$name'";
+		$row = $db->prepare($idquery);
+		$row->execute();
+		$id = $row->fetch();
+		$row->closeCursor();
+		$_SESSION["uid"] = $id['userID'];
 		$_SESSION["loggedin"] = TRUE;
 		header('Location: ../CSCI4300_FinalProj');
 	}
