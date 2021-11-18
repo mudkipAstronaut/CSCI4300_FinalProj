@@ -25,6 +25,7 @@ $statement2 -> closeCursor();
 $url = "index.php";
 
 ?>
+
 <!DOCTYPE html> 
 <html>
 <link rel="stylesheet" href="style.css"/>
