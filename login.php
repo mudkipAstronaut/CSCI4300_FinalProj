@@ -86,7 +86,7 @@ session_start();
 			<label class="password">Password:</label>
 			<input type="password" name="password" class="loginInput" style="margin: 10px 0px 0px 47px" require>
 			<span class="error" style="margin: 0px 0px 0px 10px"><?php echo $passwordErr; ?></span> <br>
-			<label class="rememberMe">Remeber me</label>
+			<label class="rememberMe">Remember me</label>
 			<input type="checkbox" class="rememberMe" value="1" name="check"><br>
 			<input type="submit" class="loginButton" value="Login" id="submit">
 			<p class="registerredir">Not a member yet? <a href="register.php" class="registerredirlink">Register now!</a></p>

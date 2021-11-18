@@ -1,4 +1,23 @@
+<?php
+// require('database.php');
+if (isset($_SESSION["uid"])) {
+	$uid = $_SESSION["uid"];
+	$query = "SELECT username FROM users WHERE userID='$uid'";
+	$result = $db->prepare($query);
+	$result->execute();	
+	$username = $result->fetch();
+	$result->closeCursor();
+}
+
+if(str_contains($_SERVER['REQUEST_URI'], 'login.php')) 
+	$style = 'style="background-color:#BEFFFF;float:right;"';
+else 
+	$style = 'style="float:right;"';
+
+?>
+
 <style>
+	
 	#navSearch form input {		
 		border: 1.5px outset slateblue;
 		height: 24px;
@@ -40,22 +59,34 @@
 		align-item: center;
 	}
 
-	ul.top_navlist li:hover {
+	ul.top_navlist li:hover:not(.headUser) {
 		background-color: #BEFFFF;
 	}
 
-	ul.top_navlist li:active {
+	ul.top_navlist li:not(.headUser):active {
 		background-color: #BEFFFF;
 	}
 
-	ul.top_navlist li {
+	ul.top_navlist li:not(.log) {
 		float: left;
 		vertical-align: middle;
 		// display: flex;
 		// align-item: center;			
 	}	
+	
+	.log {
+		float: right;
+	}
 
 	ul.top_navlist li a, #logoutBtn {
+		display: block;				
+		text-decoration: none;
+		padding: 2.5px 10px 0 10px;
+		font-family: arial;
+		font-size: 1em;
+	}
+	
+	.headUser {
 		display: block;				
 		text-decoration: none;
 		padding: 2.5px 10px 0 10px;
@@ -96,20 +127,16 @@
 					}
 					return true;
 				}				
-			</script>
-			<!-- don't link to login if user is logging in or logged in-->
-			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'login.php') &&
-				!isset($_SESSION["loggedin"])) : ?>			
-				<li><a href="login.php">Login</a></li>
-			<?php endif; ?>	
+			</script>			
 			
 			<!-- link to wishlist if logged in and not viewing wishlist -->
-			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'wishlist.php') &&
-				isset($_SESSION["loggedin"])) : ?>
-				<li><a href="wishlist.php">Wishlist</a></li>
+			<?php if(isset($_SESSION["loggedin"])) : ?>
+				<li <?php if(str_contains($_SERVER['REQUEST_URI'], 'wishlist.php')) 
+					echo 'style="background-color:#BEFFFF;"'; ?>>
+				<a href="wishlist.php">Wishlist</a></li>
 			<?php endif; ?>
 			
-			<!-- display logout option while user is logged in -->
+			<!-- display logout option while user is logged in, else display login -->
 			<?php if(isset($_SESSION["loggedin"])) : ?>
 				<!-- Delete cookie and update header -->
 				<?php if(isset($_GET['logout'])) {
@@ -118,7 +145,16 @@
 					setcookie("rememberme", TRUE, time()-100);
 					header('Location: ../CSCI4300_FinalProj');
 					}?>
-				<li><a href="?logout">Logout</a></li>
+				<li class="log" style="float:right";><a href="?logout">Logout:</a></li>				
+				<li class="log" style="float:right";><span class="headUser"><?php echo $username['username'] ?></span></li>
+			<?php else : ?>
+				
+				<li class="log" <?php 
+					if(str_contains($_SERVER['REQUEST_URI'], 'login.php')) 
+						echo 'style="background-color:#BEFFFF;float:right;"';
+					else 
+						echo 'style="float:right;"';?>>
+					<a href="login.php">Login</a></li>				
 			<?php endif; ?>	
 		</ul>		
 	</div>
