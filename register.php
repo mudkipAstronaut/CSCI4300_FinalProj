@@ -1,7 +1,4 @@
 <?php
-session_start();
-?>
-<?php
 
 	require('database.php');
 
@@ -45,6 +42,7 @@ session_start();
 			VALUES ('$name', '$email', '$password', '$date')";
 		
 			$data=$db->query($query);
+			header('Location: ../CSCI4300_FinalProj');
 		}
 	}
 ?>
@@ -53,7 +51,7 @@ session_start();
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<?php include('loginHeader.php'); ?>
+	<?php include('header.php'); ?>
 
 </head>
 <body>
