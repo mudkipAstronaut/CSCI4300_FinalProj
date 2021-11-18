@@ -43,6 +43,7 @@ else
 	.headUser {
 		display: block;
 		padding-top: 2.5px;		
+		color: rgb(255, 128, 0);
 	}
 	
 	.top_navbar {
