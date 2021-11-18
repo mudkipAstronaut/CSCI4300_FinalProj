@@ -75,6 +75,11 @@
 	}		
 </style>
 
+<?php
+
+$search = "";
+?>
+
 <nav>
 	<div id="topLevel" class="top_navbar">
 	<div style="display:inline" class="top_navbar">
