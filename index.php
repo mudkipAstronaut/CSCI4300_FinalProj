@@ -6,18 +6,33 @@ require('database.php');
 
 $places_place_id = filter_input(INPUT_GET, 'places.placeID',FILTER_VALIDATE_INT);
 $wishlist_place_id = filter_input(INPUT_GET, 'wishlist.placeID',FILTER_VALIDATE_INT);
+if(isset($_SESSION["loggedin"])) {
+  $user_id = $_SESSION["uid"];
+}
 
-$queryPopular = "SELECT placeName,city,country,reviewScore,COUNT(*) AS Count FROM wishlist,places WHERE places.placeID = wishlist.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5";
+$queryPopular = "SELECT places.placeID,placeName,city,country,reviewScore,COUNT(*) AS Count FROM wishlist,places WHERE places.placeID = wishlist.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5";
 $statement1 = $db ->prepare($queryPopular);
 $statement1 -> execute();
 $popularPlaces = $statement1->fetchAll();
 $statement1 -> closeCursor();
 
-$queryHighlyRated = "SELECT placeName,city,country,reviewScore FROM places ORDER BY reviewScore DESC LIMIT 5";
+$queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places ORDER BY reviewScore DESC LIMIT 5";
 $statement2 = $db ->prepare($queryHighlyRated);
 $statement2 -> execute();
 $highlyRatedPlaces = $statement2->fetchAll();
 $statement2 -> closeCursor();
+
+// Testing getting URL
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') { 
+  $url = "https://";   
+} else {
+  $url = "http://";   
+  // Append the host(domain name, ip) to the URL.   
+  $url.= $_SERVER['HTTP_HOST'];   
+   
+  // Append the requested resource location to the URL   
+  $url.= $_SERVER['REQUEST_URI'];   
+}
 
 ?>
 <!DOCTYPE html> 
@@ -38,14 +53,22 @@ $statement2 -> closeCursor();
 
 <?php $i = 1; ?>
 <?php foreach ($popularPlaces as $popularPlace) : ?>
+<form action="addToUserWishlist.php" method="post" id="add_to_wishlist_form">
   <div class="popularPlace fade">
     <div class="numbertext"><?php echo $i; ?> / 5</div>
     <a href=""><img alt="Location" src="place_imgs/london.jpg"></a>
     <div class="popular-locationInfo">
    	  <a href=""><?php echo $popularPlace['placeName']; ?>: <?php echo $popularPlace['city']; ?>, <?php echo $popularPlace['country']; ?> </a> 
-	  <div class="popular-addWishlist">
-	    Add to Wishlist
-	  </div>
+	  
+	  <?php if(isset($_SESSION["loggedin"])) : ?>		
+	    <div class="popular-addWishlist">
+		  <input type="hidden" name="placeID" value="<?php echo $popularPlace['placeID']; ?>">
+		  <input type="hidden" name="userID" value="<?php echo $user_id; ?>">  
+		  <input type="hidden" name="callingURL" value="<?php echo $url; ?>">
+		  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
+	    </div>
+	  <?php endif; ?>
+	  
 	  <div class="popular-rating"> 
 	    Rating: <?php echo $popularPlace['reviewScore']; ?>  
 		<?php if ($popularPlace['reviewScore'] == NULL) : ?>
@@ -55,6 +78,7 @@ $statement2 -> closeCursor();
     </div>
   </div>
   <?php $i++; ?>
+</form>
 <?php endforeach; ?>
 
 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -80,14 +104,20 @@ $statement2 -> closeCursor();
 
 <?php $i = 1; ?>
 <?php foreach ($highlyRatedPlaces as $highlyRatedPlace) : ?>
+<form action="addToUserWishlist.php" method="post" id="add_to_wishlist_form">
   <div class="ratedPlace fade">
     <div class="numbertext"><?php echo $i; ?> / 5</div>
     <a href=""><img alt="Location" src="place_imgs/london.jpg"></a>
     <div class="popular-locationInfo">
    	  <a href=""><?php echo $highlyRatedPlace['placeName']; ?>: <?php echo $highlyRatedPlace['city']; ?>, <?php echo $highlyRatedPlace['country']; ?> </a> 
-	  <div class="popular-addWishlist">
-	    Add to Wishlist
-	  </div>
+	  
+	  <?php if(isset($_SESSION["loggedin"])) : ?>		
+	    <div class="popular-addWishlist">
+		  <input type="hidden" name="placeID" value="<?php echo $popularPlace['placeID']; ?>">
+		  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
+	    </div>
+	  <?php endif; ?>
+	  
 	  <div class="popular-rating"> 
 	    Rating: <?php echo $highlyRatedPlace['reviewScore']; ?>  
 		<?php if ($highlyRatedPlace['reviewScore'] == NULL) : ?>
@@ -97,6 +127,7 @@ $statement2 -> closeCursor();
     </div>
   </div>
   <?php $i++; ?>
+</form>
 <?php endforeach; ?>
 
 <a class="prev" onclick="plusSlidesHR(-1)">&#10094;</a>

@@ -4,10 +4,12 @@ session_start();
 <?php
 require('database.php');
 
-$user_id = filter_input(INPUT_GET, 'userID');
+//$user_id = filter_input(INPUT_GET, 'userID');
+$user_id = $_SESSION["uid"];
 
-$queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description FROM wishlist,places WHERE wishlist.userID=4 AND wishlist.placeID=places.placeID;";
+$queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description FROM wishlist,places WHERE wishlist.userID=:uID AND wishlist.placeID=places.placeID;";
 $statement1 = $db ->prepare($queryWishlist);
+$statement1->bindValue(':uID', $user_id);
 $statement1 -> execute();
 $places = $statement1->fetchAll();
 //$place_name = $places['placeName'];
@@ -34,7 +36,10 @@ $statement1 -> closeCursor();
 	  <div>
         <img src="place_imgs/london.jpg" alt="interesting">
       </div>
-	  <input type="submit" value="Remove From Wishlist" class="wishlistRemoveButton">
+	  <form action="removeFromUserWishlist.php" method="post" id="remove_from_wishlist_form">
+	    <input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
+	    <input type="submit" value="Remove From Wishlist" class="wishlistRemoveButton">
+	  </form>
       <h2><a href=""><?php echo $place['placeName']; ?>: <?php echo $place['city']; ?>, <?php echo $place['country']; ?> </a></h2>
       <p class="placeDescription"> <?php echo $place['description']; ?> </p>
   	</div>
@@ -49,6 +54,7 @@ $statement1 -> closeCursor();
 	  </div>
 	</form>
   </div>
+  
 <?php endforeach; ?>
 </div>
 
