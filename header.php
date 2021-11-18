@@ -40,6 +40,11 @@ else
 		font-size: 1em;
 	} 
 	
+	.headUser {
+		display: block;
+		padding-top: 2.5px;		
+	}
+	
 	.top_navbar {
 		background-color: #99EEFF;
 	}
@@ -138,8 +143,12 @@ $search = "";
 					setcookie("rememberme", TRUE, time()-100);
 					header('Location: ../CSCI4300_FinalProj');
 					}?>
-				<li class="log" style="float:right";><a href="?logout">Logout:</a></li>				
-				<li class="log" style="float:right";><span class="headUser"><?php echo $username['username'] ?></span></li>
+				<li class="log" style="float:right";>
+					<a href="?logout">Logout:</a>					
+				</li>
+				<li class="log" style="float:right";>
+					<span class="headUser"><?php echo $username['username'] ?></span>
+				</li>
 			<?php else : ?>
 				<!-- header link will look selected if you're on that page -->
 				<li class="log" <?php 
