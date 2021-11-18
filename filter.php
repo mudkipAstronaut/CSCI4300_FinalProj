@@ -18,7 +18,9 @@ $querySearch = "SELECT * FROM places WHERE (country LIKE '%$search%' OR city LIK
 
 //get the sortby value
 $sort = filter_input(INPUT_POST, 'sort');
+if(isset($_POST['country'])){
 $countries = $_POST['country'];
+}
 
 $conts = '';
 if(!empty($countries)):
@@ -39,7 +41,5 @@ $s3 = $db->prepare($filQuery);
 $s3->execute();
 $results = $s3->fetchAll();
 $s3->closeCursor();
-
-print_r($filRes);
 
 ?>
