@@ -4,19 +4,14 @@ session_start();
 <?php
 require('database.php');
 
-//get a default value for an empty search
-$search = filter_input(INPUT_POST, 'query');
-if(!isset($search)){
-$search = '';
-}
+include('filter.php');
 
-//Get all places with country
-$querySearch = "SELECT * FROM places WHERE country LIKE '%$search%' OR city LIKE '%$search%' OR placeName LIKE '%$search%' OR description LIKE '%$search%'";
-$s1 = $db->prepare($querySearch);
-$s1->execute();
-$results = $s1->fetchAll();
-$s1->closeCursor();
-
+//get countries for the checkboxes
+$counts = "SELECT DISTINCT country FROM places";
+$s2 = $db->prepare($counts);
+$s2->execute();
+$checks = $s2->fetchAll();
+$s2->closeCursor();
 ?>
 
 <!DOCTYPE html> 
@@ -28,38 +23,39 @@ $s1->closeCursor();
 </header>
 <div id="filters">
   <h3>Filters</h3>
-  <form>
-    <div class="filter-block">
-      <h5>Checkboxes</h5>
+  <form method="POST" name="filters" action="browse.php">
+    <hr>
+     <div class="filter-block">
+      <h5>Sort By</h5>
       <div>
-	<ul>
-	  <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Option 1</label></li>
-	  <li><input id="checkbox2" type="checkbox"><label for="checkbox2">Option 2</label></li>
-	</ul>
-      </div>
-    </div>
-    
-    <div class="filter-block">
-      <h5>Select</h5>
-      <div>
-	<select>
+	<select name="sort">
 	  <option value="">Choose an option</option>
-	  <option value=".option1">Option1</option>
-	  <option value=".option2">Option2</option>
-	  <option value=".option3">Option3</option>
+	  <option value=".option1">Ranked: High to Low</option>
+	  <option value=".option2">Ranked: Low to High</option>
 	</select>
       </div>
     </div>
-
+    <hr>
     <div class="filter-block">
-      <h5>Radio</h5>
+      <h5>Countries</h5>
       <div>
 	<ul>
-	  <li><input id="radio1" type="radio"><label for="radio1">Option 1</label></li>
-	  <li><input id="radio2" type="radio"><label for="radio2">Option 2</label></li>
+	<?php
+	$i=1;
+	foreach($checks as $check): ?>
+	  <li><input id="checkbox<?php echo $i; ?>" name="country[]" value="<?php echo $check['country']; ?>" type="checkbox">
+	  <label for="checkbox<?php echo $i; ?>">
+	  <?php echo $check['country']; ?>
+	  </label>
+	  </li>
+	<?php
+	$i++;
+	endforeach; ?>
 	</ul>
       </div>
     </div>
+    <input type="submit" value="Apply Changes">
+    <input type="hidden" name="query" value="<?php echo $search; ?>">
   </form>
 </div>
 
