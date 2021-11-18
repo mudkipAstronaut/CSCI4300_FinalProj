@@ -113,7 +113,9 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
 	  
 	  <?php if(isset($_SESSION["loggedin"])) : ?>		
 	    <div class="popular-addWishlist">
-		  <input type="hidden" name="placeID" value="<?php echo $popularPlace['placeID']; ?>">
+		  <input type="hidden" name="placeID" value="<?php echo $highlyRatedPlace['placeID']; ?>">
+		  <input type="hidden" name="userID" value="<?php echo $user_id; ?>">  
+		  <input type="hidden" name="callingURL" value="<?php echo $url; ?>">
 		  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
 	    </div>
 	  <?php endif; ?>
