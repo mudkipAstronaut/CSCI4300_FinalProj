@@ -75,16 +75,21 @@
 	}		
 </style>
 
+<?php
+
+$search = "";
+?>
+
 <nav>
 	<div id="topLevel" class="top_navbar">
 	<div style="display:inline" class="top_navbar">
 		<ul class="top_navlist" >
 			<li id="icon" ><a href="index.php"><span>WooHoo</span></a></li>
 			<li id="navSearch" >
-				<form method="POST" name="searchBar" action="browse.php" onsubmit="return validate()">
+				<form method="POST" name="searchBar" action="browse.php">
 				<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
 				<input type="search" name="query" placeholder="Type Something Here"
-				/><input style="margin-left: 1px;" type="submit" value="Search" />
+				value="<?php echo $search;?>"/><input style="margin-left: 1px;" type="submit" value="Search" />
 				</form>
 			</li>	
 			<!-- JavaScript checks if searchbar is empty before starting a search -->
