@@ -1,10 +1,16 @@
 <?php
+
 session_start();
-?>
-<?php
+
+if (!isset($_SESSION["uid"])) {
+	header('Location: ../CSCI4300_FinalProj');
+}
+
 require('database.php');
 
 //$user_id = filter_input(INPUT_GET, 'userID');
+
+
 $user_id = $_SESSION["uid"];
 
 $queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description FROM wishlist,places WHERE wishlist.userID=:uID AND wishlist.placeID=places.placeID;";
