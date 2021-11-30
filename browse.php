@@ -64,7 +64,14 @@ $s2->closeCursor();
   <a href="<?php echo 'place.php?place=' . $res['placeID']; ?>" class="pEntry">
   <div class="pEntry">
     <div>
-      <img src="place_imgs/london.jpg" alt="interesting">
+    <?php
+    $imgQ = "SELECT image FROM pictures WHERE placeID=" . $res['placeID'];
+    $s2 = $db->prepare($imgQ);
+    $s2->execute();
+    $img = $s2->fetchAll()[0];
+    $s2->closeCursor();
+    ?>
+      <img src="place_imgs/<?php echo $img['image']; ?>" alt="interesting">
     </div>
     <h2><?php echo$res['placeName']; ?></h2>
     <h3><?php echo $res['city']; ?>, <?php echo $res['country']; ?></h3>
