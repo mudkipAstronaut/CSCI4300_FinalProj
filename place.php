@@ -1,7 +1,6 @@
 <?php
 session_start();
-?>
-<?php
+ 
 require('database.php');
 
 $place = $_GET['place'];
