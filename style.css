@@ -23,11 +23,18 @@ body {
 }
 .pEntry{
     margin: 1em;
+    text-decoration: none;
+    color: black;
 }
 #results{
     display: grid;
 }
-
+.center{
+    width: 85%;
+    margin: auto;
+    padding: 1.5em;
+    padding-top: 0;
+}
 #filters{
     float:left;
     margin: 1em;

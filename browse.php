@@ -61,6 +61,7 @@ $s2->closeCursor();
 
 <div id="results">
   <?php foreach($results as $res): ?>
+  <a href="<?php echo 'place.php?place=' . $res['placeID']; ?>" class="pEntry">
   <div class="pEntry">
     <div>
       <img src="place_imgs/london.jpg" alt="interesting">
@@ -71,6 +72,7 @@ $s2->closeCursor();
      <?php echo $res['description']; ?>
     </p>
   </div>
+  </a>
   <?php endforeach; ?>
 </div>
 </body>
