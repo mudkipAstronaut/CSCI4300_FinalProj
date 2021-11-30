@@ -7,7 +7,7 @@ require('database.php');
 //$user_id = filter_input(INPUT_GET, 'userID');
 $user_id = $_SESSION["uid"];
 
-$queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description FROM wishlist,places WHERE wishlist.userID=:uID AND wishlist.placeID=places.placeID;";
+$queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description,places.placeID FROM wishlist,places WHERE wishlist.userID=:uID AND wishlist.placeID=places.placeID;";
 $statement1 = $db ->prepare($queryWishlist);
 $statement1->bindValue(':uID', $user_id);
 $statement1 -> execute();
@@ -33,9 +33,32 @@ $statement1 -> closeCursor();
 <?php foreach ($places as $place) : ?>
   <div class="wishlistEntry">
     <div class="wishlist-aboveNotes">
+	  <?php
+	    require('database.php');
+	  
+	    $getPlaceImage = "SELECT image,userID FROM pictures WHERE :currentPlace = pictures.placeID GROUP BY pictures.pictureID LIMIT 1";
+	    $statement2 = $db ->prepare($getPlaceImage);
+	    $statement2->bindValue(':currentPlace', $place['placeID']);
+	    $statement2 -> execute();
+	    $placePictures = $statement2->fetchAll();
+	  
+	    if (count($placePictures)==1) {
+	      foreach ($placePictures as $placePicture) {
+		    $imagePath = $placePicture['image'];
+	      }
+	    } else {
+		    $imagePath = 'london.jpg';
+	    }
+	    $statement2 -> closeCursor();
+	  ?>
+	
+	
 	  <div>
-        <img src="place_imgs/london.jpg" alt="interesting">
+        
+		<a href=""><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="150" height="150"></a>
       </div>
+	  
+	  
 	  <form action="removeFromUserWishlist.php" method="post" id="remove_from_wishlist_form">
 	    <input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
 	    <input type="submit" value="Remove From Wishlist" class="wishlistRemoveButton">
