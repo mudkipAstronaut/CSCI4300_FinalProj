@@ -1,7 +1,10 @@
 <?php
 session_start();
-?>
-<?php
+
+if (!isset($_SESSION["uid"])) {
+	header('location: ../CSCI4300_FinalProj');
+}
+
 require('database.php');
 
 //$user_id = filter_input(INPUT_GET, 'userID');

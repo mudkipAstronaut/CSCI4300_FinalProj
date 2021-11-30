@@ -1,3 +1,21 @@
+<?php
+// require('database.php');
+if (isset($_SESSION["uid"])) {
+	$uid = $_SESSION["uid"];
+	$query = "SELECT username FROM users WHERE userID='$uid'";
+	$result = $db->prepare($query);
+	$result->execute();	
+	$username = $result->fetch();
+	$result->closeCursor();
+}
+
+if(str_contains($_SERVER['REQUEST_URI'], 'login.php')) 
+	$style = 'style="background-color:#BEFFFF;float:right;"';
+else 
+	$style = 'style="float:right;"';
+
+?>
+
 <style>
 	#navSearch form input {		
 		border: 1.5px outset slateblue;
@@ -21,6 +39,12 @@
 		color: rgb(0, 102, 204);	
 		font-size: 1em;
 	} 
+	
+	.headUser {
+		display: block;
+		padding-top: 2.5px;		
+		color: rgb(255, 128, 0);
+	}
 	
 	.top_navbar {
 		background-color: #99EEFF;
@@ -102,19 +126,16 @@ $search = "";
 					return true;
 				}				
 			</script>
-			<!-- don't link to login if user is logging in or logged in-->
-			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'login.php') &&
-				!isset($_SESSION["loggedin"])) : ?>			
-				<li><a href="login.php">Login</a></li>
-			<?php endif; ?>	
 			
 			<!-- link to wishlist if logged in and not viewing wishlist -->
-			<?php if(!str_contains($_SERVER['REQUEST_URI'], 'wishlist.php') &&
-				isset($_SESSION["loggedin"])) : ?>
-				<li><a href="wishlist.php">Wishlist</a></li>
+			<?php if(isset($_SESSION["loggedin"])) : ?>
+				<!-- header link will look selected if you're on that page -->
+				<li <?php if(str_contains($_SERVER['REQUEST_URI'], 'wishlist.php')) 
+					echo 'style="background-color:#BEFFFF;"'; ?>>
+				<a href="wishlist.php">Wishlist</a></li>
 			<?php endif; ?>
 			
-			<!-- display logout option while user is logged in -->
+			<!-- display logout option while user is logged in, else display login -->
 			<?php if(isset($_SESSION["loggedin"])) : ?>
 				<!-- Delete cookie and update header -->
 				<?php if(isset($_GET['logout'])) {
@@ -123,7 +144,20 @@ $search = "";
 					setcookie("rememberme", TRUE, time()-100);
 					header('Location: ../CSCI4300_FinalProj');
 					}?>
-				<li><a href="?logout">Logout</a></li>
+				<li class="log" style="float:right";>
+					<a href="?logout">Logout:</a>					
+				</li>
+				<li class="log" style="float:right";>
+					<span class="headUser"><?php echo $username['username'] ?></span>
+				</li>
+			<?php else : ?>
+				<!-- header link will look selected if you're on that page -->
+				<li class="log" <?php 
+					if(str_contains($_SERVER['REQUEST_URI'], 'login.php')) 
+						echo 'style="background-color:#BEFFFF;float:right;"';
+					else 
+						echo 'style="float:right;"';?>>
+					<a href="login.php">Login</a></li>				
 			<?php endif; ?>	
 		</ul>		
 	</div>

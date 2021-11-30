@@ -2,6 +2,10 @@
 session_start();
 ?>
 <?php
+if(isset($_SESSION["loggedin"])) {
+  $user_id = $_SESSION["uid"];
+}
+
 require('database.php');
 
 include('filter.php');
@@ -61,16 +65,36 @@ $s2->closeCursor();
 
 <div id="results">
   <?php foreach($results as $res): ?>
+  <a href="<?php echo 'place.php?place=' . $res['placeID']; ?>" class="pEntry">
   <div class="pEntry">
+    <iframe name="content" style="display:none;">
+    </iframe>
+    <form method="POST" name="wishlist" action="addToUserWishlist.php" target="content">
     <div>
-      <img src="place_imgs/london.jpg" alt="interesting">
+    <?php
+    $imgQ = "SELECT image FROM pictures WHERE placeID=" . $res['placeID'];
+    $s2 = $db->prepare($imgQ);
+    $s2->execute();
+    $img = $s2->fetchAll()[0];
+    $s2->closeCursor();
+    ?>
+      <img src="place_imgs/<?php echo $img['image']; ?>" alt="interesting">
     </div>
     <h2><?php echo$res['placeName']; ?></h2>
     <h3><?php echo $res['city']; ?>, <?php echo $res['country']; ?></h3>
     <p>
      <?php echo $res['description']; ?>
     </p>
+    <?php if(isset($_SESSION["loggedin"])) : ?>		
+        <div class="popular-addWishlist">
+	  <input type="hidden" name="placeID" value="<?php echo $res['placeID']; ?>">
+	  <input type="hidden" name="userID" value="<?php echo $user_id; ?>">  
+	  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
+	</div>
+    <?php endif; ?>
+    </form>
   </div>
+  </a>
   <?php endforeach; ?>
 </div>
 </body>
