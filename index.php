@@ -44,8 +44,11 @@ $url = "index.php";
 
 <?php $i = 1; ?>
 <?php foreach ($popularPlaces as $popularPlace) : ?>
-<form action="addToUserWishlist.php" method="post" id="add_to_wishlist_form">
+<iframe name="content" style="display:none;">
+</iframe>
+<form method="POST" name="wishlist" action="addToUserWishlist.php" target="content">
   <div class="popularPlace fade">
+    
     <div class="numbertext"><?php echo $i; ?> / 5</div>
 	<?php
 	  require('database.php');
@@ -114,7 +117,9 @@ $url = "index.php";
 
 <?php $i = 1; ?>
 <?php foreach ($highlyRatedPlaces as $highlyRatedPlace) : ?>
-<form action="addToUserWishlist.php" method="post" id="add_to_wishlist_form">
+<iframe name="content" style="display:none;">
+</iframe>
+<form method="POST" name="wishlist" action="addToUserWishlist.php" target="content">
   <div class="ratedPlace fade">
     <div class="numbertext"><?php echo $i; ?> / 5</div>
 	
