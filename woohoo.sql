@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 04:33 AM
+-- Generation Time: Nov 30, 2021 at 10:56 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -86,7 +86,19 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (17, 'The Wizarding World of Harry Potter', 'Las Angeles', 'USA', 'Where magic turns into revenue', NULL, 0),
 (18, 'Hollywood Sign', 'Las Angeles', 'USA', 'An inferior copy of the Bollywood version', '4.8', 3),
 (19, 'Universal CityWalk Hollywood', 'Las Angeles', 'USA', 'An amusement facility', '6.7', 4),
-(20, 'Angels Flight Railway', 'Las Angeles', 'USA', 'A transportation apparatus', '7.8', 2);
+(20, 'Angels Flight Railway', 'Las Angeles', 'USA', 'A transportation apparatus', '7.8', 2),
+(21, 'Red Fort ', 'Delhi', 'India', 'A famous Mughal era fortification built by the emperor Shah Jahan', NULL, 0),
+(22, 'Jama Masjid ', 'Delhi', 'India', 'A famous mosque built in 1656', NULL, 0),
+(23, 'Imperial Palace', 'Tokyo', 'Japan', NULL, NULL, 0),
+(24, 'Ginza District', 'Tokyo', 'Japan', 'A centuries-old shopping district', NULL, 0),
+(25, 'People\'s Square', 'Shanghai', 'China', 'A large public square', NULL, 0),
+(26, 'Nanjing Road', 'Shanghai', 'China', 'A 5km long shopping street attracting millions of people every year', NULL, 0),
+(27, 'Museu de Arte(Art Museum)', 'São Paulo', 'Brazil', 'The largest collection of western art in Latin America', NULL, 0),
+(28, 'Museo do Futebol(Football Museum)', 'São Paulo', 'Brazil', NULL, NULL, 0),
+(29, 'Basilica de Guadalupe', 'Mexico City', 'Mexico', NULL, NULL, 0),
+(30, 'Chapultepec Castle', 'Mexico City', 'Mexico ', NULL, NULL, 0),
+(31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, NULL, 0),
+(32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -181,7 +193,7 @@ ALTER TABLE `pictures`
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `users`
