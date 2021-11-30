@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 30, 2021 at 03:30 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Host: 127.0.0.1
+-- Generation Time: Nov 30, 2021 at 04:33 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `woohoo`
 --
+CREATE DATABASE IF NOT EXISTS `woohoo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `woohoo`;
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,20 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (4, 'Hoover Dam', 'Las Vegas', 'USA', 'Holds back water, bro', NULL, 4),
 (5, 'Sky Tree', 'Tokyo', 'Japan', NULL, NULL, 2),
 (6, 'Mojang Office', 'Stockholm', 'Sweden', 'Block game', '5.0', 1),
-(7, 'Emu War Burial', 'Outback', 'Australia', 'In the Outback, noone can hear you scream.', '2.5', 4);
+(7, 'Emu War Burial', 'Outback', 'Australia', 'In the Outback, noone can hear you scream.', '2.5', 4),
+(8, 'Edgar Allen Poe\'s house', 'Philadelphia', 'USA', 'Home of the famous writer', '0.0', 0),
+(9, 'Statue of Diogenes', 'Sinop', 'Turkey', 'A monument to the ancient Greek philosopher', '0.0', 0),
+(10, 'Gettysburg Battlefield', 'Gettysburg ', 'USA', NULL, '7.8', 3),
+(11, 'Georgia State Capitol', 'Atlanta', 'USA', 'Where the Ga state legislature meets to make laws and govern.', '6.8', 4),
+(12, 'Walt Disney Concert Hall', 'Los Angeles', 'USA', 'Music is played here, and in large quantities.', '7.8', 2),
+(13, 'Venice Canals Walkway', 'Las Angeles', 'USA', 'A scenic residential area reminiscent of that area in GTA 5', '6.3', 3),
+(14, 'Union Station', 'Las Angeles', 'USA', 'A nice big station', '7.6', 0),
+(15, 'Dodger Stadium', 'Las Angeles', 'USA', 'A large sports complex', NULL, 0),
+(16, 'Staples Center', 'Las Angeles', 'USA', NULL, NULL, 0),
+(17, 'The Wizarding World of Harry Potter', 'Las Angeles', 'USA', 'Where magic turns into revenue', NULL, 0),
+(18, 'Hollywood Sign', 'Las Angeles', 'USA', 'An inferior copy of the Bollywood version', '4.8', 3),
+(19, 'Universal CityWalk Hollywood', 'Las Angeles', 'USA', 'An amusement facility', '6.7', 4),
+(20, 'Angels Flight Railway', 'Las Angeles', 'USA', 'A transportation apparatus', '7.8', 2);
 
 -- --------------------------------------------------------
 
@@ -166,7 +181,7 @@ ALTER TABLE `pictures`
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
