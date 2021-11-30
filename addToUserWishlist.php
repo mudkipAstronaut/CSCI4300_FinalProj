@@ -3,7 +3,7 @@
 
 $place_id = filter_input(INPUT_POST, 'placeID');
 $user_id = filter_input(INPUT_POST, 'userID');
-$url = filter_input(INPUT_POST, 'callingURL');
+//$url = filter_input(INPUT_POST, 'callingURL');
 
 require_once('database.php');
 	
@@ -19,7 +19,12 @@ $statement->bindValue(':notes', NULL);
 $statement->execute();
 $statement->closeCursor();
 
-$location = 'location: '.$url;
-header($location);
+$nameQ = "SELECT placeName FROM places WHERE placeID=".$place_id;
+$s1 = $db->prepare($nameQ);
+$s1->execute();
+$name = $s1->fetchAll()[0];
+$s1->closeCursor();
+
+echo '<script>alert("Added '. $name[0]  .' to your Wishlist")</script>';
 
 ?>
