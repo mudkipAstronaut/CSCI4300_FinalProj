@@ -145,10 +145,10 @@ $search = "";
 					header('Location: ../CSCI4300_FinalProj');
 					}?>
 				<li class="log" style="float:right";>
-					<a href="?logout">Logout:</a>					
+					<a href="?logout">Logout</a>					
 				</li>
 				<li class="log" style="float:right";>
-					<span class="headUser"><?php echo $username['username'] ?></span>
+					<a href="editprofile.php" class="headUser"><?php echo $username['username'] ?></a>
 				</li>
 			<?php else : ?>
 				<!-- header link will look selected if you're on that page -->
