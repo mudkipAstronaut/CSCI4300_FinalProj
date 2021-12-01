@@ -71,7 +71,9 @@ $statement1 -> closeCursor();
   	</div>
 	<br>
 	
-	<form action="updateWishlistNotes.php" method="post" id="update_notes_form">
+	<iframe name="content" style="display:none;">
+    </iframe>
+    <form method="POST" name="wishlist" action="updateWishlistNotes.php" target="content" id="update_notes_form">
 	  <div class="wishlist-Notes">
 	    <p class="travelNotesHeader"> Travel Notes: </p>
 		<input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
@@ -87,8 +89,8 @@ $statement1 -> closeCursor();
 <?php if (count($places) == 0) : ?>
 <div id="wishlist-empty">
   <div class="wishlist-empty-text">
-      <p> It seems that your wishlist is empty. </p>
-	  <p> Try searching for some places that interest you. </p>
+    <p> It seems that your wishlist is empty. </p>
+	<p> Try searching for some places that interest you. </p>
   </div>
 </div>
 <?php endif; ?>

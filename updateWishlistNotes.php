@@ -16,6 +16,6 @@ $statement->bindValue(':wishlist_id', $wishlist_id);
 $statement->execute();
 $statement->closeCursor();
 
-$location = 'location: wishlist.php';
-header($location);
+//$location = 'location: wishlist.php';
+//header($location);
 ?>
