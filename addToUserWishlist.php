@@ -19,12 +19,13 @@ $statement->bindValue(':notes', NULL);
 $statement->execute();
 $statement->closeCursor();
 
+/*
 $nameQ = "SELECT placeName FROM places WHERE placeID=".$place_id;
 $s1 = $db->prepare($nameQ);
 $s1->execute();
 $name = $s1->fetchAll()[0];
 $s1->closeCursor();
-
 echo '<script>alert("Added '. $name[0]  .' to your Wishlist")</script>';
+*/
 
 ?>

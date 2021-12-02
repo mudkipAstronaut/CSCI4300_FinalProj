@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2021 at 10:56 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- Generation Time: Dec 02, 2021 at 01:38 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `woohoo`
 --
-CREATE DATABASE IF NOT EXISTS `woohoo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `woohoo`;
 
 -- --------------------------------------------------------
 
@@ -44,7 +42,26 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (1, 'london.jpg', 2, 1),
 (2, 'athens.jpeg', 3, 1),
 (3, 'hoover-dam.jpg', 4, 1),
-(4, 'liberty.jpg', 1, 1);
+(4, 'liberty.jpg', 1, 1),
+(5, 'Tokyo_SkyTree.jpg', 5, 3),
+(6, 'Hollywood_Sign.jpg', 18, 3),
+(7, 'Mojang.jpg', 6, 2),
+(8, 'PoeHouse-Baltimore.jpg', 8, 2),
+(9, 'Gettysburg.jpg', 10, 2),
+(10, 'Disney_Concert.jpg', 12, 3),
+(11, 'Dodger-Stadium.jpg', 15, 3),
+(12, 'jama-maszid.jpg', 22, 3),
+(13, 'Tokyo-Imperial-Palace.jpg', 23, 1),
+(14, 'Imperial-Bridge.jpg', 23, 2),
+(15, 'Imperial.jpg', 23, 3),
+(16, 'Nanjing_Road.jpg', 26, 4),
+(17, 'Nanjing-road-pedestrian.jpg', 26, 1),
+(18, 'MASP_Brazil.jpg', 27, 3),
+(19, 'Chapultepec.jpg', 30, 3),
+(20, 'Pyramid-Giza.jpg', 31, 1),
+(21, 'great-pyramid.jpg', 31, 1),
+(22, 'Great-Sphinx.jpg', 32, 2),
+(23, 'london.jpg', 33, 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +91,7 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (5, 'Sky Tree', 'Tokyo', 'Japan', NULL, NULL, 2),
 (6, 'Mojang Office', 'Stockholm', 'Sweden', 'Block game', '5.0', 1),
 (7, 'Emu War Burial', 'Outback', 'Australia', 'In the Outback, noone can hear you scream.', '2.5', 4),
-(8, 'Edgar Allen Poe\'s house', 'Philadelphia', 'USA', 'Home of the famous writer', '0.0', 0),
+(8, 'Edgar Allan Poe\'s house', 'Philadelphia', 'USA', 'Home of the famous writer', '0.0', 0),
 (9, 'Statue of Diogenes', 'Sinop', 'Turkey', 'A monument to the ancient Greek philosopher', '0.0', 0),
 (10, 'Gettysburg Battlefield', 'Gettysburg ', 'USA', NULL, '7.8', 3),
 (11, 'Georgia State Capitol', 'Atlanta', 'USA', 'Where the Ga state legislature meets to make laws and govern.', '6.8', 4),
@@ -98,7 +115,8 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (29, 'Basilica de Guadalupe', 'Mexico City', 'Mexico', NULL, NULL, 0),
 (30, 'Chapultepec Castle', 'Mexico City', 'Mexico ', NULL, NULL, 0),
 (31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, NULL, 0),
-(32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 0);
+(32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 0),
+(33, 'Big Ben', 'London', 'United Kingdom', 'A tall clocktower next to the River Thames.', '3.5', 2);
 
 -- --------------------------------------------------------
 
@@ -147,7 +165,10 @@ INSERT INTO `wishlist` (`wishlistID`, `userID`, `placeID`, `notes`) VALUES
 (3, 4, 7, NULL),
 (4, 2, 1, NULL),
 (5, 2, 4, NULL),
-(6, 3, 5, 'Nani?');
+(6, 3, 5, 'Nani?'),
+(7, 1, 4, NULL),
+(8, 1, 3, NULL),
+(9, 1, 7, NULL);
 
 --
 -- Indexes for dumped tables
@@ -187,13 +208,13 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -205,7 +226,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
