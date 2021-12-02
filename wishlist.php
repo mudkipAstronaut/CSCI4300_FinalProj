@@ -50,7 +50,7 @@ $statement1 -> closeCursor();
 		    $imagePath = $placePicture['image'];
 	      }
 	    } else {
-		    $imagePath = 'london.jpg';
+		    $imagePath = 'default.jpg';
 	    }
 	    $statement2 -> closeCursor();
 	  ?>
@@ -58,7 +58,7 @@ $statement1 -> closeCursor();
 	
 	  <div>
         
-		<a href=""><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="150" height="150"></a>
+		<a href="<?php echo 'place.php?place=' . $place['placeID']; ?>"><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="150" height="150"></a>
       </div>
 	  
 	  
@@ -66,7 +66,7 @@ $statement1 -> closeCursor();
 	    <input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
 	    <input type="submit" value="Remove From Wishlist" class="wishlistRemoveButton">
 	  </form>
-      <h2><a href=""><?php echo $place['placeName']; ?>: <?php echo $place['city']; ?>, <?php echo $place['country']; ?> </a></h2>
+      <h2><a href="<?php echo 'place.php?place=' . $place['placeID']; ?>"><?php echo $place['placeName']; ?>: <?php echo $place['city']; ?>, <?php echo $place['country']; ?> </a></h2>
       <p class="placeDescription"> <?php echo $place['description']; ?> </p>
   	</div>
 	<br>
