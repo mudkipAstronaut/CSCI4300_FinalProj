@@ -44,13 +44,35 @@ $url = "index.php";
 
 <?php $i = 1; ?>
 <?php foreach ($popularPlaces as $popularPlace) : ?>
-<form action="addToUserWishlist.php" method="post" id="add_to_wishlist_form">
+<iframe name="content" style="display:none;">
+</iframe>
+<form method="POST" name="wishlist" action="addToUserWishlist.php" target="content">
   <div class="popularPlace fade">
+    
     <div class="numbertext"><?php echo $i; ?> / 5</div>
-    <a href=""><img alt="Location" src="place_imgs/london.jpg"></a>
+	<?php
+	  require('database.php');
+	  
+	  $getPlaceImage = "SELECT image,userID FROM pictures WHERE :currentPlace = pictures.placeID GROUP BY pictures.pictureID LIMIT 1";
+	  $statement3 = $db ->prepare($getPlaceImage);
+	  $statement3->bindValue(':currentPlace', $popularPlace['placeID']);
+	  $statement3 -> execute();
+	  $placePictures = $statement3->fetchAll();
+	  
+	  if (count($placePictures)==1) {
+	    foreach ($placePictures as $placePicture) {
+		  $imagePath = $placePicture['image'];
+	    }
+	  } else {
+		  $imagePath = 'london.jpg';
+	  }
+	  $statement3 -> closeCursor();
+	?>
+	
+	<a href=""><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
+	
     <div class="popular-locationInfo">
    	  <a href=""><?php echo $popularPlace['placeName']; ?>: <?php echo $popularPlace['city']; ?>, <?php echo $popularPlace['country']; ?> </a> 
-	  
 	  <?php if(isset($_SESSION["loggedin"])) : ?>		
 	    <div class="popular-addWishlist">
 		  <input type="hidden" name="placeID" value="<?php echo $popularPlace['placeID']; ?>">
@@ -95,10 +117,33 @@ $url = "index.php";
 
 <?php $i = 1; ?>
 <?php foreach ($highlyRatedPlaces as $highlyRatedPlace) : ?>
-<form action="addToUserWishlist.php" method="post" id="add_to_wishlist_form">
+<iframe name="content" style="display:none;">
+</iframe>
+<form method="POST" name="wishlist" action="addToUserWishlist.php" target="content">
   <div class="ratedPlace fade">
     <div class="numbertext"><?php echo $i; ?> / 5</div>
-    <a href=""><img alt="Location" src="place_imgs/london.jpg"></a>
+	
+	<?php
+	  require('database.php');
+	  
+	  $getPlaceImage = "SELECT image,userID FROM pictures WHERE :currentPlace = pictures.placeID GROUP BY pictures.pictureID LIMIT 1";
+	  $statement4 = $db ->prepare($getPlaceImage);
+	  $statement4->bindValue(':currentPlace', $highlyRatedPlace['placeID']);
+	  $statement4 -> execute();
+	  $placePictures = $statement4->fetchAll();
+	  
+	  if (count($placePictures)==1) {
+	    foreach ($placePictures as $placePicture) {
+		  $imagePath = $placePicture['image'];
+	    }
+	  } else {
+		  $imagePath = 'london.jpg';
+	  }
+	  $statement4 -> closeCursor();
+	?>
+	
+	
+    <a href=""><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
     <div class="popular-locationInfo">
    	  <a href=""><?php echo $highlyRatedPlace['placeName']; ?>: <?php echo $highlyRatedPlace['city']; ?>, <?php echo $highlyRatedPlace['country']; ?> </a> 
 	  
@@ -135,6 +180,7 @@ $url = "index.php";
   <span class="dot2" onclick="currentSlideHR(4)"></span> 
   <span class="dot2" onclick="currentSlideHR(5)"></span> 
 </div>
+<br>
 
 <script>
 

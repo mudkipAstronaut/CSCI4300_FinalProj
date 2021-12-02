@@ -270,6 +270,7 @@ img {vertical-align: middle;}
 
 .popularPlace img {
 	width: 500px;
+	height: 400px;
 }
 
 .ratedPlace {	display: none}
@@ -552,10 +553,11 @@ img {vertical-align: middle;}
 .wishlistEntry img {
 	width: 150px;
 	float: left;
+	border: 1px solid black;
 }
 
 .wishlistEntry h2 {
-	
+	margin-left: 152px;
 }
 
 .wishlistRemoveButton {
@@ -565,6 +567,10 @@ img {vertical-align: middle;}
 .wishlist-aboveNotes {
 	margin-left: 5px;
 	margin-right: 5px;
+}
+
+.wishlist-aboveNotes p {
+	margin-left: 152px;
 }
 
 .wishlist-Notes {
