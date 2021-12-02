@@ -6,11 +6,18 @@ require('database.php');
 $place = $_GET['place'];
 
 //get the place info
-$placeQ = "SELECT * FROM places WHERE placeID=" . $place;
-$s5 = $db->prepare($placeQ);
-$s5->execute();
-$results = $s5->fetchAll()[0];
-$s5->closeCursor();
+try {
+	$placeQ = "SELECT * FROM places WHERE placeID=" . $place;
+	$s5 = $db->prepare($placeQ);
+	$s5->execute();
+	$results = $s5->fetchAll()[0];
+	$s5->closeCursor();
+} catch (PDOException $ex) {
+	if(!isset($_GET['logout'])) {
+		throw $ex;
+	}
+	echo $ex->getMessage();
+}
 ?>
 
 <!DOCTYPE html> 
