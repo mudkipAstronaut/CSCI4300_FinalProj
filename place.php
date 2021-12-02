@@ -44,6 +44,9 @@ $s2->closeCursor();
 <p>
 <?php echo $results['description']; ?>
 </p>
+
+<?php include('review.php'); ?>
+
 </div>
 
 </body>

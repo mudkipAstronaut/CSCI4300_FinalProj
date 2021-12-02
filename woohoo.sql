@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2021 at 01:38 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.9
+-- Generation Time: Dec 02, 2021 at 02:07 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -121,6 +121,20 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `reviewID` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `placeid` int(11) NOT NULL,
+  `score` decimal(10,1) DEFAULT NULL,
+  `written` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -187,6 +201,12 @@ ALTER TABLE `places`
   ADD PRIMARY KEY (`placeID`);
 
 --
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`reviewID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -215,6 +235,12 @@ ALTER TABLE `pictures`
 --
 ALTER TABLE `places`
   MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
