@@ -64,15 +64,15 @@ $url = "index.php";
 		  $imagePath = $placePicture['image'];
 	    }
 	  } else {
-		  $imagePath = 'london.jpg';
+		  $imagePath = 'default.jpg';
 	  }
 	  $statement3 -> closeCursor();
 	?>
 	
-	<a href=""><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
+	<a href="<?php echo 'place.php?place=' . $popularPlace['placeID']; ?>"><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
 	
     <div class="popular-locationInfo">
-   	  <a href=""><?php echo $popularPlace['placeName']; ?>: <?php echo $popularPlace['city']; ?>, <?php echo $popularPlace['country']; ?> </a> 
+   	  <a href="<?php echo 'place.php?place=' . $popularPlace['placeID']; ?>"><?php echo $popularPlace['placeName']; ?>: <?php echo $popularPlace['city']; ?>, <?php echo $popularPlace['country']; ?> </a> 
 	  <?php if(isset($_SESSION["loggedin"])) : ?>		
 	    <div class="popular-addWishlist">
 		  <input type="hidden" name="placeID" value="<?php echo $popularPlace['placeID']; ?>">
@@ -137,15 +137,15 @@ $url = "index.php";
 		  $imagePath = $placePicture['image'];
 	    }
 	  } else {
-		  $imagePath = 'london.jpg';
+		  $imagePath = 'default.jpg';
 	  }
 	  $statement4 -> closeCursor();
 	?>
 	
 	
-    <a href=""><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
+    <a href="<?php echo 'place.php?place=' . $highlyRatedPlace['placeID']; ?>"><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
     <div class="popular-locationInfo">
-   	  <a href=""><?php echo $highlyRatedPlace['placeName']; ?>: <?php echo $highlyRatedPlace['city']; ?>, <?php echo $highlyRatedPlace['country']; ?> </a> 
+   	  <a href="<?php echo 'place.php?place=' . $highlyRatedPlace['placeID']; ?>"><?php echo $highlyRatedPlace['placeName']; ?>: <?php echo $highlyRatedPlace['city']; ?>, <?php echo $highlyRatedPlace['country']; ?> </a> 
 	  
 	  <?php if(isset($_SESSION["loggedin"])) : ?>		
 	    <div class="popular-addWishlist">
