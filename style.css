@@ -18,13 +18,17 @@ body {
     margin-right: 1em;
     float: left;
 }
-.pEntry p{
-    font-size: 0.7em;
+.pEntry h2{
+    text-decoration: underline;
 }
 .pEntry{
     margin: 1em;
     text-decoration: none;
     color: black;
+    background-color: #99EEFF;
+    border: 2px solid slateblue;
+    padding:1em;
+    padding-top:0;
 }
 #results{
     display: grid;
@@ -32,15 +36,20 @@ body {
 .center{
     width: 85%;
     margin: auto;
-    padding: 1.5em;
+    padding: 1em;
     padding-top: 0;
+    margin-top:1em;
+    background-color: #99EEFF;
+    border: 2px solid slateblue;
 }
 #filters{
     float:left;
     margin: 1em;
     display: grid;
-    background-color: skyblue;
+    background-color: #99EEFF;
+    border: 2px solid slateblue;
     padding: 0.5em;
+    margin-right:0;
 }
 #filters ul, li{
     padding: 0;

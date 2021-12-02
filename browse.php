@@ -20,7 +20,9 @@ $s2->closeCursor();
 
 <!DOCTYPE html> 
 <html>
+<head>
 <link rel="stylesheet" href="style.css"/>
+</head>
 <body>
 <header>
 <?php include('header.php'); ?>
@@ -66,7 +68,7 @@ $s2->closeCursor();
 <div id="results">
   <?php foreach($results as $res): ?>
   <a href="<?php echo 'place.php?place=' . $res['placeID']; ?>" class="pEntry">
-  <div class="pEntry">
+  <div>
     <iframe name="content" style="display:none;">
     </iframe>
     <form method="POST" name="wishlist" action="addToUserWishlist.php" target="content">
@@ -78,10 +80,15 @@ $s2->closeCursor();
     $img = $s2->fetchAll()[0];
     $s2->closeCursor();
     ?>
-      <img src="place_imgs/<?php echo $img['image']; ?>" alt="interesting">
+      <img src="place_imgs/<?php 
+      $imgPath = $img['image'];
+      if(empty($imgPath)){
+	$imgPath = 'default.jpg';
+      }
+      echo $imgPath; 
+      ?>" alt="interesting">
     </div>
-    <h2><?php echo$res['placeName']; ?></h2>
-    <h3><?php echo $res['city']; ?>, <?php echo $res['country']; ?></h3>
+    <h2><?php echo $res['placeName']; ?>: <?php echo $res['city']; ?>, <?php echo $res['country']; ?></h2>
     <p>
      <?php echo $res['description']; ?>
     </p>
