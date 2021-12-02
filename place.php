@@ -1,6 +1,11 @@
 <?php
 session_start();
- 
+?>
+<?php 
+if(isset($_SESSION["loggedin"])) {
+  $user_id = $_SESSION["uid"];
+}
+
 require('database.php');
 
 $place = $_GET['place'];
@@ -15,7 +20,9 @@ $s5->closeCursor();
 
 <!DOCTYPE html> 
 <html>
+<head>
 <link rel="stylesheet" href="style.css"/>
+</head>
 <body>
 <header>
 <?php include('header.php'); ?>
