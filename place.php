@@ -23,6 +23,9 @@ try {
 	}
 	echo $ex->getMessage();
 }
+
+//saving placeID for review.php
+$pid = $results['placeID'];
 ?>
 
 <!DOCTYPE html> 
@@ -114,6 +117,9 @@ echo 'No Reviews Yet';
 <p>
 <?php echo $results['description']; ?>
 </p>
+
+<?php include('review.php'); ?>
+
 </div>
 <script>
 var slideIndex = 1;
