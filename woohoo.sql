@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 06:12 PM
+-- Generation Time: Dec 03, 2021 at 06:31 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -64,7 +64,9 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (21, 'great-pyramid.jpg', 31, 1),
 (22, 'Great-Sphinx.jpg', 32, 2),
 (23, 'london.jpg', 33, 1),
-(24, 'india_gateway.jpg', 34, 1);
+(24, 'india_gateway.jpg', 34, 1),
+(25, 'chicago_picasso.jpg', 36, 1),
+(26, 'St_Louis_arch.jpg', 35, 1);
 
 -- --------------------------------------------------------
 
@@ -120,7 +122,9 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, NULL, 0),
 (32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 0),
 (33, 'Big Ben', 'London', 'United Kingdom', 'A tall clocktower next to the River Thames.', '3.5', 2),
-(34, 'Gateway of India', 'Mumbai', 'India', NULL, NULL, 1);
+(34, 'Gateway of India', 'Mumbai', 'India', NULL, NULL, 1),
+(35, 'Gateway Arch', 'St Louis', 'USA', 'A large arch dedicated to the American people, one of the largest monuments in the Western hemisphere', NULL, 1),
+(36, 'Chicago Picasso', 'Chicago', 'USA', 'Also called The Picasso, it is an abstract sculpture made by the famous artist', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -241,13 +245,13 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `reviews`
