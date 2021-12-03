@@ -63,7 +63,8 @@ $numImg = count($images);
 $counter=1;
 ?>
 
-<?php foreach($images as $img): ?>
+<?php
+foreach($images as $img): ?>
 <div class="mySlides fade">
 <div class="numbertext"><?php echo $counter.'/'.$numImg; ?></div>
 <img src="place_imgs/<?php 
@@ -88,10 +89,19 @@ $counter=1;
 </div>
 <?php
 $counter++;
-endforeach; ?>
+endforeach;?>
 
+<?php
+if(empty($images)){
+echo '<img src="place_imgs/default.jpg" alt="interesting" style="display:block;margin:auto;">';
+}
+else{
+echo '
 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 <a class="next" onclick="plusSlides(1)">&#10095;</a>
+';
+}
+?>
 </div>
 <h4>Rating: <?php
 if(!is_null($results['reviewScore'])){
