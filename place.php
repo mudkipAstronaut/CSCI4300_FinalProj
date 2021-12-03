@@ -18,6 +18,9 @@ try {
 	}
 	echo $ex->getMessage();
 }
+
+//saving placeID for review.php
+$pid = $results['placeID'];
 ?>
 
 <!DOCTYPE html> 
