@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 04:52 PM
+-- Generation Time: Dec 03, 2021 at 05:09 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `pictures` (
 --
 
 INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
-(1, 'london.jpg', 2, 1),
+(1, 'london-eye.jpg', 2, 1),
 (2, 'athens.jpeg', 3, 1),
 (3, 'hoover-dam.jpg', 4, 1),
 (4, 'liberty.jpg', 1, 1),

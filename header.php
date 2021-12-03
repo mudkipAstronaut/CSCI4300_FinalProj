@@ -135,6 +135,14 @@ $search = "";
 				<a href="wishlist.php">Wishlist</a></li>
 			<?php endif; ?>
 			
+			<!-- link to addplace.php if logged in and not viewing it -->
+			<?php if(isset($_SESSION["loggedin"])) : ?>
+				<!-- header link will look selected if you're on that page -->
+				<li <?php if(str_contains($_SERVER['REQUEST_URI'], 'addplace.php')) 
+					echo 'style="background-color:#BEFFFF;"'; ?>>
+				<a href="addplace.php">Add Place</a></li>
+			<?php endif; ?>
+			
 			<!-- display logout option while user is logged in, else display login -->
 			<?php if(isset($_SESSION["loggedin"])) : ?>
 				<!-- Delete cookie and update header -->
@@ -147,11 +155,15 @@ $search = "";
 				<li class="log" style="float:right";>
 					<a href="?logout">Logout</a>					
 				</li>
-				<li class="log" style="float:right";>
+				<li class="log" <?php 
+					if(str_contains($_SERVER['REQUEST_URI'], 'editprofile.php')) 
+						echo 'style="background-color:#BEFFFF;float:right;"';
+					else 
+						echo 'style="float:right;"';?>>
 					<a href="editprofile.php" class="headUser"><?php echo $username['username'] ?></a>
 				</li>
 			<?php else : ?>
-				<!-- header link will look selected if you're on that page -->
+				<!-- login link will look selected if you're on that page -->
 				<li class="log" <?php 
 					if(str_contains($_SERVER['REQUEST_URI'], 'login.php')) 
 						echo 'style="background-color:#BEFFFF;float:right;"';
