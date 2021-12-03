@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 05:09 PM
+-- Generation Time: Dec 03, 2021 at 06:12 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -63,7 +63,8 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (20, 'Pyramid-Giza.jpg', 31, 1),
 (21, 'great-pyramid.jpg', 31, 1),
 (22, 'Great-Sphinx.jpg', 32, 2),
-(23, 'london.jpg', 33, 1);
+(23, 'london.jpg', 33, 1),
+(24, 'india_gateway.jpg', 34, 1);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,8 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (30, 'Chapultepec Castle', 'Mexico City', 'Mexico ', NULL, NULL, 0),
 (31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, NULL, 0),
 (32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 0),
-(33, 'Big Ben', 'London', 'United Kingdom', 'A tall clocktower next to the River Thames.', '3.5', 2);
+(33, 'Big Ben', 'London', 'United Kingdom', 'A tall clocktower next to the River Thames.', '3.5', 2),
+(34, 'Gateway of India', 'Mumbai', 'India', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -191,9 +193,9 @@ INSERT INTO `wishlist` (`wishlistID`, `userID`, `placeID`, `notes`) VALUES
 (4, 2, 1, NULL),
 (5, 2, 4, NULL),
 (6, 3, 5, 'Nani?'),
-(7, 1, 4, NULL),
-(8, 1, 3, NULL),
-(9, 1, 7, NULL);
+(7, 1, 4, ''),
+(8, 1, 3, 'woohoo'),
+(9, 1, 7, '');
 
 --
 -- Indexes for dumped tables
@@ -239,13 +241,13 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `reviews`
