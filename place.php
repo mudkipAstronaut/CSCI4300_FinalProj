@@ -111,7 +111,7 @@ if(!is_null($results['reviewScore'])){
 echo $results['reviewScore'];
 }
 else{
-echo 'No Reviews Yet';
+echo 'No ratings yet';
 }
 ?></h4>
 <p>

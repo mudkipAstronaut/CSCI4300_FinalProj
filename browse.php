@@ -77,16 +77,14 @@ $s2->closeCursor();
     $imgQ = "SELECT image FROM pictures WHERE placeID=" . $res['placeID'];
     $s2 = $db->prepare($imgQ);
     $s2->execute();
-    $img = $s2->fetchAll()[0];
+	$img = $s2->fetchAll();
+	if (count($img) != 0) {
+		$imgPath = $img[0]['image'];
+	}
+	else $imgPath = 'default.jpg';
     $s2->closeCursor();
     ?>
-      <img src="place_imgs/<?php 
-      $imgPath = $img['image'];
-      if(empty($imgPath)){
-	$imgPath = 'default.jpg';
-      }
-      echo $imgPath; 
-      ?>" alt="interesting">
+    <img src="place_imgs/<?php echo $imgPath; ?>" alt="interesting">
     </div>
     <h2><?php echo $res['placeName']; ?>: <?php echo $res['city']; ?>, <?php echo $res['country']; ?></h2>
     <p>
