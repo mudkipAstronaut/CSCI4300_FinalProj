@@ -10,13 +10,13 @@ if(isset($_SESSION["loggedin"])) {
   $user_id = $_SESSION["uid"];
 }
 
-$queryPopular = "SELECT places.placeID,placeName,city,country,reviewScore,COUNT(*) AS Count FROM wishlist,places WHERE places.placeID = wishlist.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5";
+$queryPopular = "SELECT places.placeID,placeName,city,country,reviewScore,COUNT(*) AS Count FROM wishlist,places,pictures WHERE places.placeID = wishlist.placeID AND pictures.placeID = wishlist.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5";
 $statement1 = $db ->prepare($queryPopular);
 $statement1 -> execute();
 $popularPlaces = $statement1->fetchAll();
 $statement1 -> closeCursor();
 
-$queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places ORDER BY reviewScore DESC LIMIT 5";
+$queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places,pictures WHERE places.placeID = pictures.placeID ORDER BY reviewScore DESC LIMIT 5";
 $statement2 = $db ->prepare($queryHighlyRated);
 $statement2 -> execute();
 $highlyRatedPlaces = $statement2->fetchAll();
