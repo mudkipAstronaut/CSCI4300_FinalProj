@@ -115,16 +115,6 @@ $search = "";
 				value="<?php echo $search;?>"/><input style="margin-left: 1px;" type="submit" value="Search" />
 				</form>
 			</li>	
-			<!-- JavaScript checks if searchbar is empty before starting a search -->
-			<script>
-				function validate() {
-					var query = document.searchBar.query.value;
-					if (query == "" || query === null) {
-						return false;
-					}
-					return true;
-				}				
-			</script>
 			
 			<!-- link to wishlist if logged in and not viewing wishlist -->
 			<?php if(isset($_SESSION["loggedin"])) : ?>

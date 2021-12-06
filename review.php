@@ -40,29 +40,50 @@ button.addReview {
 }
 
 button.addReview:hover {	
-	// background-color: rgb(255, 245, 0);
-	// background-color: #BEFFFF;
+	background-color: #BEFFFF;
 }
-</style>
 
+button.addReview:active {	
+	background-color: #77DFDF;
+}
+
+
+</style>
 <script>
 function createReviewBox() {
-	var li = document.CreateElement('li');
-	var form = document.CreateElement('form');
-	var text = document.CreateElement('input');
+	let div = document.createElement('div');
+	div.className = "review";
+	div.style.cssText = 'margin:1em;';
+	let form = document.createElement('form');
+	
+	//creating elements of the review form
+	//numerical rating
+	let rateLabel = document.createElement('label');
+	rateLabel.innerHTML = "Decimal score out of five";
+	rateLabel.style.cssText = 'margin-left: 1em;padding-top:8px;';
+	let rateText = document.createElement('input');
+	rateText.style.cssText = 'margin-left:1em;width:30px;';
+	rateLabel.appendChild(rateText);
+	//text of the review, if any
+	let text = document.createElement('input');
 	text.type = "text";
-	form.appendChild('text');
-	li.appendChild('form');
-	document.GetElementById('rlist').appendChild('li');
+	text.style.cssText = 'width:98%;margin:8px 10px;';
+	//submit rating/review
+	let submit = document.createElement('input');
+	submit.type = "submit";
+	
+	form.append(rateLabel, text);
+	div.appendChild(form);
+	let revList = document.getElementById('rlist');
+	document.getElementsByClassName('reviewBox')[0].insertBefore(div, revList);
 }
 </script>
 
 <div class="reviewBox">
 <div style="display:flex;"> 
 	<span style="padding-left:8px;float:left;margin-top:2px;"><?php echo $text; ?></span>
-	<form>
-	<button type="button" style="float:left;" class="addReview" onclick="createReviewBox();">Leave a review</button>
-	</form>
+	<button id="addRev" type="button" style="float:left;" class="addReview" onclick="createReviewBox()">
+	Leave a review</button>
 </div>
 <ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
