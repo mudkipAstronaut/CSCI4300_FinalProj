@@ -22,8 +22,24 @@ $statement1 -> closeCursor();
 
 <!DOCTYPE html> 
 <html>
+
+<style>
+
+.showNotes { 
+	text-align: center;
+	margin: 0 auto;
+	width: 785px;
+}
+
+#visibleNotes {
+	display: none;
+}
+
+</style>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 <link rel="stylesheet" href="style.css"/>
+<!-- <script src="http://ajax.goggleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
 <body>
 <header>
@@ -33,6 +49,7 @@ $statement1 -> closeCursor();
 
 <div id="wishlist-container">
 
+<?php $wishlistIteration = 0; ?>
 <?php foreach ($places as $place) : ?>
   <div class="wishlistEntry">
     <div class="wishlist-aboveNotes">
@@ -75,13 +92,25 @@ $statement1 -> closeCursor();
     </iframe>
     <form method="POST" name="wishlist" action="updateWishlistNotes.php" target="content" id="update_notes_form">
 	  <div class="wishlist-Notes">
-	    <p class="travelNotesHeader"> Travel Notes: </p>
-		<input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
-	    <textarea placeholder="Enter your travel plans/notes for this location here." class="wishlist-textarea" name="notesTextArea"><?php echo $place['notes']; ?></textarea>
-   	    <input type="submit" value="Save Notes" class="wishlist-saveNotes">
+	    <!-- <p class="travelNotesHeader"> Travel Notes: </p>
+		
+		<!-- ------------------------------------------ -->
+		<br>
+		
+		<button onclick="hideShowNotes(<?php echo $wishlistIteration; ?>)" class="showNotes"> Show Travel Notes: </button>
+		<div id="visibleNotes" name="notes">
+		  <input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
+	      <textarea placeholder="Enter your travel plans/notes for this location here." class="wishlist-textarea" name="notesTextArea"><?php echo $place['notes']; ?></textarea>
+   	      <input type="submit" value="Save Notes" class="wishlist-saveNotes">
+		</div>
+		
+		<!-- ------------------------------------------ -->
+		
+		
 	  </div>
 	</form>
   </div>
+  <?php $wishlistIteration = $wishlistIteration + 1; ?>
   
 <?php endforeach; ?>
 </div>
@@ -100,6 +129,23 @@ $statement1 -> closeCursor();
   new Sortable(dragArea, {
     animation: 350
   });
+  
+  <!-- ------------------------------------------ -->
+  
+  function hideShowNotes(y) {
+	  var x = document.querySelectorAll("[id='visibleNotes']");
+	  
+	  const element = document.querySelectorAll("[class='showNotes']");
+	  if (x[y].style.display === "none") {
+		  x[y].style.display = "block";
+		  element[y].innerHTML = "Hide Travel Notes:";
+	  } else {
+		  x[y].style.display = "none";
+		  element[y].innerHTML = "Show Travel Notes:";
+	  }
+  }
+  
+  <!-- ------------------------------------------ -->
 </script>
 
 

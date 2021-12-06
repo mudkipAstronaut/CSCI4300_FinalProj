@@ -10,13 +10,13 @@ if(isset($_SESSION["loggedin"])) {
   $user_id = $_SESSION["uid"];
 }
 
-$queryPopular = "SELECT places.placeID,placeName,city,country,reviewScore,COUNT(*) AS Count FROM wishlist,places WHERE places.placeID = wishlist.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5";
+$queryPopular = "SELECT places.placeID,placeName,city,country,reviewScore,COUNT(*) AS Count FROM wishlist,places,pictures WHERE places.placeID = wishlist.placeID AND places.placeID=pictures.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5;";
 $statement1 = $db ->prepare($queryPopular);
 $statement1 -> execute();
 $popularPlaces = $statement1->fetchAll();
 $statement1 -> closeCursor();
 
-$queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places ORDER BY reviewScore DESC LIMIT 5";
+$queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places,pictures WHERE places.placeID=pictures.placeID ORDER BY reviewScore DESC LIMIT 5;";
 $statement2 = $db ->prepare($queryHighlyRated);
 $statement2 -> execute();
 $highlyRatedPlaces = $statement2->fetchAll();
@@ -26,13 +26,41 @@ $url = "index.php";
 
 ?>
 
+
+
 <!DOCTYPE html> 
 <html>
+
+
+<style>
+
+body {
+	background-image: url("place_imgs/Homepage-background-beach.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #cccccc;
+}
+
+.testWhite {
+	background-color: white;
+	width: 800px;
+	margin: 0 auto;
+	border-radius: 25px;
+	border: 2px solid slateblue;
+	padding: 10px;
+}
+
+</style>
+
+
 <link rel="stylesheet" href="style.css"/>
 <body>
 <header>
 <?php include('header.php'); ?>
 </header>
+
+<br>
+<div class="testWhite">
 
 <!-- Popular Places -->
 
@@ -69,7 +97,7 @@ $url = "index.php";
 	  $statement3 -> closeCursor();
 	?>
 	
-	<a href="<?php echo 'place.php?place=' . $popularPlace['placeID']; ?>"><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
+	<a href="<?php echo 'place.php?place=' . $popularPlace['placeID']; ?>"><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="700" height="600"></a>
 	
     <div class="popular-locationInfo">
    	  <a href="<?php echo 'place.php?place=' . $popularPlace['placeID']; ?>"><?php echo $popularPlace['placeName']; ?>: <?php echo $popularPlace['city']; ?>, <?php echo $popularPlace['country']; ?> </a> 
@@ -143,7 +171,7 @@ $url = "index.php";
 	?>
 	
 	
-    <a href="<?php echo 'place.php?place=' . $highlyRatedPlace['placeID']; ?>"><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="500" height="500"></a>
+    <a href="<?php echo 'place.php?place=' . $highlyRatedPlace['placeID']; ?>"><img alt="Location" src="place_imgs/<?php echo $imagePath; ?>" width="700" height="600"></a>
     <div class="popular-locationInfo">
    	  <a href="<?php echo 'place.php?place=' . $highlyRatedPlace['placeID']; ?>"><?php echo $highlyRatedPlace['placeName']; ?>: <?php echo $highlyRatedPlace['city']; ?>, <?php echo $highlyRatedPlace['country']; ?> </a> 
 	  
@@ -180,6 +208,9 @@ $url = "index.php";
   <span class="dot2" onclick="currentSlideHR(4)"></span> 
   <span class="dot2" onclick="currentSlideHR(5)"></span> 
 </div>
+
+</div>
+
 <br>
 
 <script>

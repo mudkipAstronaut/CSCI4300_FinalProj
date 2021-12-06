@@ -68,13 +68,18 @@ body {
 
 body { font-family: Verdana, sans-serif; margin:0 }
 
+#homeContent {
+	
+}
+
 .popularPlace {	display: none}
 
 img {vertical-align: middle;}
 
 .popularPlace img {
-	width: 500px;
-	height: 400px;
+	width: 700px;
+	height: 600px;
+	border-radius: 25px;
 }
 
 .ratedPlace {	display: none}
@@ -82,12 +87,14 @@ img {vertical-align: middle;}
 img {vertical-align: middle;}
 
 .ratedPlace img {
-	width: 500px;
+	width: 700px;
+	height: 600px;
+	border-radius: 25px;
 }
 
 /* Slideshow container */
 .popular-slideshow-container {
-  max-width: 500px;
+  max-width: 700px;
   position: relative;
   margin: auto;
 }
@@ -137,6 +144,7 @@ img {vertical-align: middle;}
   width: 100%;
   /*text-align: center; */
   background-color: slateblue;
+  border-radius: 0px 0px 25px 25px;
 }
 
 .popular-locationInfo a {
@@ -357,7 +365,7 @@ img {vertical-align: middle;}
 .wishlistEntry img {
 	width: 150px;
 	float: left;
-	border: 1px solid black;
+	border: 1px solid slateblue;
 }
 
 .wishlistEntry h2 {
@@ -379,19 +387,28 @@ img {vertical-align: middle;}
 
 .wishlist-Notes {
 	display: table;
+	clear: left;
 }
 
+/*
 .travelNotesHeader {
 	font-size: 20px;
 	padding: 0px;
 	margin: 0px 0px 0px 5px;
 }
+*/
+
+.showNotes {
+	margin: 0px 0px 5px 5px;
+	clear: left;
+}
+
 
 .wishlist-textarea {
 	margin: 5px;
-	width: 750px;
-	max-width: 750px;
-	min-width: 750px;
+	width: 785px;
+	max-width: 785px;
+	min-width: 785px;
 	min-height: 50px;
 }
 
@@ -413,3 +430,4 @@ img {vertical-align: middle;}
 	width: 800px;
 	height: 20px;
 }
+
