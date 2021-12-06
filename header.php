@@ -165,7 +165,16 @@ $search = "";
 						echo 'style="background-color:#BEFFFF;float:right;"';
 					else 
 						echo 'style="float:right;"';?>>
-					<a href="login.php">Login</a></li>				
+					<a href="login.php">Login</a>
+				</li>		
+
+				<li class="log" <?php 
+					if(str_contains($_SERVER['REQUEST_URI'], 'register.php')) 
+						echo 'style="background-color:#BEFFFF;float:right;"';
+					else 
+						echo 'style="float:right;"';?>>
+					<a href="register.php">Register</a>
+				</li>
 			<?php endif; ?>	
 		</ul>		
 	</div>
