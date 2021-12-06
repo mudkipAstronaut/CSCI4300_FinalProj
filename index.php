@@ -85,7 +85,7 @@ $url = "index.php";
 	  <div class="popular-rating"> 
 	    Rating: <?php echo $popularPlace['reviewScore']; ?>  
 		<?php if ($popularPlace['reviewScore'] == NULL) : ?>
-		  No Reviews Yet
+		  No Ratings Yet
 		<?php endif; ?>
 	  </div>
     </div>
@@ -159,7 +159,7 @@ $url = "index.php";
 	  <div class="popular-rating"> 
 	    Rating: <?php echo $highlyRatedPlace['reviewScore']; ?>  
 		<?php if ($highlyRatedPlace['reviewScore'] == NULL) : ?>
-		  No Reviews Yet
+		  No Ratings Yet
 		<?php endif; ?>
 	  </div>
     </div>
