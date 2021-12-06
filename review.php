@@ -29,10 +29,42 @@ if (count($reviews) != 0) {
 	background-color: #99EEFF;
 }
 
+button.addReview {		
+	background-color: #99EEFF;
+	border: 1.5px outset slateblue;
+	height: 24px;
+	margin-left: 12px;
+	padding-bottom: 1px;
+	padding-top: 0;
+    cursor: pointer;
+}
+
+button.addReview:hover {	
+	// background-color: rgb(255, 245, 0);
+	// background-color: #BEFFFF;
+}
 </style>
+
+<script>
+function createReviewBox() {
+	var li = document.CreateElement('li');
+	var form = document.CreateElement('form');
+	var text = document.CreateElement('input');
+	text.type = "text";
+	form.appendChild('text');
+	li.appendChild('form');
+	document.GetElementById('rlist').appendChild('li');
+}
+</script>
+
 <div class="reviewBox">
-<span style="padding-left:8px;"><?php echo $text; ?></span>
-<ul class="reviewList">
+<div style="display:flex;"> 
+	<span style="padding-left:8px;float:left;margin-top:2px;"><?php echo $text; ?></span>
+	<form>
+	<button type="button" style="float:left;" class="addReview" onclick="createReviewBox();">Leave a review</button>
+	</form>
+</div>
+<ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
 		<?php 
 		$query = "SELECT username FROM users WHERE userID=" . $review['userID'];

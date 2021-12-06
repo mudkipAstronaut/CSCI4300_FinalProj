@@ -31,7 +31,6 @@ else
 		background-color: rgb(255, 245, 0);
 	}
 	
-	/* signout button will look the same as a nav link */
 	#logoutBtn{
 		background: none;
 		border: none;
