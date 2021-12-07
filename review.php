@@ -12,7 +12,7 @@ if (count($reviews) != 0) {
 ?>
 
 <style>
-.reviewBox {
+#reviewPane {
 	background-color: rgb(255, 215, 0);
 	padding-top: 10px;
 	border: solid slateblue 1.5px;
@@ -50,39 +50,48 @@ button.addReview:active {
 
 </style>
 <script>
-function createReviewBox() {
-	let div = document.createElement('div');
-	div.className = "review";
-	div.style.cssText = 'margin:1em;';
-	let form = document.createElement('form');
+//creates or destroys the review editor
+function manageReviewBox() {
+	let revPane = document.getElementById('reviewPane');	
 	
-	//creating elements of the review form
-	//numerical rating
-	let rateLabel = document.createElement('label');
-	rateLabel.innerHTML = "Decimal score out of five";
-	rateLabel.style.cssText = 'margin-left: 1em;padding-top:8px;';
-	let rateText = document.createElement('input');
-	rateText.style.cssText = 'margin-left:1em;width:30px;';
-	rateLabel.appendChild(rateText);
-	//text of the review, if any
-	let text = document.createElement('input');
-	text.type = "text";
-	text.style.cssText = 'width:98%;margin:8px 10px;';
-	//submit rating/review
-	let submit = document.createElement('input');
-	submit.type = "submit";
-	
-	form.append(rateLabel, text);
-	div.appendChild(form);
-	let revList = document.getElementById('rlist');
-	document.getElementsByClassName('reviewBox')[0].insertBefore(div, revList);
+	if (document.getElementById('editor') == null) {	
+		let div = document.createElement('div');
+		div.className = "review";
+		div.id = "editor";
+		div.style.cssText = 'margin:1em;';
+		let form = document.createElement('form');
+		
+		//creating elements of the review form
+		//numerical rating
+		let rateLabel = document.createElement('label');
+		rateLabel.innerHTML = "Decimal score out of five";
+		rateLabel.style.cssText = 'margin-left: 1em;padding-top:8px;';
+		let rateText = document.createElement('input');
+		rateText.style.cssText = 'margin-left:1em;width:30px;';
+		rateLabel.appendChild(rateText);
+		//text of the review, if any
+		let text = document.createElement('input');
+		text.type = "text";
+		text.style.cssText = 'width:98%;margin:8px 10px;';
+		//submit rating/review
+		let submit = document.createElement('input');
+		submit.type = "submit";
+		
+		//put together review box
+		form.append(rateLabel, text);
+		div.appendChild(form);
+		let revList = document.getElementById('rlist');
+		revPane.insertBefore(div, revList);
+	} else {	
+		revPane.removeChild(document.getElementById('editor'));
+	}
 }
 </script>
 
-<div class="reviewBox">
+<div id="reviewPane">
 <div style="display:flex;"> 
 	<span style="padding-left:8px;float:left;margin-top:2px;"><?php echo $text; ?></span>
-	<button id="addRev" type="button" style="float:left;" class="addReview" onclick="createReviewBox()">
+	<button id="addRev" type="button" style="float:left;" class="addReview" onclick="manageReviewBox()">
 	Leave a review</button>
 </div>
 <ul class="reviewList" id="rlist">
