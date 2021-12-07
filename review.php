@@ -29,10 +29,63 @@ if (count($reviews) != 0) {
 	background-color: #99EEFF;
 }
 
+button.addReview {		
+	background-color: #99EEFF;
+	border: 1.5px outset slateblue;
+	height: 24px;
+	margin-left: 12px;
+	padding-bottom: 1px;
+	padding-top: 0;
+    cursor: pointer;
+}
+
+button.addReview:hover {	
+	background-color: #BEFFFF;
+}
+
+button.addReview:active {	
+	background-color: #77DFDF;
+}
+
+
 </style>
+<script>
+function createReviewBox() {
+	let div = document.createElement('div');
+	div.className = "review";
+	div.style.cssText = 'margin:1em;';
+	let form = document.createElement('form');
+	
+	//creating elements of the review form
+	//numerical rating
+	let rateLabel = document.createElement('label');
+	rateLabel.innerHTML = "Decimal score out of five";
+	rateLabel.style.cssText = 'margin-left: 1em;padding-top:8px;';
+	let rateText = document.createElement('input');
+	rateText.style.cssText = 'margin-left:1em;width:30px;';
+	rateLabel.appendChild(rateText);
+	//text of the review, if any
+	let text = document.createElement('input');
+	text.type = "text";
+	text.style.cssText = 'width:98%;margin:8px 10px;';
+	//submit rating/review
+	let submit = document.createElement('input');
+	submit.type = "submit";
+	
+	form.append(rateLabel, text);
+	div.appendChild(form);
+	let revList = document.getElementById('rlist');
+	document.getElementsByClassName('reviewBox')[0].insertBefore(div, revList);
+}
+</script>
+
 <div class="reviewBox">
-<span style="padding-left:8px;"><?php echo $text; ?></span>
-<ul class="reviewList">
+<div style="display:flex;"> 
+	<span style="padding-left:8px;float:left;margin-top:2px;"><?php echo $text; ?></span>
+	<button id="addRev" type="button" style="float:left;" class="addReview" onclick="createReviewBox()">
+	Leave a review</button>
+</div>
+<ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
 		<?php 
 		$query = "SELECT username FROM users WHERE userID=" . $review['userID'];
