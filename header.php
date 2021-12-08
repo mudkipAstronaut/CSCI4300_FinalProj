@@ -64,11 +64,11 @@ else
 	}
 
 	ul.top_navlist li:hover {
-		background-color: #BEFFFF;
+		background-color: #EEFFFF;
 	}
 
 	ul.top_navlist li:active {
-		background-color: #BEFFFF;
+		background-color: #EEFFFF;
 	}
 
 	ul.top_navlist li {
@@ -101,6 +101,7 @@ else
 <?php
 
 $search = "";
+$currPageBtnCSS = 'style="background-color:#EEFFFF;"';
 ?>
 
 <nav>
@@ -120,13 +121,13 @@ $search = "";
 			<?php if(isset($_SESSION["loggedin"])) : ?>
 				<!-- header link will look selected if you're on that page -->
 				<li <?php if(str_contains($_SERVER['REQUEST_URI'], 'wishlist.php')) 
-					echo 'style="background-color:#BEFFFF;"'; ?>>
+					echo $currPageBtnCSS; ?>>
 				<a href="wishlist.php">Wishlist</a></li>
 			
 			<!-- link to addplace.php if logged in and not viewing it -->
 				<!-- header link will look selected if you're on that page -->
 				<li <?php if(str_contains($_SERVER['REQUEST_URI'], 'addplace.php')) 
-					echo 'style="background-color:#BEFFFF;"'; ?>>
+					echo $currPageBtnCSS; ?>>
 				<a href="addplace.php">Add Place</a></li>
 			
 			<!-- display logout option while user is logged in, else display login -->
@@ -142,7 +143,7 @@ $search = "";
 				</li>
 				<li class="log" <?php 
 					if(str_contains($_SERVER['REQUEST_URI'], 'editprofile.php')) 
-						echo 'style="background-color:#BEFFFF;float:right;"';
+						echo $currPageBtnCSS;
 					else 
 						echo 'style="float:right;"';?>>
 					<a href="editprofile.php" class="headUser"><?php echo $username['username'] ?></a>
@@ -151,7 +152,7 @@ $search = "";
 				<!-- login link will look selected if you're on that page -->
 				<li class="log" <?php 
 					if(str_contains($_SERVER['REQUEST_URI'], 'login.php')) 
-						echo 'style="background-color:#BEFFFF;float:right;"';
+						echo $currPageBtnCSS;
 					else 
 						echo 'style="float:right;"';?>>
 					<a href="login.php">Login</a>
@@ -159,7 +160,7 @@ $search = "";
 
 				<li class="log" <?php 
 					if(str_contains($_SERVER['REQUEST_URI'], 'register.php')) 
-						echo 'style="background-color:#BEFFFF;float:right;"';
+						echo $currPageBtnCSS;
 					else 
 						echo 'style="float:right;"';?>>
 					<a href="register.php">Register</a>

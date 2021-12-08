@@ -42,7 +42,7 @@ if (count($reviews) != 0) {
 
 /* button.revBtn:hover {	*/
 .revBtn:hover {	
-	background-color: #BEFFFF;
+	background-color: #EEFFFF;
 }
 
 /* button.revBtn:active {	*/
@@ -57,10 +57,15 @@ if (count($reviews) != 0) {
 <div id="reviewPane">
 
 <div style="display:flex;"> 
-	<span style="padding-left:8px;float:left;margin-top:2px;"><?php echo $text; ?></span>
+	<span style="padding-left:8px;float:left;margin-top:2px;margin-left:10px"><?php echo $text; ?></span>
+	<!-- Add review button only exists for logged in users -->
+	<?php if (isset($_SESSION["loggedin"])) : ?>
 	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox()">
 	Leave a review</button>
+	<?php endif; ?>
 </div>
+<!-- little bit of added security, review editor only exists in DOM if user is logged in-->
+<?php if (isset($_SESSION["loggedin"])) : ?>
 <div class="review" id="editor" style="margin:1em; display:none;">
 	<form action="review_add.php" method="post" onsubmit="return validateReview()">
 		<div style="margin-top: 5px;">
@@ -72,6 +77,7 @@ if (count($reviews) != 0) {
 		<input type="submit" class="revBtn" style="margin-bottom: 5px;">
 	</form>
 </div>
+<?php endif; ?>
 <ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
 		<?php 

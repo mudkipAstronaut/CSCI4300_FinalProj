@@ -1,8 +1,14 @@
 function toggleRevBox() {
 	let editor = document.getElementById('editor');
-	if (editor.style.display == "none") 
+	let addRev = document.getElementById('addRev');
+	if (editor.style.display == "none") {
 		editor.style.display = "block";
-	else editor.style.display = "none";
+		addRev.innerHTML = "Close editor";
+	}
+	else {
+		editor.style.display = "none";
+		addRev.innerHTML = "Leave a review";
+	}	
 }
 
 function validateReview() {
