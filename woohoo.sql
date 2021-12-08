@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 06:31 PM
+-- Generation Time: Dec 09, 2021 at 12:29 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -66,7 +66,8 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (23, 'london.jpg', 33, 1),
 (24, 'india_gateway.jpg', 34, 1),
 (25, 'chicago_picasso.jpg', 36, 1),
-(26, 'St_Louis_arch.jpg', 35, 1);
+(26, 'St_Louis_arch.jpg', 35, 1),
+(27, 'diogenes_statue.jpg', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -96,33 +97,33 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (5, 'Sky Tree', 'Tokyo', 'Japan', NULL, NULL, 2),
 (6, 'Mojang Office', 'Stockholm', 'Sweden', 'Block game', '5.0', 1),
 (7, 'Emu War Burial', 'Outback', 'Australia', 'In the Outback, noone can hear you scream.', '2.5', 4),
-(8, 'Edgar Allan Poe\'s house', 'Philadelphia', 'USA', 'Home of the famous writer', '0.0', 0),
-(9, 'Statue of Diogenes', 'Sinop', 'Turkey', 'A monument to the ancient Greek philosopher', '0.0', 0),
+(8, 'Edgar Allan Poe\'s house', 'Philadelphia', 'USA', 'Home of the famous writer', '0.0', 1),
+(9, 'Statue of Diogenes', 'Sinop', 'Turkey', 'A monument to the ancient Greek philosopher', '3.8', 1),
 (10, 'Gettysburg Battlefield', 'Gettysburg ', 'USA', NULL, '3.9', 3),
 (11, 'Georgia State Capitol', 'Atlanta', 'USA', 'Where the Ga state legislature meets to make laws and govern.', '3.4', 4),
 (12, 'Walt Disney Concert Hall', 'Los Angeles', 'USA', 'Music is played here, and in large quantities.', '3.9', 2),
 (13, 'Venice Canals Walkway', 'Las Angeles', 'USA', 'A scenic residential area reminiscent of that area in GTA 5', '3.2', 3),
-(14, 'Union Station', 'Las Angeles', 'USA', 'A nice big station', '3.8', 0),
-(15, 'Dodger Stadium', 'Las Angeles', 'USA', 'A large sports complex', NULL, 0),
-(16, 'Staples Center', 'Las Angeles', 'USA', NULL, NULL, 0),
-(17, 'The Wizarding World of Harry Potter', 'Las Angeles', 'USA', 'Where magic turns into revenue', NULL, 0),
+(14, 'Union Station', 'Las Angeles', 'USA', 'A nice big station', '3.8', 1),
+(15, 'Dodger Stadium', 'Las Angeles', 'USA', 'A large sports complex', NULL, 1),
+(16, 'Staples Center', 'Las Angeles', 'USA', NULL, NULL, 1),
+(17, 'The Wizarding World of Harry Potter', 'Las Angeles', 'USA', 'Where magic turns into revenue', NULL, 1),
 (18, 'Hollywood Sign', 'Las Angeles', 'USA', 'An inferior copy of the Bollywood version', '4.8', 3),
 (19, 'Universal CityWalk Hollywood', 'Las Angeles', 'USA', 'An amusement facility', '3.4', 4),
 (20, 'Angels Flight Railway', 'Las Angeles', 'USA', 'A transportation apparatus', '3.9', 2),
-(21, 'Red Fort ', 'Delhi', 'India', 'A famous Mughal era fortification built by the emperor Shah Jahan', NULL, 0),
-(22, 'Jama Masjid ', 'Delhi', 'India', 'A famous mosque built in 1656', NULL, 0),
-(23, 'Imperial Palace', 'Tokyo', 'Japan', NULL, NULL, 0),
-(24, 'Ginza District', 'Tokyo', 'Japan', 'A centuries-old shopping district', NULL, 0),
-(25, 'People\'s Square', 'Shanghai', 'China', 'A large public square', NULL, 0),
-(26, 'Nanjing Road', 'Shanghai', 'China', 'A 5km long shopping street attracting millions of people every year', NULL, 0),
-(27, 'Museu de Arte(Art Museum)', 'São Paulo', 'Brazil', 'The largest collection of western art in Latin America', NULL, 0),
-(28, 'Museo do Futebol(Football Museum)', 'São Paulo', 'Brazil', NULL, NULL, 0),
-(29, 'Basilica de Guadalupe', 'Mexico City', 'Mexico', NULL, NULL, 0),
-(30, 'Chapultepec Castle', 'Mexico City', 'Mexico ', NULL, NULL, 0),
-(31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, NULL, 0),
-(32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 0),
+(21, 'Red Fort ', 'Delhi', 'India', 'A famous Mughal era fortification built by the emperor Shah Jahan', NULL, 1),
+(22, 'Jama Masjid ', 'Delhi', 'India', 'A famous mosque built in 1656', NULL, 1),
+(23, 'Imperial Palace', 'Tokyo', 'Japan', NULL, NULL, 1),
+(24, 'Ginza District', 'Tokyo', 'Japan', 'A centuries-old shopping district', NULL, 1),
+(25, 'People\'s Square', 'Shanghai', 'China', 'A large public square', NULL, 1),
+(26, 'Nanjing Road', 'Shanghai', 'China', 'A 5km long shopping street attracting millions of people every year', NULL, 1),
+(27, 'Museu de Arte(Art Museum)', 'São Paulo', 'Brazil', 'The largest collection of western art in Latin America', NULL, 1),
+(28, 'Museo do Futebol(Football Museum)', 'São Paulo', 'Brazil', NULL, NULL, 1),
+(29, 'Basilica de Guadalupe', 'Mexico City', 'Mexico', NULL, NULL, 1),
+(30, 'Chapultepec Castle', 'Mexico City', 'Mexico ', NULL, NULL, 1),
+(31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, NULL, 1),
+(32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 1),
 (33, 'Big Ben', 'London', 'United Kingdom', 'A tall clocktower next to the River Thames.', '3.5', 2),
-(34, 'Gateway of India', 'Mumbai', 'India', NULL, NULL, 1),
+(34, 'Gateway of India', 'Mumbai', 'India', NULL, '1.0', 1),
 (35, 'Gateway Arch', 'St Louis', 'USA', 'A large arch dedicated to the American people, one of the largest monuments in the Western hemisphere', NULL, 1),
 (36, 'Chicago Picasso', 'Chicago', 'USA', 'Also called The Picasso, it is an abstract sculpture made by the famous artist', NULL, 1);
 
@@ -147,7 +148,12 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`reviewID`, `userID`, `placeID`, `score`, `written`) VALUES
 (1, 4, 1, '4.4', 'It was a wonderful site, bigger than I thought it would be. The weather was nice, and you can actually walk up to the top of the statue--if you\'re okay with cardio!'),
 (2, 3, 9, '3.6', 'This man was an insult to greater men, a beggar among giants, and yet it is a wonderfully made statue.'),
-(3, 3, 1, '4.4', 'This is an iconic piece of Americana.');
+(3, 3, 1, '4.4', 'This is an iconic piece of Americana.'),
+(5, 4, 9, '4.0', 'Based cynic versus acidified bloodthirsty authoritarian'),
+(6, 4, 31, '4.6', 'This is truly a sight to behold. Herodotus would have you believe these were the product of slave labor, but that is NOT what the evidence shows.'),
+(7, 3, 31, '2.8', 'It\'s cool how big they are, and I get that they\'re eternally old and all of that, but come on, IT\'S JUST A SHAPE! I could stack one up myself if I had enough slaves to do it over 20 years.'),
+(10, 2, 34, '3.5', 'The structure itself is wonderful, I love the architectural style of it in all its glory. But the wait to get there was terrible--so many other people are trying to see what you are, which really brings down the whole experience.'),
+(11, 3, 34, '4.5', 'Don\'t listen to the other reviewer, the crowds were nothing. It was like there was some sort of disease plaguing the land.');
 
 -- --------------------------------------------------------
 
@@ -171,7 +177,7 @@ INSERT INTO `users` (`userID`, `username`, `email`, `password`, `dateRegistered`
 (1, 'Admin', 'admin@gmail.com', 'password', '2021-11-02'),
 (2, 'bobby86', 'hotmale@hotmail.com', '13454321', '2021-11-03'),
 (3, 'ME', 'wowowowowo@gmail.com', '54321drowssap', '2021-11-03'),
-(4, 'meowjohnSMITH', 'nyan@yahoo.com', '-350u2-u5-259', '2021-11-03');
+(4, 'meowjohnSMITH', 'nyan@yahoo.com', 'kittytitty', '2021-11-03');
 
 -- --------------------------------------------------------
 
@@ -193,13 +199,14 @@ CREATE TABLE `wishlist` (
 INSERT INTO `wishlist` (`wishlistID`, `userID`, `placeID`, `notes`) VALUES
 (1, 4, 3, 'Based institution'),
 (2, 4, 4, 'hella wet'),
-(3, 4, 7, NULL),
 (4, 2, 1, NULL),
 (5, 2, 4, NULL),
 (6, 3, 5, 'Nani?'),
 (7, 1, 4, ''),
 (8, 1, 3, 'woohoo'),
-(9, 1, 7, '');
+(22, 1, 7, NULL),
+(24, 4, 7, NULL),
+(25, 3, 7, NULL);
 
 --
 -- Indexes for dumped tables
@@ -245,7 +252,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `places`
@@ -257,19 +264,19 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -9,6 +9,8 @@ $do->closeCursor();
 if (count($reviews) != 0) {
 	$text = "Reviews";
 } else $text = "No reviews have been written for this location.";
+
+
 ?>
 
 <style>
