@@ -355,6 +355,11 @@ img {vertical-align: middle;}
   margin-top: 10px;
 }
 
+a.deleteProfile:hover {
+    background-color: #FFDFDF;
+	border: 2px solid red;
+}
+
 .deleteWarn {
   font-size: 25px;
   display: inline-block;
