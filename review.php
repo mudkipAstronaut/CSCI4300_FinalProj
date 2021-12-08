@@ -55,10 +55,22 @@ if (count($reviews) != 0) {
 <script src="review_manage.js"></script>
 
 <div id="reviewPane">
+
 <div style="display:flex;"> 
 	<span style="padding-left:8px;float:left;margin-top:2px;"><?php echo $text; ?></span>
-	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="manageReviewBox()">
+	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox()">
 	Leave a review</button>
+</div>
+<div class="review" id="editor" style="margin:1em; display:none;">
+	<form action="review_add.php" method="post" onsubmit="return validateReview()">
+		<div style="margin-top: 5px;">
+			<label style="margin-left: 1em; padding-top: 8px;">Decimal score out of five:
+			<input type="number" style="margin-left: 1em; width: 50px;" id="rateNum">
+			</label>
+		</div>
+		<input type="text" id="revText" style="width: 98%; margin: 8px 10px;">
+		<input type="submit" class="revBtn" style="margin-bottom: 5px;">
+	</form>
 </div>
 <ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
