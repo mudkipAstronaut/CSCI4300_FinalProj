@@ -29,7 +29,6 @@ if (count($reviews) != 0) {
 	background-color: #99EEFF;
 }
 
-/* button.revBtn {		*/
 .revBtn {		
 	background-color: #99EEFF;
 	border: 1.5px outset slateblue;
@@ -40,12 +39,10 @@ if (count($reviews) != 0) {
     cursor: pointer;
 }
 
-/* button.revBtn:hover {	*/
 .revBtn:hover {	
 	background-color: #EEFFFF;
 }
 
-/* button.revBtn:active {	*/
 .revBtn:active {	
 	background-color: #77DFDF;
 }
@@ -68,12 +65,14 @@ if (count($reviews) != 0) {
 <?php if (isset($_SESSION["loggedin"])) : ?>
 <div class="review" id="editor" style="margin:1em; display:none;">
 	<form action="review_add.php" method="post" onsubmit="return validateReview()">
+		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
+		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
 		<div style="margin-top: 5px;">
 			<label style="margin-left: 1em; padding-top: 8px;">Decimal score out of five:
-			<input type="number" style="margin-left: 1em; width: 50px;" id="rateNum">
+			<input type="number" step="0.1" name="score" style="margin-left: 1em; width: 50px;" id="rateNum">
 			</label>
 		</div>
-		<input type="text" id="revText" style="width: 98%; margin: 8px 10px;">
+		<input type="text" name="written" id="revText" style="width: 98%; margin: 8px 10px;">
 		<input type="submit" class="revBtn" style="margin-bottom: 5px;">
 	</form>
 </div>
