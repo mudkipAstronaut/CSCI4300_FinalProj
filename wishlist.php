@@ -123,12 +123,6 @@ $statement1 -> closeCursor();
 <?php endif; ?>
 
 <script>
-  const dragArea = document.querySelector("#wishlist-container");
-  new Sortable(dragArea, {
-    animation: 350
-  });
-  
-  <!-- ------------------------------------------ -->
   
   function hideShowNotes(y) {
 	  var x = document.querySelectorAll("[id='visibleNotes']");
