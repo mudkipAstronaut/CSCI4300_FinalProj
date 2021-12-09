@@ -19,6 +19,10 @@ $statement->bindValue(':written_', $written_);
 $statement->execute();
 $statement->closeCursor();
 
+//=========================
+//update score 
+//=========================
+
 //average all reviews for a place
 $query = "SELECT AVG(score) AS average FROM reviews WHERE placeID = ".$place_id;
 // $result = $db->prepare($query);

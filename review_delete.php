@@ -7,6 +7,10 @@ require_once('database.php');
 $delete = "DELETE FROM reviews WHERE placeID = ".$place_id." AND userID = ".$user_id;
 $db->query($delete);
 
+//=========================
+//update score 
+//=========================
+
 //code to get average and update place review score
 $query = "SELECT AVG(score) AS average FROM reviews WHERE placeID = ".$place_id;
 // $result = $db->prepare($query);
