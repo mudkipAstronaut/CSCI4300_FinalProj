@@ -62,7 +62,7 @@ if (count($reviews) != 0) {
 	<form id="delRev" style="float:left; display:none;" action="review_delete.php" method="post">
 		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
 		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
-		<input type="submit" class="revBtn()">
+		<input type="submit" class="revBtn">
 		Delete review</input>
 	</form>
 	<?php endif; ?>
@@ -98,7 +98,7 @@ if (count($reviews) != 0) {
 			let editor = document.getElementById('editor');
 			editor.elements[0].setAttribute('action','review_edit.php');
 			//display delete-review button
-			document.getElementById('delRev').style.display = "";
+			document.getElementById('delRev').style.display = "block";
 		</script>
 		<?php endif; ?>
 		<?php
