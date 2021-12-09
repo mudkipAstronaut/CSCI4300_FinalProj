@@ -4,6 +4,7 @@ function toggleRevBox() {
 	if (editor.style.display == "none") {
 		editor.style.display = "block";
 		addRev.innerHTML = "Close editor";
+		addRev.style.cssText = "width:87.8; text-align:center;";
 	}
 	else {
 		editor.style.display = "none";

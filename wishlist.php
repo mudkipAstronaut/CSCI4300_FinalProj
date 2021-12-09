@@ -31,9 +31,7 @@ $statement1 -> closeCursor();
 	width: 785px;
 }
 
-#visibleNotes {
-	display: none;
-}
+
 
 </style>
 
@@ -97,7 +95,7 @@ $statement1 -> closeCursor();
 		<!-- ------------------------------------------ -->
 		<br>
 		
-		<button onclick="hideShowNotes(<?php echo $wishlistIteration; ?>)" class="showNotes"> Show Travel Notes: </button>
+		<button onclick="hideShowNotes(<?php echo $wishlistIteration; ?>)" class="showNotes"> Hide Travel Notes: </button>
 		<div id="visibleNotes" name="notes">
 		  <input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
 	      <textarea placeholder="Enter your travel plans/notes for this location here." class="wishlist-textarea" name="notesTextArea"><?php echo $place['notes']; ?></textarea>
@@ -125,12 +123,6 @@ $statement1 -> closeCursor();
 <?php endif; ?>
 
 <script>
-  const dragArea = document.querySelector("#wishlist-container");
-  new Sortable(dragArea, {
-    animation: 350
-  });
-  
-  <!-- ------------------------------------------ -->
   
   function hideShowNotes(y) {
 	  var x = document.querySelectorAll("[id='visibleNotes']");
@@ -138,9 +130,11 @@ $statement1 -> closeCursor();
 	  const element = document.querySelectorAll("[class='showNotes']");
 	  if (x[y].style.display === "none") {
 		  x[y].style.display = "block";
+		  x[y].style.display.transition = "height 1s";
 		  element[y].innerHTML = "Hide Travel Notes:";
 	  } else {
 		  x[y].style.display = "none";
+		  x[y].style.display.transition = "height 1s";
 		  element[y].innerHTML = "Show Travel Notes:";
 	  }
   }

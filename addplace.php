@@ -35,7 +35,7 @@ session_start();
 
         // get description
 		if (!empty($_POST['desc'])) {
-			$desc = $_POST['desc'];
+			$desc = str_replace('\'','\\\'',$_POST['desc']);
 		}
 
         //Check for errors

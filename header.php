@@ -111,9 +111,10 @@ $currPageBtnCSS = 'style="background-color:#EEFFFF;"';
 			<li id="icon" ><a href="index.php"><span>WooHoo</span></a></li>
 			<li id="navSearch" >
 				<form method="POST" name="searchBar" action="browse.php">
-				<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
-				<input type="search" name="query" placeholder="Type Something Here"
-				value="<?php echo $search;?>"/><input style="margin-left: 1px;" type="submit" value="Search" />
+					<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
+					<input type="search" name="query" placeholder="Type Something Here"
+					value="<?php echo $search;?>"/>
+					<input style="margin-left: 1px;" type="submit" value="Search" />
 				</form>
 			</li>	
 			

@@ -1,5 +1,5 @@
 <?php
-
+//get reviews for the place
 $query = "SELECT * FROM reviews WHERE placeID=" . $pid;
 $do = $db->prepare($query);
 $do->execute();
@@ -29,7 +29,6 @@ if (count($reviews) != 0) {
 	background-color: #99EEFF;
 }
 
-/* button.revBtn {		*/
 .revBtn {		
 	background-color: #99EEFF;
 	border: 1.5px outset slateblue;
@@ -40,12 +39,10 @@ if (count($reviews) != 0) {
     cursor: pointer;
 }
 
-/* button.revBtn:hover {	*/
 .revBtn:hover {	
 	background-color: #EEFFFF;
 }
 
-/* button.revBtn:active {	*/
 .revBtn:active {	
 	background-color: #77DFDF;
 }
@@ -61,26 +58,51 @@ if (count($reviews) != 0) {
 	<!-- Add review button only exists for logged in users -->
 	<?php if (isset($_SESSION["loggedin"])) : ?>
 	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox()">
-	Leave a review</button>
+	Leave a review</button>	
+	<form id="delRev" style="float:left; display:none;" action="review_delete.php" method="post">
+		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
+		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
+		<input type="submit" class="revBtn">
+		Delete review</input>
+	</form>
 	<?php endif; ?>
 </div>
+
 <!-- little bit of added security, review editor only exists in DOM if user is logged in-->
 <?php if (isset($_SESSION["loggedin"])) : ?>
 <div class="review" id="editor" style="margin:1em; display:none;">
 	<form action="review_add.php" method="post" onsubmit="return validateReview()">
+		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
+		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
 		<div style="margin-top: 5px;">
 			<label style="margin-left: 1em; padding-top: 8px;">Decimal score out of five:
-			<input type="number" style="margin-left: 1em; width: 50px;" id="rateNum">
+			<input type="number" step="0.1" name="score" style="margin-left: 1em; width: 50px;" id="rateNum">
 			</label>
 		</div>
-		<input type="text" id="revText" style="width: 98%; margin: 8px 10px;">
+		<input type="text" name="written" id="revText" style="width: 98%; margin: 8px 10px;">
 		<input type="submit" class="revBtn" style="margin-bottom: 5px;">
 	</form>
 </div>
 <?php endif; ?>
+
 <ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
 		<?php 
+		//check if review is written by current user, and if so change review editor
+		if ($review['userID'] == $user_id) : ?>
+		<script>
+			//change editor button text
+			let addRev = document.getElementById('addRev');
+			addRev.innerHTML = "Edit Review";
+			//change editor action to review_edit.php
+			let editor = document.getElementById('editor');
+			editor.elements[0].setAttribute('action','review_edit.php');
+			//display delete-review button
+			document.getElementById('delRev').style.display = "block";
+		</script>
+		<?php endif; ?>
+		<?php
+		//get username for review
 		$query = "SELECT username FROM users WHERE userID=" . $review['userID'];
 		$do = $db->prepare($query);
 		$do->execute();
