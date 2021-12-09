@@ -89,7 +89,7 @@ if (count($reviews) != 0) {
 	<?php foreach($reviews as $review) : ?> 
 		<?php 
 		//check if review is written by current user, and if so change review editor
-		if ($review['userID'] == $user_id) : ?>
+		if (isset($user_id) && $review['userID'] == $user_id) : ?>
 		<script>
 			//change editor button text
 			let addRev = document.getElementById('addRev');
