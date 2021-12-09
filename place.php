@@ -68,6 +68,9 @@ $numImg = count($images);
 $counter=1;
 ?>
 
+<!-- image container won't show if there are no images -->
+<?php if(!empty($img['image'])) : ?>
+
 <?php
 foreach($images as $img): ?>
 <div class="mySlides fade">
@@ -133,6 +136,7 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";  
 }
 </script>
+<?php endif; ?>
 </div>
 <h4>Rating: <?php
 if(!is_null($results['reviewScore'])){
