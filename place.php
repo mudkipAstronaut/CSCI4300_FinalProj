@@ -40,7 +40,8 @@ $pid = $results['placeID'];
 
 <div class="center">
 <h2 style="text-decoration:underline;"><?php echo $results['placeName']; ?>: <?php echo $results['city']; ?>, <?php echo $results['country']; ?></h2>
-<p><?php
+<p>
+<?php
 $userId = $results['userID'];
 if($userId < 1){
 $userId = 1;
@@ -55,6 +56,7 @@ echo 'Added by '. $username[0];
 ?></p>
 
 <div class="slideshow-container">
+
 <?php
 $imgQ = "SELECT image, userID FROM pictures WHERE placeID=" . $results['placeID'];
 $s2 = $db->prepare($imgQ);
@@ -69,15 +71,16 @@ $counter=1;
 <?php
 foreach($images as $img): ?>
 <div class="mySlides fade">
-<div class="numbertext"><?php echo $counter.'/'.$numImg; ?></div>
-<img src="place_imgs/<?php 
-      $imgPath = $img['image'];
-      if(empty($imgPath)){
-	$imgPath = 'default.jpg';
-      }
-      echo $imgPath; 
-      ?>" alt="interesting" style="width:100%;">
-      
+
+     <div class="numbertext"><?php echo $counter.'/'.$numImg; ?></div>
+     <img src="place_imgs/<?php 
+     	  $imgPath = $img['image'];
+	  if(empty($imgPath)){
+	  $imgPath = 'default.jpg';
+	  }
+	  echo $imgPath; 
+	  ?>" alt="interesting" style="width:100%;">
+	  
       <div class="text">
       <?php
       $userQ = 'SELECT username FROM users WHERE userID='. $img['userID'] .' LIMIT 1';
@@ -90,21 +93,51 @@ foreach($images as $img): ?>
       ?>
       </div>
 </div>
-<?php
-$counter++;
-endforeach;?>
 
 <?php
+$counter++;
+endforeach;
+
 if(empty($images)){
-echo '<img src="place_imgs/default.jpg" alt="interesting" style="display:block;margin:auto;">';
-}
-else{
 echo '
-<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-<a class="next" onclick="plusSlides(1)">&#10095;</a>
-';
+<div class="mySlides fade">
+<div class="numbertext">1/1</div>
+<img src="place_imgs/default.jpg" alt="interesting" style="width:100%;">
+<div class="text">Added by Admin</div>
+</div>';
 }
 ?>
+<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
 </div>
 <h4>Rating: <?php
 if(!is_null($results['reviewScore'])){
@@ -121,36 +154,5 @@ echo 'No ratings yet';
 <?php include('review.php'); ?>
 
 </div>
-<script>
-var slideIndex = 1;
-showSlides(slideIndex);
-         
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-} 
-</script>
-
 </body>
 </html>
