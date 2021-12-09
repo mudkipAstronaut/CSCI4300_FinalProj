@@ -9,8 +9,6 @@ $do->closeCursor();
 if (count($reviews) != 0) {
 	$text = "Reviews";
 } else $text = "No reviews have been written for this location.";
-
-$revBtnText = "Leave a review";
 ?>
 
 <style>
@@ -59,7 +57,7 @@ $revBtnText = "Leave a review";
 	<span style="padding-left:8px;float:left;margin-top:2px;margin-left:10px"><?php echo $text; ?></span>
 	<!-- Add review button only exists for logged in users -->
 	<?php if (isset($_SESSION["loggedin"])) : ?>
-	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox('<?php echo $revBtnText; ?>')">
+	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox('Leave a review')">
 	Leave a review</button>	
 	<form id="delRev" style="float:left; display:none;" action="review_delete.php" method="post">
 		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
