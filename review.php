@@ -88,7 +88,10 @@ if (count($reviews) != 0) {
 <ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
 		<?php 
-		//check if review is written by current user, and if so change review editor
+		//check if review is written by current user, and if so change review editor;
+		
+		//isset() has to be on the left, so that if the user isn't logged in it will 
+		//short circuit the AND statement
 		if (isset($user_id) && $review['userID'] == $user_id) : ?>
 		<script>
 			//change editor button text

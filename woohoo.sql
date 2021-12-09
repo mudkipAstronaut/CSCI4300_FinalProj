@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 08:34 PM
+-- Generation Time: Dec 09, 2021 at 09:30 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -71,7 +71,9 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (28, 'ga_capital.jpg', 11, 1),
 (29, 'venice_canal_la.jpg', 13, 1),
 (30, 'venice_canal_la1.jpg', 13, 1),
-(31, 'national-monument.jpg', 37, 1);
+(31, 'national-monument.jpg', 37, 1),
+(32, 'emu_war_burial.jpeg', 7, 1),
+(33, 'staples_center.jpg', 16, 1);
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,7 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (28, 'Museo do Futebol(Football Museum)', 'São Paulo', 'Brazil', NULL, NULL, 1),
 (29, 'Basilica de Guadalupe', 'Mexico City', 'Mexico', NULL, NULL, 1),
 (30, 'Chapultepec Castle', 'Mexico City', 'Mexico ', NULL, NULL, 1),
-(31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, NULL, 1),
+(31, 'Pyramids of Giza', 'Cairo', 'Egypt', NULL, '4.1', 1),
 (32, 'Sphinx', 'Cairo', 'Egypt', NULL, NULL, 1),
 (33, 'Big Ben', 'London', 'United Kingdom', 'A tall clocktower next to the River Thames.', '3.5', 2),
 (34, 'Gateway of India', 'Mumbai', 'India', NULL, '1.0', 1),
@@ -161,7 +163,8 @@ INSERT INTO `reviews` (`reviewID`, `userID`, `placeID`, `score`, `written`) VALU
 (11, 3, 34, '4.5', 'Don\'t listen to the other reviewer, the crowds were nothing. It was like there was some sort of disease plaguing the land.'),
 (16, 1, 9, '5.0', 'The administration sees hosting this content as a temporary expedient to satiate the passions of the masses.'),
 (17, 2, 22, '2.9', 'The picture resolution is a perfect symbol of the quality of this attraction to a crowded in viewer.'),
-(18, 2, 12, '3.8', 'What a beautiful, organic temple to the cold machinations of the eminent media corporation, gatekeeper of all humanity\'s visually represented passions.');
+(18, 2, 12, '3.8', 'What a beautiful, organic temple to the cold machinations of the eminent media corporation, gatekeeper of all humanity\'s visually represented passions.'),
+(19, 2, 31, '5.0', 'This triangle is waaaaaaaaaaaack');
 
 -- --------------------------------------------------------
 
@@ -260,7 +263,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `places`
@@ -272,7 +275,7 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`
