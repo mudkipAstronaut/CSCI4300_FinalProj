@@ -1,14 +1,13 @@
-function toggleRevBox() {
+function toggleRevBox(content) {
 	let editor = document.getElementById('editor');
 	let addRev = document.getElementById('addRev');
 	if (editor.style.display == "none") {
 		editor.style.display = "block";
 		addRev.innerHTML = "Close editor";
-		addRev.style.cssText = "width:87.8; text-align:center;";
 	}
 	else {
 		editor.style.display = "none";
-		addRev.innerHTML = "Leave a review";
+		addRev.innerHTML = content;
 	}	
 }
 

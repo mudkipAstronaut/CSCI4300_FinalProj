@@ -9,6 +9,8 @@ $do->closeCursor();
 if (count($reviews) != 0) {
 	$text = "Reviews";
 } else $text = "No reviews have been written for this location.";
+
+$revBtnText = "Leave a review";
 ?>
 
 <style>
@@ -57,13 +59,12 @@ if (count($reviews) != 0) {
 	<span style="padding-left:8px;float:left;margin-top:2px;margin-left:10px"><?php echo $text; ?></span>
 	<!-- Add review button only exists for logged in users -->
 	<?php if (isset($_SESSION["loggedin"])) : ?>
-	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox()">
+	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox('<?php echo $revBtnText; ?>')">
 	Leave a review</button>	
 	<form id="delRev" style="float:left; display:none;" action="review_delete.php" method="post">
 		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
 		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
-		<input type="submit" class="revBtn">
-		Delete review</input>
+		<input type="submit" class="revBtn" value="Delete Review"/>
 	</form>
 	<?php endif; ?>
 </div>
@@ -71,7 +72,7 @@ if (count($reviews) != 0) {
 <!-- little bit of added security, review editor only exists in DOM if user is logged in-->
 <?php if (isset($_SESSION["loggedin"])) : ?>
 <div class="review" id="editor" style="margin:1em; display:none;">
-	<form action="review_add.php" method="post" onsubmit="return validateReview()">
+	<form id="revForm" action="review_add.php" method="post" onsubmit="return validateReview()">
 		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
 		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
 		<div style="margin-top: 5px;">
@@ -97,9 +98,10 @@ if (count($reviews) != 0) {
 			//change editor button text
 			let addRev = document.getElementById('addRev');
 			addRev.innerHTML = "Edit Review";
+			addRev.setAttribute('onclick', 'toggleRevBox(\'Edit Review\')');
 			//change editor action to review_edit.php
 			let editor = document.getElementById('editor');
-			editor.elements[0].setAttribute('action','review_edit.php');
+			document.getElementById('revForm').setAttribute('action','review_edit.php');
 			//display delete-review button
 			document.getElementById('delRev').style.display = "block";
 		</script>
