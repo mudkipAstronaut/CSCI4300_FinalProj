@@ -69,7 +69,7 @@ $counter=1;
 ?>
 
 <!-- image container won't show if there are no images -->
-<?php if(!empty($img['image'])) : ?>
+<?php if(!empty($images[0]['image'])) : ?>
 
 <?php
 foreach($images as $img): ?>

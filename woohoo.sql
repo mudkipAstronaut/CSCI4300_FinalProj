@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 09:30 PM
+-- Generation Time: Dec 09, 2021 at 10:16 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -73,7 +73,8 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (30, 'venice_canal_la1.jpg', 13, 1),
 (31, 'national-monument.jpg', 37, 1),
 (32, 'emu_war_burial.jpeg', 7, 1),
-(33, 'staples_center.jpg', 16, 1);
+(33, 'staples_center.jpg', 16, 1),
+(35, 'diogenes_statue1.jpg', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -263,7 +264,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `places`
