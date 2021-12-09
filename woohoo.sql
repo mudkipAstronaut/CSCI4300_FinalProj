@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 12:29 AM
+-- Generation Time: Dec 09, 2021 at 08:34 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -67,7 +67,11 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (24, 'india_gateway.jpg', 34, 1),
 (25, 'chicago_picasso.jpg', 36, 1),
 (26, 'St_Louis_arch.jpg', 35, 1),
-(27, 'diogenes_statue.jpg', 9, 1);
+(27, 'diogenes_statue.jpg', 9, 1),
+(28, 'ga_capital.jpg', 11, 1),
+(29, 'venice_canal_la.jpg', 13, 1),
+(30, 'venice_canal_la1.jpg', 13, 1),
+(31, 'national-monument.jpg', 37, 1);
 
 -- --------------------------------------------------------
 
@@ -98,10 +102,10 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (6, 'Mojang Office', 'Stockholm', 'Sweden', 'Block game', '5.0', 1),
 (7, 'Emu War Burial', 'Outback', 'Australia', 'In the Outback, noone can hear you scream.', '2.5', 4),
 (8, 'Edgar Allan Poe\'s house', 'Philadelphia', 'USA', 'Home of the famous writer', '0.0', 1),
-(9, 'Statue of Diogenes', 'Sinop', 'Turkey', 'A monument to the ancient Greek philosopher', '3.8', 1),
+(9, 'Statue of Diogenes', 'Sinop', 'Turkey', 'A monument to the ancient Greek philosopher', '4.2', 1),
 (10, 'Gettysburg Battlefield', 'Gettysburg ', 'USA', NULL, '3.9', 3),
 (11, 'Georgia State Capitol', 'Atlanta', 'USA', 'Where the Ga state legislature meets to make laws and govern.', '3.4', 4),
-(12, 'Walt Disney Concert Hall', 'Los Angeles', 'USA', 'Music is played here, and in large quantities.', '3.9', 2),
+(12, 'Walt Disney Concert Hall', 'Los Angeles', 'USA', 'Music is played here, and in large quantities.', '3.8', 2),
 (13, 'Venice Canals Walkway', 'Las Angeles', 'USA', 'A scenic residential area reminiscent of that area in GTA 5', '3.2', 3),
 (14, 'Union Station', 'Las Angeles', 'USA', 'A nice big station', '3.8', 1),
 (15, 'Dodger Stadium', 'Las Angeles', 'USA', 'A large sports complex', NULL, 1),
@@ -111,7 +115,7 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (19, 'Universal CityWalk Hollywood', 'Las Angeles', 'USA', 'An amusement facility', '3.4', 4),
 (20, 'Angels Flight Railway', 'Las Angeles', 'USA', 'A transportation apparatus', '3.9', 2),
 (21, 'Red Fort ', 'Delhi', 'India', 'A famous Mughal era fortification built by the emperor Shah Jahan', NULL, 1),
-(22, 'Jama Masjid ', 'Delhi', 'India', 'A famous mosque built in 1656', NULL, 1),
+(22, 'Jama Masjid ', 'Delhi', 'India', 'A famous mosque built in 1656', '2.9', 1),
 (23, 'Imperial Palace', 'Tokyo', 'Japan', NULL, NULL, 1),
 (24, 'Ginza District', 'Tokyo', 'Japan', 'A centuries-old shopping district', NULL, 1),
 (25, 'People\'s Square', 'Shanghai', 'China', 'A large public square', NULL, 1),
@@ -125,7 +129,8 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (33, 'Big Ben', 'London', 'United Kingdom', 'A tall clocktower next to the River Thames.', '3.5', 2),
 (34, 'Gateway of India', 'Mumbai', 'India', NULL, '1.0', 1),
 (35, 'Gateway Arch', 'St Louis', 'USA', 'A large arch dedicated to the American people, one of the largest monuments in the Western hemisphere', NULL, 1),
-(36, 'Chicago Picasso', 'Chicago', 'USA', 'Also called The Picasso, it is an abstract sculpture made by the famous artist', NULL, 1);
+(36, 'Chicago Picasso', 'Chicago', 'USA', 'Also called The Picasso, it is an abstract sculpture made by the famous artist', NULL, 1),
+(37, 'National Monument', 'Jakarta ', 'Indonesia', 'A monument to Indonesia\'s existence as a nation', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -153,7 +158,10 @@ INSERT INTO `reviews` (`reviewID`, `userID`, `placeID`, `score`, `written`) VALU
 (6, 4, 31, '4.6', 'This is truly a sight to behold. Herodotus would have you believe these were the product of slave labor, but that is NOT what the evidence shows.'),
 (7, 3, 31, '2.8', 'It\'s cool how big they are, and I get that they\'re eternally old and all of that, but come on, IT\'S JUST A SHAPE! I could stack one up myself if I had enough slaves to do it over 20 years.'),
 (10, 2, 34, '3.5', 'The structure itself is wonderful, I love the architectural style of it in all its glory. But the wait to get there was terrible--so many other people are trying to see what you are, which really brings down the whole experience.'),
-(11, 3, 34, '4.5', 'Don\'t listen to the other reviewer, the crowds were nothing. It was like there was some sort of disease plaguing the land.');
+(11, 3, 34, '4.5', 'Don\'t listen to the other reviewer, the crowds were nothing. It was like there was some sort of disease plaguing the land.'),
+(16, 1, 9, '5.0', 'The administration sees hosting this content as a temporary expedient to satiate the passions of the masses.'),
+(17, 2, 22, '2.9', 'The picture resolution is a perfect symbol of the quality of this attraction to a crowded in viewer.'),
+(18, 2, 12, '3.8', 'What a beautiful, organic temple to the cold machinations of the eminent media corporation, gatekeeper of all humanity\'s visually represented passions.');
 
 -- --------------------------------------------------------
 
@@ -174,7 +182,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `username`, `email`, `password`, `dateRegistered`) VALUES
-(1, 'Admin', 'admin@gmail.com', 'password', '2021-11-02'),
+(1, 'Administration', 'admin@gmail.com', 'password', '2021-11-02'),
 (2, 'bobby86', 'hotmale@hotmail.com', '13454321', '2021-11-03'),
 (3, 'ME', 'wowowowowo@gmail.com', '54321drowssap', '2021-11-03'),
 (4, 'meowjohnSMITH', 'nyan@yahoo.com', 'kittytitty', '2021-11-03');
@@ -252,19 +260,19 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users`
