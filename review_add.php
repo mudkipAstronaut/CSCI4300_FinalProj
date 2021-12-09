@@ -24,4 +24,7 @@ $statement->closeCursor();
 //=========================
 
 include('review_update_score.php');
+
+$location = 'location: place.php?place='.$place_id;
+header($location);
 ?> 
