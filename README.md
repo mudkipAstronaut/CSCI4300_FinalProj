@@ -8,3 +8,16 @@ The repository contains a website named WooHoo for a
 user-generated database of travel locations, reviews and advice.
 
 ## Usage
+
+The entry point to the website is the `index.php` file
+
+This website has been tested on Firefox for Ubuntu 20.04, Chrome for Windows 10.
+
+We used the XAMPP Framework to test and develop the website locally.
+
+## Folder Structure
+
+the main folder contains all the php files and forms. The `place_imgs` folder
+contains all the images that the webpage uses that are directly connected to places
+in the website.
+We also have a `style.css` file that contains the main style for all the pages.
