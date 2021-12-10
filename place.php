@@ -51,8 +51,12 @@ $s1 = $db->prepare($userQ);
 $s1->execute();
 $username = $s1->fetchAll()[0];
 $s1->closeCursor();
-
+if(!empty($username)){
 echo 'Added by '. $username[0];
+}
+else{
+echo 'Added by [Deleted]';
+}
 ?></p>
 
 <div class="slideshow-container">
@@ -92,7 +96,13 @@ foreach($images as $img): ?>
       $username = $s2->fetchAll()[0];
       $s2->closeCursor();
 
+      
+      if(!empty($username)){
       echo 'Added by '. $username[0];
+      }
+      else{
+      echo 'Added by [Deleted]';
+      }
       ?>
       </div>
 </div>
