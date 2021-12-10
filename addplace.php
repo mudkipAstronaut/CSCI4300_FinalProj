@@ -8,7 +8,7 @@ session_start();
 	// define variables and set to empty values
     $nameErr = $cityErr = $countryErr = "";
     $name = $city = $country = $desc = $img = "";
-    $targetPath = "/opt/lampp/htdocs/CSCI4300_FinalProj/place_imgs/";
+    $targetPath = "C:\xampp\htdocs\F\CSCI4300_FinalProj\place_imgs";
 
     $sessionid = $_SESSION['uid'];
 
@@ -40,7 +40,8 @@ session_start();
 		}
 
 	// get Image
-	       if( !empty($_FILES['fileUpload']) ){
+		$noImage = empty($_FILES['fileUpload']);		
+	   if(!$noImage){
 	       	   	//get the actual path
 			$targetPath = $targetPath . basename($_FILES['fileUpload']['name']);
 
@@ -48,23 +49,44 @@ session_start();
 				echo '<script>alert("Success")</script>';
 			}
 			else{
+				echo $noImage;
+				$noImage = true;
 				echo '<script>alert("nah")</script>';
 				print_r($_FILES['fileUpload']);
 				echo $targetPath;
+			}
+		}
+		
+		//inserts pic for place after getting placeID
+		function insertPic($noImage) {
+			if (!$noImage) {
+				//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
+				$getPlaceID = "SELECT placeID FROM places WHERE places.placeName = '$name'";
+				$statement = $db->prepare($getPlaceID);
+				$statement->execute();
+				$picPlaceID = $statement->fetchAll()[0];
+				$statement->closeCursor();
+				
+				$insertPic = "INSERT INTO pictures (image,  placeID, userID)
+					VALUES ('$targetPath', '$picPlaceID', '$sessionid')";
+				
+				$db->query($insertPic);					
 			}
 		}
 
         //Check for errors
         if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
             $inquery = "";
+			//inserting place with or without a description or image
             if (empty($desc)) {
                 $inquery = "INSERT INTO places (placeName, city, country, userID)
                 VALUES ('$name', '$city', '$country', '$sessionid')";
             } else {
                 $inquery = "INSERT INTO places (placeName, city, country, description, userID)
-                VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";
+                VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";				
             }
             $data=$db->query($inquery);
+			insertPic($noImage);
 	    //header('Location: ../CSCI4300_FinalProj');
         }
     }
@@ -95,18 +117,23 @@ session_start();
 		<div class="login">
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
 			    <header><h1 class="loginHeader">Add New Place</h1></header>
+				<!-- insert place name -->
 			    <label class="username">Place Name:</label>
 			    <input type="text" name="placename" class="loginInput" style="margin: 10px 0px 0px 17px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $nameErr; ?></span> <br>
+				<!-- insert place city -->
                 <label class="password">City:</label>
 			    <input type="text" name="city" class="loginInput" style="margin: 10px 0px 0px 80px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $cityErr; ?></span> <br>
+				<!-- insert place country -->
 			    <label class="password">Country:</label>
 			    <input type="text" name="country" class="loginInput" style="margin: 10px 0px 5px 47px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $countryErr; ?></span> <br>
+				<!-- insert place description -->
                 <label class="password">Description:</label>
                 <textarea name="desc" rows="4" cols="50" class="loginInput" style="margin: 10px 0px 0px 20px; vertical-align: top"></textarea> <br>
-
+				
+				<!-- insert place image -->
 			    <label class="password">Image:</label>
 			    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
     			    <input type="file" name="fileUpload" id="fileUpload" class="loginInput" style="margin: 10px 0px 0px 60px"><br>

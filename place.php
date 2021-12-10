@@ -15,8 +15,11 @@ try {
 	$placeQ = "SELECT * FROM places WHERE placeID=" . $place;
 	$s5 = $db->prepare($placeQ);
 	$s5->execute();
-	$results = $s5->fetchAll()[0];
+	$results = $s5->fetchAll();	
 	$s5->closeCursor();
+	if ($results == null) {
+		header('location: place_404.php');
+	} else $results = $results[0];
 } catch (PDOException $ex) {
 	if(!isset($_GET['logout'])) {
 		throw $ex;
