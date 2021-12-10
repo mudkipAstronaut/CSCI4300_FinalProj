@@ -6,6 +6,7 @@ session_start();
 
     $sessionid = $_SESSION['uid'];
 
+    $placeGet = $_GET['place'];
     $place = $_POST['placeid'];
 
     //to make sure that anyone not logged in but admin
@@ -53,8 +54,8 @@ session_start();
             <label class="deleteWarn">Are You Sure?</label> <br>
             <lable class="deleteDesc">**You won't be able to recover the place once deleted!**</label>
             <br><br><br><br><br><br>
-            <a href="<?php echo 'place.php?place='.$place; ?>" class="returnButton">Return</a>
-	       <input type="hidden" name="placeid" value="<?php echo $place; ?>">
+            <a href="<?php echo 'place.php?place='.$placeGet; ?>" class="returnButton">Return</a>
+	       <input type="hidden" name="placeid" value="<?php echo $placeGet; ?>">
 			<input type="submit" class="deleteConfirmButton" value="YES" id="submit">
 		</div>
 		</form>
