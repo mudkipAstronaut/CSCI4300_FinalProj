@@ -15,6 +15,9 @@ This website has been tested on Firefox for Ubuntu 20.04, Chrome for Windows 10.
 
 We used the XAMPP Framework to test and develop the website locally.
 
+Our database accessor (found in `database.php`) was based on the class assignment 13
+but modified to fit our needs and our specific database.
+
 ## Folder Structure
 
 the main folder contains all the php files and forms. The `place_imgs` folder
