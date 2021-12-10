@@ -105,15 +105,15 @@ if (count($reviews) != 0) {
 		</script>
 		<?php endif; ?>
 		<?php
-		//get username for review
+		//get username for review or leave it as [Deleted]
+		$username = "[Deleted]";
 		$query = "SELECT username FROM users WHERE userID=" . $review['userID'];
 		$do = $db->prepare($query);
 		$do->execute();
-		$username = "[Deleted]";
 		$result = $do->fetchAll();
 		$do->closeCursor();
 		if ($result != null) {
-			$username = $do->fetchAll()[0]['username'];
+			$username = $result[0]['username'];
 		} 
 		?>
 		<li>
