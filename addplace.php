@@ -7,7 +7,8 @@ session_start();
 
 	// define variables and set to empty values
     $nameErr = $cityErr = $countryErr = "";
-    $name = $city = $country = $desc = "";
+    $name = $city = $country = $desc = $img = "";
+    $targetPath = "/opt/lampp/htdocs/CSCI4300_FinalProj/place_imgs/";
 
     $sessionid = $_SESSION['uid'];
 
@@ -35,7 +36,22 @@ session_start();
 
         // get description
 		if (!empty($_POST['desc'])) {
-			$desc = str_replace('\'','\\\'',$_POST['desc']);
+			$desc = $_POST['desc'];
+		}
+
+	// get Image
+	       if( !empty($_FILES['fileUpload']) ){
+	       	   	//get the actual path
+			$targetPath = $targetPath . basename($_FILES['fileUpload']['name']);
+
+			if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath)){
+				echo '<script>alert("Success")</script>';
+			}
+			else{
+				echo '<script>alert("nah")</script>';
+				print_r($_FILES['fileUpload']);
+				echo $targetPath;
+			}
 		}
 
         //Check for errors
@@ -49,7 +65,7 @@ session_start();
                 VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";
             }
             $data=$db->query($inquery);
-            header('Location: ../CSCI4300_FinalProj');
+	    //header('Location: ../CSCI4300_FinalProj');
         }
     }
 
@@ -62,7 +78,7 @@ session_start();
 		$row->closeCursor();
 		$_SESSION["uid"] = $id['userID'];
 		$_SESSION["loggedin"] = TRUE;
-		header('Location: ../CSCI4300_FinalProj');
+		//header('Location: ../CSCI4300_FinalProj');
 	}
 
 ?>
@@ -77,7 +93,7 @@ session_start();
 	<main>
 		
 		<div class="login">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" enctype="multipart/form-data">
 			    <header><h1 class="loginHeader">Add New Place</h1></header>
 			    <label class="username">Place Name:</label>
 			    <input type="text" name="placename" class="loginInput" style="margin: 10px 0px 0px 17px">
@@ -90,6 +106,11 @@ session_start();
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $countryErr; ?></span> <br>
                 <label class="password">Description:</label>
                 <textarea name="desc" rows="4" cols="50" class="loginInput" style="margin: 10px 0px 0px 20px; vertical-align: top"></textarea> <br>
+
+			    <label class="password">Image:</label>
+			    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+    			    <input type="file" name="fileUpload" id="fileUpload" class="loginInput" style="margin: 10px 0px 0px 60px"><br>
+				
 			    <input type="submit" class="loginButton" value="Add Place" id="submit">
             </form>
 		</div>
