@@ -109,13 +109,17 @@ if (count($reviews) != 0) {
 		$query = "SELECT username FROM users WHERE userID=" . $review['userID'];
 		$do = $db->prepare($query);
 		$do->execute();
-		$user = $do->fetchAll()[0];
+		$username = "[Deleted]";
+		$result = $do->fetchAll();
 		$do->closeCursor();
+		if ($result != null) {
+			$username = $do->fetchAll()[0]['username'];
+		} 
 		?>
 		<li>
 			<div class="review">
 				<?php if($review['written'] != '' & $review['written'] != NULL) : ?>					
-				<p> <?php echo $user['username']; echo "\tRating: "; echo $review['score']; ?> </p>
+				<p> <?php echo $username; echo "\tRating: "; echo $review['score']; ?> </p>
 				<p> <?php echo $review['written']; ?></p>
 				<?php endif; ?>
 			</div>
