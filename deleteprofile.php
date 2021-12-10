@@ -9,6 +9,9 @@ session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "DELETE FROM users WHERE userID='$sessionid'";
         $data=$db->query($query);
+		
+		$deleteWishlist = "DELETE FROM wishlist WHERE userID = ".$sessionid;
+		$data1 = $db->query($deleteWishlist);
         
         //Logout
         session_unset();
