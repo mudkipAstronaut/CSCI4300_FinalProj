@@ -162,6 +162,11 @@ echo 'No ratings yet';
 
 <?php include('review.php'); ?>
 
+<?php if($user_id == 1){ ?>
+<div style="display:inline-block;">
+<a href="<?php echo 'deletePlace.php?place='.$place; ?>" class="deleteProfile" style="margin-top:2em;">Delete Place</a>
+</div>
+<?php } ?>
 </div>
 </body>
 </html>
