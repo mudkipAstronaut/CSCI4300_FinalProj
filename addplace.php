@@ -36,19 +36,21 @@ session_start();
 
         // get description
 		if (!empty($_POST['desc'])) {
-			$desc = $_POST['desc'];
+			//this line escapes any apostrophes to prevent SQL errors
+			$desc = str_replace('\'','\\\'',$_POST['desc']);
 		}
 
 	// get Image
 		$noImage = empty($_FILES['fileUpload']);		
 	   if(!$noImage){
 	       	   	//get the actual path
-			$targetPath = $targetPath . basename($_FILES['fileUpload']['name']);
+			$fileName = basename($_FILES['fileUpload']['name']);
 
 			if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath)){
 				echo '<script>alert("Success")</script>';
 			}
 			else{
+				echo $_FILES['fileUpload'];
 				echo $noImage;
 				$noImage = true;
 				echo '<script>alert("nah")</script>';
@@ -121,19 +123,19 @@ session_start();
 			    <label class="username">Place Name:</label>
 			    <input type="text" name="placename" class="loginInput" style="margin: 10px 0px 0px 17px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $nameErr; ?></span> <br>
-				<!-- insert place city -->
+				<!-- insert city -->
                 <label class="password">City:</label>
 			    <input type="text" name="city" class="loginInput" style="margin: 10px 0px 0px 80px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $cityErr; ?></span> <br>
-				<!-- insert place country -->
+				<!-- insert country -->
 			    <label class="password">Country:</label>
 			    <input type="text" name="country" class="loginInput" style="margin: 10px 0px 5px 47px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $countryErr; ?></span> <br>
-				<!-- insert place description -->
+				<!-- insert description -->
                 <label class="password">Description:</label>
                 <textarea name="desc" rows="4" cols="50" class="loginInput" style="margin: 10px 0px 0px 20px; vertical-align: top"></textarea> <br>
 				
-				<!-- insert place image -->
+				<!-- insert image -->
 			    <label class="password">Image:</label>
 			    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
     			    <input type="file" name="fileUpload" id="fileUpload" class="loginInput" style="margin: 10px 0px 0px 60px"><br>

@@ -113,8 +113,8 @@ $currPageBtnCSS = 'style="background-color:#EEFFFF;"';
 				<form method="POST" name="searchBar" action="browse.php">
 					<!-- weird spacing on the search bar's right arrow to avoid whitespace --> 
 					<input type="search" name="query" placeholder="Type Something Here"
-					value="<?php echo $search;?>"/>
-					<input style="margin-left: 1px;" type="submit" value="Search" />
+					value="<?php echo $search;?>"
+					/><input style="margin-left: 1px;" type="submit" value="Search" />
 				</form>
 			</li>	
 			
