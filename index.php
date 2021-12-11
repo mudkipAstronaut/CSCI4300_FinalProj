@@ -16,7 +16,7 @@ $statement1 -> execute();
 $popularPlaces = $statement1->fetchAll();
 $statement1 -> closeCursor();
 
-$queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places,pictures WHERE places.placeID = pictures.placeID ORDER BY reviewScore DESC LIMIT 5";
+$queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places,pictures WHERE places.placeID = pictures.placeID GROUP BY places.placeID ORDER BY reviewScore DESC LIMIT 5";
 $statement2 = $db ->prepare($queryHighlyRated);
 $statement2 -> execute();
 $highlyRatedPlaces = $statement2->fetchAll();
