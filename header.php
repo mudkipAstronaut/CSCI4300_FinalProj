@@ -107,7 +107,7 @@ $currPageBtnCSS = 'style="background-color:#EEFFFF;"';
 <nav>
 	<div id="topLevel" class="top_navbar">
 	<div style="display:inline" class="top_navbar">
-		<ul class="top_navlist" >
+		<ul id="headUL" class="top_navlist" >
 			<li id="icon" ><a href="index.php"><span>WooHoo</span></a></li>
 			<li id="navSearch" >
 				<form method="POST" name="searchBar" action="browse.php">

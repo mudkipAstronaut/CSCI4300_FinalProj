@@ -15,8 +15,11 @@ try {
 	$placeQ = "SELECT * FROM places WHERE placeID=" . $place;
 	$s5 = $db->prepare($placeQ);
 	$s5->execute();
-	$results = $s5->fetchAll()[0];
+	$results = $s5->fetchAll();	
 	$s5->closeCursor();
+	if ($results == null) {
+		header('location: place_404.php');
+	} else $results = $results[0];
 } catch (PDOException $ex) {
 	if(!isset($_GET['logout'])) {
 		throw $ex;
@@ -42,17 +45,21 @@ $pid = $results['placeID'];
 <h2 style="text-decoration:underline;"><?php echo $results['placeName']; ?>: <?php echo $results['city']; ?>, <?php echo $results['country']; ?></h2>
 <p>
 <?php
-$userId = $results['userID'];
-if($userId < 1){
-$userId = 1;
+$poster = $results['userID'];
+if($poster < 1){
+$poster = 1;
 }
-$userQ = 'SELECT username FROM users WHERE userID='. $userId .' LIMIT 1';
+$userQ = 'SELECT username FROM users WHERE userID='. $poster .' LIMIT 1';
 $s1 = $db->prepare($userQ);
 $s1->execute();
 $username = $s1->fetchAll()[0];
 $s1->closeCursor();
-
+if(!empty($username)){
 echo 'Added by '. $username[0];
+}
+else{
+echo 'Added by [Deleted]';
+}
 ?></p>
 
 <div class="slideshow-container">
@@ -67,6 +74,9 @@ $s2->closeCursor();
 $numImg = count($images);
 $counter=1;
 ?>
+
+<!-- image container won't show if there are no images -->
+<?php if(!empty($images[0]['image'])) : ?>
 
 <?php
 foreach($images as $img): ?>
@@ -89,7 +99,13 @@ foreach($images as $img): ?>
       $username = $s2->fetchAll()[0];
       $s2->closeCursor();
 
+      
+      if(!empty($username)){
       echo 'Added by '. $username[0];
+      }
+      else{
+      echo 'Added by [Deleted]';
+      }
       ?>
       </div>
 </div>
@@ -133,6 +149,7 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";  
 }
 </script>
+<?php endif; ?>
 </div>
 <h4>Rating: <?php
 if(!is_null($results['reviewScore'])){
@@ -145,9 +162,17 @@ echo 'No ratings yet';
 <p>
 <?php echo $results['description']; ?>
 </p>
+<?php 
+$loggedIn = isset($user_id);
+?>
 
 <?php include('review.php'); ?>
 
+<?php if($loggedIn && $user_id == 1){ ?>
+<div style="display:inline-block;">
+<a href="<?php echo 'deletePlace.php?place='.$place; ?>" class="deleteProfile" style="margin-top:2em;">Delete Place</a>
+</div>
+<?php } ?>
 </div>
 </body>
 </html>

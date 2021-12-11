@@ -57,13 +57,12 @@ if (count($reviews) != 0) {
 	<span style="padding-left:8px;float:left;margin-top:2px;margin-left:10px"><?php echo $text; ?></span>
 	<!-- Add review button only exists for logged in users -->
 	<?php if (isset($_SESSION["loggedin"])) : ?>
-	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox()">
+	<button id="addRev" type="button" style="float:left;" class="revBtn" onclick="toggleRevBox('Leave a review')">
 	Leave a review</button>	
 	<form id="delRev" style="float:left; display:none;" action="review_delete.php" method="post">
 		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
 		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
-		<input type="submit" class="revBtn">
-		Delete review</input>
+		<input type="submit" class="revBtn" value="Delete Review"/>
 	</form>
 	<?php endif; ?>
 </div>
@@ -71,7 +70,7 @@ if (count($reviews) != 0) {
 <!-- little bit of added security, review editor only exists in DOM if user is logged in-->
 <?php if (isset($_SESSION["loggedin"])) : ?>
 <div class="review" id="editor" style="margin:1em; display:none;">
-	<form action="review_add.php" method="post" onsubmit="return validateReview()">
+	<form id="revForm" action="review_add.php" method="post" onsubmit="return validateReview()">
 		<input type="hidden" name="userID" value="<?php echo $user_id; ?>"/>
 		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
 		<div style="margin-top: 5px;">
@@ -88,31 +87,49 @@ if (count($reviews) != 0) {
 <ul class="reviewList" id="rlist">
 	<?php foreach($reviews as $review) : ?> 
 		<?php 
-		//check if review is written by current user, and if so change review editor
-		if (isset($user_id) && $review['userID'] == $user_id) : ?>
+		//check if review is written by current user, and if so change review editor;
+		
+		//$loggedIn has to be on the left, so that if the user isn't logged in it will 
+		//short circuit the AND statement
+		$revUser = $review['userID'];
+		if ($loggedIn && $revUser == $user_id) : ?>
 		<script>
 			//change editor button text
 			let addRev = document.getElementById('addRev');
 			addRev.innerHTML = "Edit Review";
+			addRev.setAttribute('onclick', 'toggleRevBox(\'Edit Review\')');
 			//change editor action to review_edit.php
 			let editor = document.getElementById('editor');
-			editor.elements[0].setAttribute('action','review_edit.php');
+			document.getElementById('revForm').setAttribute('action','review_edit.php');
 			//display delete-review button
 			document.getElementById('delRev').style.display = "block";
 		</script>
 		<?php endif; ?>
 		<?php
-		//get username for review
+		//get username for review or leave it as [Deleted]
+		$username = "[Deleted]";
 		$query = "SELECT username FROM users WHERE userID=" . $review['userID'];
 		$do = $db->prepare($query);
 		$do->execute();
-		$user = $do->fetchAll()[0];
+		$result = $do->fetchAll();
 		$do->closeCursor();
+		if ($result != null) {
+			$username = $result[0]['username'];
+		} 
 		?>
 		<li>
 			<div class="review">
-				<?php if($review['written'] != '' & $review['written'] != NULL) : ?>					
-				<p> <?php echo $user['username']; echo "\tRating: "; echo $review['score']; ?> </p>
+				<?php if($review['written'] != '' & $review['written'] != NULL) : ?>	
+				<div style="display:flex;width:100%;">
+					<p style="float:left;"> <?php echo $username; echo "\tRating: "; echo $review['score']; ?> </p>
+					<?php if($loggedIn && $user_id == 1) : ?>
+					<form style="float:right;margin-left:12px;" id="delRev" action="review_delete.php" method="post">
+						<input type="hidden" name="userID" value="<?php echo $revUser; ?>"/>
+						<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
+						<input type="submit" class="deleteProfile" value="Delete Review"/>
+					</form>
+					<?php endif; ?>				
+				</div>
 				<p> <?php echo $review['written']; ?></p>
 				<?php endif; ?>
 			</div>
