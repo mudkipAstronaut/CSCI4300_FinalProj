@@ -89,9 +89,10 @@ if (count($reviews) != 0) {
 		<?php 
 		//check if review is written by current user, and if so change review editor;
 		
-		//isset() has to be on the left, so that if the user isn't logged in it will 
+		//$loggedIn has to be on the left, so that if the user isn't logged in it will 
 		//short circuit the AND statement
-		if (isset($user_id) && $review['userID'] == $user_id) : ?>
+		$revUser = $review['userID'];
+		if ($loggedIn && $revUser == $user_id) : ?>
 		<script>
 			//change editor button text
 			let addRev = document.getElementById('addRev');
@@ -118,8 +119,17 @@ if (count($reviews) != 0) {
 		?>
 		<li>
 			<div class="review">
-				<?php if($review['written'] != '' & $review['written'] != NULL) : ?>					
-				<p> <?php echo $username; echo "\tRating: "; echo $review['score']; ?> </p>
+				<?php if($review['written'] != '' & $review['written'] != NULL) : ?>	
+				<div style="display:flex;width:100%;">
+					<p style="float:left;"> <?php echo $username; echo "\tRating: "; echo $review['score']; ?> </p>
+					<?php if($loggedIn && $user_id == 1) : ?>
+					<form style="float:right;margin-left:12px;" id="delRev" action="review_delete.php" method="post">
+						<input type="hidden" name="userID" value="<?php echo $revUser; ?>"/>
+						<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
+						<input type="submit" class="deleteProfile" value="Delete Review"/>
+					</form>
+					<?php endif; ?>				
+				</div>
 				<p> <?php echo $review['written']; ?></p>
 				<?php endif; ?>
 			</div>

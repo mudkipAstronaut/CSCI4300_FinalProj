@@ -355,7 +355,7 @@ img {vertical-align: middle;}
   margin-top: 10px;
 }
 
-a.deleteProfile:hover {
+.deleteProfile:hover {
     background-color: #FFDFDF;
 	border: 2px solid red;
 }

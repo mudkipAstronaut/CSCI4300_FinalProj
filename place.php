@@ -45,11 +45,11 @@ $pid = $results['placeID'];
 <h2 style="text-decoration:underline;"><?php echo $results['placeName']; ?>: <?php echo $results['city']; ?>, <?php echo $results['country']; ?></h2>
 <p>
 <?php
-$userId = $results['userID'];
-if($userId < 1){
-$userId = 1;
+$poster = $results['userID'];
+if($poster < 1){
+$poster = 1;
 }
-$userQ = 'SELECT username FROM users WHERE userID='. $userId .' LIMIT 1';
+$userQ = 'SELECT username FROM users WHERE userID='. $poster .' LIMIT 1';
 $s1 = $db->prepare($userQ);
 $s1->execute();
 $username = $s1->fetchAll()[0];
@@ -162,10 +162,13 @@ echo 'No ratings yet';
 <p>
 <?php echo $results['description']; ?>
 </p>
+<?php 
+$loggedIn = isset($user_id);
+?>
 
 <?php include('review.php'); ?>
 
-<?php if($user_id == 1){ ?>
+<?php if($loggedIn && $user_id == 1){ ?>
 <div style="display:inline-block;">
 <a href="<?php echo 'deletePlace.php?place='.$place; ?>" class="deleteProfile" style="margin-top:2em;">Delete Place</a>
 </div>
