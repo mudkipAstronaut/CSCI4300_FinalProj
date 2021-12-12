@@ -11,4 +11,5 @@ catch(PDOExcepiton $e){
 	echo '<p> Unable to connect to the database:'.$error;
 	exit();
 }
+
 ?>

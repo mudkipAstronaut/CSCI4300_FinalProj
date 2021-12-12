@@ -2,8 +2,9 @@
 session_start();
 ?>
 <?php
-	require('database.php');	
-
+	require('database.php');
+	
+	
 function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 	if (!$noImage) {
 		//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
@@ -104,7 +105,7 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<header>
@@ -137,7 +138,6 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 				
 				<!-- insert image -->
 			    <label class="password">Image:</label>
-			    <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> -->
 				<input type="file" name="fileUpload" id="fileUpload" value="" class="loginInput" style="margin: 10px 0px 0px 60px"><br>
 				
 			    <input type="submit" class="loginButton" value="Add Place" id="submit">

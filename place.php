@@ -34,7 +34,7 @@ $pid = $results['placeID'];
 <!DOCTYPE html> 
 <html>
 <head>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <header>

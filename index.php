@@ -53,7 +53,7 @@ body {
 </style>
 
 
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="css/style.css"/>
 <body>
 <header>
 <?php include('header.php'); ?>
