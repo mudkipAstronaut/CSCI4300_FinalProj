@@ -59,7 +59,7 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 		}
 
 	// get Image
-		$targetPath = "C:/xampp/htdocs/F/CSCI4300_FinalProj/place_imgs/";
+		$targetPath = "place_imgs/";
 		$noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;	
 		$fileName = "";
 		if(!$noImage){
