@@ -10,14 +10,16 @@ $query = "SELECT AVG(score) AS average FROM reviews WHERE placeID = ".$place_id;
 $result = $db->query($query);
 // $statement->bindValue(':place_id', $place_id);
 $result->execute();
-$avgScore = $result->fetchAll()[0];
+$avgScore = $result->fetchAll()[0]['average'];
 $result->closeCursor();
 // echo $avgScore[0];
 // $avgScore = $result->fetch_assoc();//->fetchAll()[0];
 
 //update place review score
-$update = "UPDATE places SET reviewScore = ".$avgScore['average']." WHERE places.placeID = ".$place_id;
+if(!empty($avgScore)) {
+$update = "UPDATE places SET reviewScore = ".$avgScore." WHERE places.placeID = ".$place_id;
 $statement = $db->prepare($update);
 // $statement->bindValue(':place_id', $place_id);
 $statement->execute();
+}
 ?>  

@@ -78,8 +78,9 @@ if (count($reviews) != 0) {
 			<input type="number" step="0.1" name="score" style="margin-left: 1em; width: 50px;" id="rateNum">
 			</label>
 		</div>
-		<input type="text" name="written" id="revText" style="width: 98%; margin: 8px 10px;">
-		<input type="submit" class="revBtn" style="margin-bottom: 5px;">
+		<!-- <input type="text" name="written" id="revText" style="width: 98%; margin: 8px 10px;"/> -->
+		<textarea name="written" id="revText" style="width: 1082px;height: 140px;margin: 8px 10px;"></textarea>
+		<input value="Post" type="submit" class="revBtn" style="width: 98%; margin-bottom: 5px;"/>
 	</form>
 </div>
 <?php endif; ?>
@@ -100,9 +101,14 @@ if (count($reviews) != 0) {
 			addRev.setAttribute('onclick', 'toggleRevBox(\'Edit Review\')');
 			//change editor action to review_edit.php
 			let editor = document.getElementById('editor');
-			document.getElementById('revForm').setAttribute('action','review_edit.php');
+			let form = document.getElementById('revForm');
+			form.setAttribute('action','review_edit.php');
+			let revText = <?php echo json_encode($review['written']); ?>;
 			//display delete-review button
-			document.getElementById('delRev').style.display = "block";
+			if(revText != "" && revText != null) {
+				document.getElementById('delRev').style.display = "block";
+				form.elements[3].innerHTML = revText;				
+			}
 		</script>
 		<?php endif; ?>
 		<?php
@@ -117,9 +123,9 @@ if (count($reviews) != 0) {
 			$username = $result[0]['username'];
 		} 
 		?>
+		<?php if($review['written'] != '' & $review['written'] != NULL) : ?>	
 		<li>
 			<div class="review">
-				<?php if($review['written'] != '' & $review['written'] != NULL) : ?>	
 				<div style="display:flex;width:100%;">
 					<p style="float:left;"> <?php echo $username; echo "\tRating: "; echo $review['score']; ?> </p>
 					<?php if($loggedIn && $user_id == 1) : ?>
@@ -131,9 +137,9 @@ if (count($reviews) != 0) {
 					<?php endif; ?>				
 				</div>
 				<p> <?php echo $review['written']; ?></p>
-				<?php endif; ?>
 			</div>
 		</li>
+		<?php endif; ?>
 	<?php endforeach; ?> 
 </ul>
 <br/>
