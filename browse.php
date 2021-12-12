@@ -91,12 +91,15 @@ $s2->closeCursor();
     <p>
      <?php echo $res['description']; ?>
     </p>
-    <?php if(isset($_SESSION["loggedin"])) : ?>		
+    <?php if(!empty($user_id)) : ?>	
         <div class="popular-addWishlist">
-	  <input type="hidden" name="placeID" value="<?php echo $res['placeID']; ?>">
-	  <input type="hidden" name="userID" value="<?php echo $user_id; ?>">  
-	  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
-	</div>
+		  <input type="hidden" name="placeID" value="<?php echo $res['placeID']; ?>">
+		  <input type="hidden" name="userID" value="<?php echo $user_id; ?>">  
+		  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
+		</div>
+		<?php if($user_id == 1) : ?>
+			<!-- Delete place button -->
+		<?php endif; ?>
     <?php endif; ?>
     </form>
   </div>

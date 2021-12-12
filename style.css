@@ -521,3 +521,17 @@ img {vertical-align: middle;}
 	width: 800px;
 	height: 20px;
 }
+
+/* ============== */
+/* Browse */
+/* ============== */
+
+.wishlistAddButton {
+	border: 1.5px outset slateblue;
+	cursor: pointer;
+	background-color: rgb(255, 215, 0);	
+}
+
+.wishlistAddButton:hover {
+	background-color: rgb(255, 245, 0);
+}

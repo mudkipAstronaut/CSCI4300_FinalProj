@@ -2,7 +2,23 @@
 session_start();
 ?>
 <?php
-	require('database.php');
+	require('database.php');	
+
+function insertPic($noImage, $name, $db, $fileName, $sessionid) {
+	if (!$noImage) {
+		//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
+		$getPlaceID = "SELECT placeID FROM places WHERE places.placeName = '$name'";
+		$statement = $db->prepare($getPlaceID);
+		$statement->execute();
+		$picPlaceID = $statement->fetchAll()[0]['placeID'];
+		$statement->closeCursor();
+		
+		$addPic = "INSERT INTO pictures (image,  placeID, userID)
+			VALUES ('$fileName', '$picPlaceID', '$sessionid')";
+		
+		$db->query($addPic);					
+	}
+}
     
 
 	// define variables and set to empty values
@@ -42,19 +58,16 @@ session_start();
 		}
 
 	// get Image
-		// $noImage = empty($_FILES['fileUpload']);		
-		// $noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;		
 		$targetPath = "C:/xampp/htdocs/F/CSCI4300_FinalProj/place_imgs/";
-		$noImage = false;		
+		$noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;	
+		$fileName = "";
 		if(!$noImage){
 			//get the actual path
 			$fileName = basename($_FILES['fileUpload']['name']);
 			$targetPath = $targetPath . $fileName;
 			
 			move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath);		
-		} else {
-			echo '<script>alert("no image detected?")</script>';
-		}		
+		} 		
 
         //Check for errors
         if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
