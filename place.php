@@ -151,14 +151,17 @@ function showSlides(n) {
 </script>
 <?php endif; ?>
 </div>
-<h4>Rating: <?php
-if(!is_null($results['reviewScore'])){
-echo $results['reviewScore'];
-}
-else{
-echo 'No ratings yet';
-}
-?></h4>
+<div style="display:inline">
+	<h4>Rating: <?php
+	if(!is_null($results['reviewScore'])){
+	echo $results['reviewScore'];
+	}
+	else{
+	echo 'No ratings yet';
+	}
+	?></h4>
+	
+</div>
 <p>
 <?php echo $results['description']; ?>
 </p>

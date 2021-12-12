@@ -57,18 +57,7 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 			//escape any apostrophes to prevent SQL errors
 			$desc = str_replace('\'','\\\'',$_POST['desc']);
 		}
-
-	// get Image
-		$targetPath = "place_imgs/";
-		$noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;	
-		$fileName = "";
-		if(!$noImage){
-			//get the actual path
-			$fileName = basename($_FILES['fileUpload']['name']);
-			$targetPath = $targetPath . $fileName;
 			
-			move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath);		
-		} 		
 
         //Check for errors
         if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
@@ -82,8 +71,9 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
                 VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";				
             }
             $data=$db->query($inquery);
-			//inserts pic for place after getting placeID
-			insertPic($noImage, $name, $db, $fileName, $sessionid);
+			
+			//addpicture to db
+			include('picture_add.php');	
 	    //header('Location: ../CSCI4300_FinalProj');
         }
     }
