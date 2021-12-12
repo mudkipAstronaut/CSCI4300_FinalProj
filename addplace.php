@@ -17,26 +17,28 @@ session_start();
 		if (empty($_POST['placename'])) {
 			$nameErr = "*Name is required";
 		} else {
-			$name=$_POST['placename'];
+			//escape any apostrophes to prevent SQL errors
+			$name= str_replace('\'','\\\'',$_POST['placename']);
 		}
 
 		// get city
 		if (empty($_POST['city'])) {
 			$cityErr = "*City is required";
 		} else {
-			$city=$_POST['city'];
+			$city =$_POST['city'];
 		}
 
         // get country
 		if (empty($_POST['country'])) {
 			$countryErr = "*Country is required";
 		} else {
-			$country=$_POST['country'];
+			//escape any apostrophes to prevent SQL errors
+			$country = str_replace('\'','\\\'',$_POST['country']);
 		}
 
         // get description
 		if (!empty($_POST['desc'])) {
-			//this line escapes any apostrophes to prevent SQL errors
+			//escape any apostrophes to prevent SQL errors
 			$desc = str_replace('\'','\\\'',$_POST['desc']);
 		}
 
