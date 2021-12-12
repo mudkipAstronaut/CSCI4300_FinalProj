@@ -41,9 +41,10 @@ session_start();
 		}
 
 	// get Image
-		$noImage = empty($_FILES['fileUpload']);		
-	   if(!$noImage){
-	       	   	//get the actual path
+		// $noImage = empty($_FILES['fileUpload']);		
+		$noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;		
+		if(!$noImage){
+			//get the actual path
 			$fileName = basename($_FILES['fileUpload']['name']);
 
 			// if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath)){
@@ -52,9 +53,8 @@ session_start();
 			}
 			else{
 				// echo $_FILES['fileUpload']['name'];
-				echo $fileName;
-				echo $noImage;
-				$noImage = true;
+				// echo $fileName;
+				// $noImage = true;
 				echo '<script>alert("nah")</script>';
 				print_r($_FILES['fileUpload']);
 				echo $targetPath;
