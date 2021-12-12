@@ -58,6 +58,12 @@ body {
     margin-bottom: 0;
 }
 
+#filters ul li label {
+	display: inline-block;
+	max-width: 130px;
+	word-wrap: break-word;
+}
+
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
@@ -387,6 +393,10 @@ img {vertical-align: middle;}
   margin-top: 10px;
 }
 
+.deleteConfirmButton:hover {
+	background-color: #FFDFDF;
+}
+
 .returnButton{
   font-size: 12px;
   color:black;
@@ -396,6 +406,10 @@ img {vertical-align: middle;}
   padding: 5px 15px 5px 15px;
   float: left;
   margin-top: 10px;
+}
+
+.returnButton:hover {
+	background-color: #CDFF4F;
 }
 
 .registerredir{
@@ -506,4 +520,18 @@ img {vertical-align: middle;}
 	margin: 5px;
 	width: 800px;
 	height: 20px;
+}
+
+/* ============== */
+/* Browse */
+/* ============== */
+
+.wishlistAddButton {
+	border: 1.5px outset slateblue;
+	cursor: pointer;
+	background-color: rgb(255, 215, 0);	
+}
+
+.wishlistAddButton:hover {
+	background-color: rgb(255, 245, 0);
 }

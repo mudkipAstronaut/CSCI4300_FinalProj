@@ -2,13 +2,28 @@
 session_start();
 ?>
 <?php
-	require('database.php');
+	require('database.php');	
+
+function insertPic($noImage, $name, $db, $fileName, $sessionid) {
+	if (!$noImage) {
+		//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
+		$getPlaceID = "SELECT placeID FROM places WHERE places.placeName = '$name'";
+		$statement = $db->prepare($getPlaceID);
+		$statement->execute();
+		$picPlaceID = $statement->fetchAll()[0]['placeID'];
+		$statement->closeCursor();
+		
+		$addPic = "INSERT INTO pictures (image,  placeID, userID)
+			VALUES ('$fileName', '$picPlaceID', '$sessionid')";
+		
+		$db->query($addPic);					
+	}
+}
     
 
 	// define variables and set to empty values
     $nameErr = $cityErr = $countryErr = "";
     $name = $city = $country = $desc = $img = "";
-    $targetPath = "C:\xampp\htdocs\F\CSCI4300_FinalProj\place_imgs";
 
     $sessionid = $_SESSION['uid'];
 
@@ -17,62 +32,42 @@ session_start();
 		if (empty($_POST['placename'])) {
 			$nameErr = "*Name is required";
 		} else {
-			$name=$_POST['placename'];
+			//escape any apostrophes to prevent SQL errors
+			$name= str_replace('\'','\\\'',$_POST['placename']);
 		}
 
 		// get city
 		if (empty($_POST['city'])) {
 			$cityErr = "*City is required";
 		} else {
-			$city=$_POST['city'];
+			$city =$_POST['city'];
 		}
 
         // get country
 		if (empty($_POST['country'])) {
 			$countryErr = "*Country is required";
 		} else {
-			$country=$_POST['country'];
+			//escape any apostrophes to prevent SQL errors
+			$country = str_replace('\'','\\\'',$_POST['country']);
 		}
 
         // get description
 		if (!empty($_POST['desc'])) {
-			$desc = $_POST['desc'];
+			//escape any apostrophes to prevent SQL errors
+			$desc = str_replace('\'','\\\'',$_POST['desc']);
 		}
 
 	// get Image
-		$noImage = empty($_FILES['fileUpload']);		
-	   if(!$noImage){
-	       	   	//get the actual path
-			$targetPath = $targetPath . basename($_FILES['fileUpload']['name']);
-
-			if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath)){
-				echo '<script>alert("Success")</script>';
-			}
-			else{
-				echo $noImage;
-				$noImage = true;
-				echo '<script>alert("nah")</script>';
-				print_r($_FILES['fileUpload']);
-				echo $targetPath;
-			}
-		}
-		
-		//inserts pic for place after getting placeID
-		function insertPic($noImage) {
-			if (!$noImage) {
-				//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
-				$getPlaceID = "SELECT placeID FROM places WHERE places.placeName = '$name'";
-				$statement = $db->prepare($getPlaceID);
-				$statement->execute();
-				$picPlaceID = $statement->fetchAll()[0];
-				$statement->closeCursor();
-				
-				$insertPic = "INSERT INTO pictures (image,  placeID, userID)
-					VALUES ('$targetPath', '$picPlaceID', '$sessionid')";
-				
-				$db->query($insertPic);					
-			}
-		}
+		$targetPath = "C:/xampp/htdocs/F/CSCI4300_FinalProj/place_imgs/";
+		$noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;	
+		$fileName = "";
+		if(!$noImage){
+			//get the actual path
+			$fileName = basename($_FILES['fileUpload']['name']);
+			$targetPath = $targetPath . $fileName;
+			
+			move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath);		
+		} 		
 
         //Check for errors
         if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
@@ -86,7 +81,8 @@ session_start();
                 VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";				
             }
             $data=$db->query($inquery);
-			insertPic($noImage);
+			//inserts pic for place after getting placeID
+			insertPic($noImage, $name, $db, $fileName, $sessionid);
 	    //header('Location: ../CSCI4300_FinalProj');
         }
     }
@@ -109,9 +105,15 @@ session_start();
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<?php include('header.php'); ?>
 </head>
 <body>
+	<header>
+		<?php include('header.php'); ?>		
+	</header>
+	<script>
+	let ul = document.getElementById('headUL');
+	ul.style.maxHeight = "24px";
+	</script>
 	<main>
 		
 		<div class="login">
@@ -121,22 +123,22 @@ session_start();
 			    <label class="username">Place Name:</label>
 			    <input type="text" name="placename" class="loginInput" style="margin: 10px 0px 0px 17px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $nameErr; ?></span> <br>
-				<!-- insert place city -->
+				<!-- insert city -->
                 <label class="password">City:</label>
 			    <input type="text" name="city" class="loginInput" style="margin: 10px 0px 0px 80px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $cityErr; ?></span> <br>
-				<!-- insert place country -->
+				<!-- insert country -->
 			    <label class="password">Country:</label>
 			    <input type="text" name="country" class="loginInput" style="margin: 10px 0px 5px 47px">
 			    <span class="error" style="margin: 0px 0px 0px 10px"><?php echo $countryErr; ?></span> <br>
-				<!-- insert place description -->
+				<!-- insert description -->
                 <label class="password">Description:</label>
                 <textarea name="desc" rows="4" cols="50" class="loginInput" style="margin: 10px 0px 0px 20px; vertical-align: top"></textarea> <br>
 				
-				<!-- insert place image -->
+				<!-- insert image -->
 			    <label class="password">Image:</label>
-			    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-    			    <input type="file" name="fileUpload" id="fileUpload" class="loginInput" style="margin: 10px 0px 0px 60px"><br>
+			    <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> -->
+				<input type="file" name="fileUpload" id="fileUpload" value="" class="loginInput" style="margin: 10px 0px 0px 60px"><br>
 				
 			    <input type="submit" class="loginButton" value="Add Place" id="submit">
             </form>

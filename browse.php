@@ -49,8 +49,9 @@ $s2->closeCursor();
 	<?php
 	$i=1;
 	foreach($checks as $check): ?>
-	  <li><input id="checkbox<?php echo $i; ?>" name="country[]" value="<?php echo $check['country']; ?>" type="checkbox">
-	  <label for="checkbox<?php echo $i; ?>">
+	  <li>
+	  <input id="checkbox<?php echo $i; ?>" name="country[]" value="<?php echo $check['country']; ?>" type="checkbox">
+	  <label id="countryLabel" for="checkbox<?php echo $i; ?>">
 	  <?php echo $check['country']; ?>
 	  </label>
 	  </li>
@@ -90,12 +91,15 @@ $s2->closeCursor();
     <p>
      <?php echo $res['description']; ?>
     </p>
-    <?php if(isset($_SESSION["loggedin"])) : ?>		
+    <?php if(!empty($user_id)) : ?>	
         <div class="popular-addWishlist">
-	  <input type="hidden" name="placeID" value="<?php echo $res['placeID']; ?>">
-	  <input type="hidden" name="userID" value="<?php echo $user_id; ?>">  
-	  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
-	</div>
+		  <input type="hidden" name="placeID" value="<?php echo $res['placeID']; ?>">
+		  <input type="hidden" name="userID" value="<?php echo $user_id; ?>">  
+		  <input type="submit" value="Add to Wishlist" class="wishlistAddButton">
+		</div>
+		<?php if($user_id == 1) : ?>
+			<!-- Delete place button -->
+		<?php endif; ?>
     <?php endif; ?>
     </form>
   </div>

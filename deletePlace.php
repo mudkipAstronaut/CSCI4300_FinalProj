@@ -6,8 +6,8 @@ session_start();
 
     $sessionid = $_SESSION['uid'];
 
-    $placeGet = $_GET['place'];
-    $place = $_POST['placeid'];
+    $placeGet = $_GET['place'];	
+	if (isset($_POST['placeid'])) $place = $_POST['placeid'];
 
     //to make sure that anyone not logged in but admin
     if($sessionid != 1){
@@ -52,7 +52,7 @@ session_start();
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 		<div class="delete">
             <label class="deleteWarn">Are You Sure?</label> <br>
-            <lable class="deleteDesc">**You won't be able to recover the place once deleted!**</label>
+            <lable class="deleteDesc">**You won't be able to recover this place once deleted!**</label>
             <br><br><br><br><br><br>
             <a href="<?php echo 'place.php?place='.$placeGet; ?>" class="returnButton">Return</a>
 	       <input type="hidden" name="placeid" value="<?php echo $placeGet; ?>">

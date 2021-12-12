@@ -4,7 +4,7 @@ $username='root';
 $password='';
 
 try{
-	$db=new PDO($dsn, $username, $password);
+	$db = new PDO($dsn, $username, $password);
 }
 catch(PDOExcepiton $e){
 	$error=$e->getMessage();
