@@ -24,3 +24,9 @@ function validateReview() {
 	}
 	return true;	
 }
+
+function validatePic() {
+	let upload = document.getElementById("fileUpload");
+	if (upload.value == "" || upload.value == null) return false;
+	else return true;
+}
