@@ -7,15 +7,15 @@ if (!isset($_SESSION["uid"])) {
 
 require('database.php');
 
-//$user_id = filter_input(INPUT_GET, 'userID');
+// Gets the user id from the session
 $user_id = $_SESSION["uid"];
 
+// Gets each of the user's wishlist items
 $queryWishlist = "SELECT wishlist.notes,wishlist.wishlistID,places.placeName,places.city,places.country,places.description,places.placeID FROM wishlist,places WHERE wishlist.userID=:uID AND wishlist.placeID=places.placeID;";
 $statement1 = $db ->prepare($queryWishlist);
 $statement1->bindValue(':uID', $user_id);
 $statement1 -> execute();
 $places = $statement1->fetchAll();
-//$place_name = $places['placeName'];
 $statement1 -> closeCursor();
 
 ?>
@@ -54,6 +54,7 @@ $statement1 -> closeCursor();
 	  <?php
 	    require('database.php');
 	  
+		// Gets each of the wishlist items's picture for the place. If the place does not have a picture a default one is used
 	    $getPlaceImage = "SELECT image,userID FROM pictures WHERE :currentPlace = pictures.placeID GROUP BY pictures.pictureID LIMIT 1";
 	    $statement2 = $db ->prepare($getPlaceImage);
 	    $statement2->bindValue(':currentPlace', $place['placeID']);
@@ -90,20 +91,14 @@ $statement1 -> closeCursor();
     </iframe>
     <form method="POST" name="wishlist" action="updateWishlistNotes.php" target="content" id="update_notes_form">
 	  <div class="wishlist-Notes">
-	    <!-- <p class="travelNotesHeader"> Travel Notes: </p>
-		
-		<!-- ------------------------------------------ -->
 		<br>
-		
+		<!-- Each of the wishlist item's have a notes section that can be toggled to hide or show. In each text area a user can put their travel plans or other additional information.  -->
 		<button onclick="hideShowNotes(<?php echo $wishlistIteration; ?>)" class="showNotes"> Hide Travel Notes: </button>
 		<div id="visibleNotes" name="notes">
 		  <input type="hidden" name="itemWishlistID" value="<?php echo $place['wishlistID']; ?>">
 	      <textarea placeholder="Enter your travel plans/notes for this location here." class="wishlist-textarea" name="notesTextArea"><?php echo $place['notes']; ?></textarea>
    	      <input type="submit" value="Save Notes" class="wishlist-saveNotes">
 		</div>
-		
-		<!-- ------------------------------------------ -->
-		
 		
 	  </div>
 	</form>
@@ -123,7 +118,7 @@ $statement1 -> closeCursor();
 <?php endif; ?>
 
 <script>
-  
+  // This is the function that hides and shows a notes section for a wishlist item when clicked
   function hideShowNotes(y) {
 	  var x = document.querySelectorAll("[id='visibleNotes']");
 	  

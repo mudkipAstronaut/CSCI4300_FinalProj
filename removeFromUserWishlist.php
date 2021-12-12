@@ -1,10 +1,9 @@
 <?php
-// Get the category data
 $wishlist_id = filter_input(INPUT_POST, 'itemWishlistID');
 
 require_once('database.php');
 	
-// Add the product to the database  
+// Removes the wishlist item from the database
 $query = "DELETE 
 		FROM wishlist
 	WHERE
