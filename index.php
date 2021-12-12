@@ -10,12 +10,14 @@ if(isset($_SESSION["loggedin"])) {
   $user_id = $_SESSION["uid"];
 }
 
+// Gets the most popular places that have an image. Popular places are the locations which appear most often in people's wishlist. 
 $queryPopular = "SELECT places.placeID,placeName,city,country,reviewScore,COUNT(*) AS Count FROM wishlist,places,pictures WHERE places.placeID = wishlist.placeID AND pictures.placeID = wishlist.placeID GROUP BY wishlist.placeID ORDER BY Count DESC LIMIT 5";
 $statement1 = $db ->prepare($queryPopular);
 $statement1 -> execute();
 $popularPlaces = $statement1->fetchAll();
 $statement1 -> closeCursor();
 
+// Gets the places with the highest ratings that have an image
 $queryHighlyRated = "SELECT places.placeID,placeName,city,country,reviewScore FROM places,pictures WHERE places.placeID = pictures.placeID GROUP BY places.placeID ORDER BY reviewScore DESC LIMIT 5";
 $statement2 = $db ->prepare($queryHighlyRated);
 $statement2 -> execute();
@@ -81,6 +83,7 @@ body {
 	<?php
 	  require('database.php');
 	  
+	  // Gets an image for the current place
 	  $getPlaceImage = "SELECT image,userID FROM pictures WHERE :currentPlace = pictures.placeID GROUP BY pictures.pictureID LIMIT 1";
 	  $statement3 = $db ->prepare($getPlaceImage);
 	  $statement3->bindValue(':currentPlace', $popularPlace['placeID']);
@@ -92,6 +95,7 @@ body {
 		  $imagePath = $placePicture['image'];
 	    }
 	  } else {
+		  // If a place does not have an image a default one is used
 		  $imagePath = 'default.jpg';
 	  }
 	  $statement3 -> closeCursor();
@@ -122,10 +126,12 @@ body {
 </form>
 <?php endforeach; ?>
 
+<!-- When these buttons are clicked they will go forward or back in the slide show accordingly  -->
 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
 
+<!-- Each of these dots correspond to a place, that when clicked will go to its corresponding slide in the slideshow -->
 <br>
 <div style="text-align:center">
   <span class="dot" onclick="currentSlide(1)"></span> 
@@ -154,6 +160,7 @@ body {
 	<?php
 	  require('database.php');
 	  
+	  // Gets an image for the current place
 	  $getPlaceImage = "SELECT image,userID FROM pictures WHERE :currentPlace = pictures.placeID GROUP BY pictures.pictureID LIMIT 1";
 	  $statement4 = $db ->prepare($getPlaceImage);
 	  $statement4->bindValue(':currentPlace', $highlyRatedPlace['placeID']);
@@ -165,6 +172,7 @@ body {
 		  $imagePath = $placePicture['image'];
 	    }
 	  } else {
+		  // If a place does not have an image a default one is used.
 		  $imagePath = 'default.jpg';
 	  }
 	  $statement4 -> closeCursor();
@@ -196,11 +204,13 @@ body {
 </form>
 <?php endforeach; ?>
 
+<!-- When these buttons are clicked they will go forward or back in the slide show accordingly  -->
 <a class="prev" onclick="plusSlidesHR(-1)">&#10094;</a>
 <a class="next" onclick="plusSlidesHR(1)">&#10095;</a>
 </div>
 
 <br>
+<!-- Each of these dot2s correspond to a place, that when clicked will go to its corresponding slide in the slideshow -->
 <div style="text-align:center">
   <span class="dot2" onclick="currentSlideHR(1)"></span> 
   <span class="dot2" onclick="currentSlideHR(2)"></span> 
@@ -219,14 +229,17 @@ body {
 var slideIndex = 1;
 showSlides(slideIndex);
 
+// Increments or decrements the current slideIndex
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
 
+// Goes to the corresponding slideIndex when a dot is clicked, then displays the new slide
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
 
+// Displays the current slide in the slideshow for popular places and hides the rest
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("popularPlace");
@@ -247,14 +260,17 @@ function showSlides(n) {
 var slideIndexHR = 1;
 showSlidesHR(slideIndexHR);
 
+// Increments or decrements the current slideIndexHR
 function plusSlidesHR(n) {
   showSlidesHR(slideIndexHR += n);
 }
 
+// Goes to the corresponding slideIndexHR when a dot2 is clicked, then displays the new slide
 function currentSlideHR(n) {
   showSlidesHR(slideIndexHR = n);
 }
 
+// Displays the current slide in the slideshow for Highly Rated places and hides the rest
 function showSlidesHR(n) {
   var i;
   var slides = document.getElementsByClassName("ratedPlace");
