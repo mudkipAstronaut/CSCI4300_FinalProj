@@ -167,7 +167,8 @@ echo 'Added by [Deleted]';
 <!-- add image form -->
 <?php if($loggedIn) : ?>
 	<label>Add an image
-		<form method="post" action="<?php echo "place.php?place=".$place;?>" enctype="multipart/form-data">
+		<form method="post" action="<?php echo "place.php?place=".$place;?>" 
+			enctype="multipart/form-data" onsubmit="return validatePic()">
 			<input type="file" name="fileUpload" id="fileUpload" value="" class="loginInput" style="margin: 4px 0;"/>
 			<input type="submit" class="wishlistAddButton" value="Add Picture" id="submit" style="margin: 4px 0;"/>
 		</form>
