@@ -49,7 +49,8 @@ $s2->closeCursor();
 	<?php
 	$i=1;
 	foreach($checks as $check): ?>
-	  <li><input id="checkbox<?php echo $i; ?>" name="country[]" value="<?php echo $check['country']; ?>" type="checkbox">
+	  <li>
+	  <input id="checkbox<?php echo $i; ?>" name="country[]" value="<?php echo $check['country']; ?>" type="checkbox">
 	  <label id="countryLabel" for="checkbox<?php echo $i; ?>">
 	  <?php echo $check['country']; ?>
 	  </label>

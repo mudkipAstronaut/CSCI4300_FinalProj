@@ -8,7 +8,6 @@ session_start();
 	// define variables and set to empty values
     $nameErr = $cityErr = $countryErr = "";
     $name = $city = $country = $desc = $img = "";
-    $targetPath = "C:\xampp\htdocs\F\CSCI4300_FinalProj\place_imgs";
 
     $sessionid = $_SESSION['uid'];
 
@@ -44,41 +43,18 @@ session_start();
 
 	// get Image
 		// $noImage = empty($_FILES['fileUpload']);		
-		$noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;		
+		// $noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;		
+		$targetPath = "C:/xampp/htdocs/F/CSCI4300_FinalProj/place_imgs/";
+		$noImage = false;		
 		if(!$noImage){
 			//get the actual path
 			$fileName = basename($_FILES['fileUpload']['name']);
-
-			// if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath)){
-			if(move_uploaded_file($fileName, $targetPath)){
-				echo '<script>alert("Success")</script>';
-			}
-			else{
-				// echo $_FILES['fileUpload']['name'];
-				// echo $fileName;
-				// $noImage = true;
-				echo '<script>alert("nah")</script>';
-				print_r($_FILES['fileUpload']);
-				echo $targetPath;
-			}
-		}
-		
-		//inserts pic for place after getting placeID
-		function insertPic($noImage) {
-			if (!$noImage) {
-				//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
-				$getPlaceID = "SELECT placeID FROM places WHERE places.placeName = '$name'";
-				$statement = $db->prepare($getPlaceID);
-				$statement->execute();
-				$picPlaceID = $statement->fetchAll()[0];
-				$statement->closeCursor();
-				
-				$insertPic = "INSERT INTO pictures (image,  placeID, userID)
-					VALUES ('$targetPath', '$picPlaceID', '$sessionid')";
-				
-				$db->query($insertPic);					
-			}
-		}
+			$targetPath = $targetPath . $fileName;
+			
+			move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath);		
+		} else {
+			echo '<script>alert("no image detected?")</script>';
+		}		
 
         //Check for errors
         if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
@@ -92,7 +68,8 @@ session_start();
                 VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";				
             }
             $data=$db->query($inquery);
-			insertPic($noImage);
+			//inserts pic for place after getting placeID
+			insertPic($noImage, $name, $db, $fileName, $sessionid);
 	    //header('Location: ../CSCI4300_FinalProj');
         }
     }
@@ -115,9 +92,15 @@ session_start();
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<?php include('header.php'); ?>
 </head>
 <body>
+	<header>
+		<?php include('header.php'); ?>		
+	</header>
+	<script>
+	let ul = document.getElementById('headUL');
+	ul.style.maxHeight = "24px";
+	</script>
 	<main>
 		
 		<div class="login">
@@ -141,8 +124,8 @@ session_start();
 				
 				<!-- insert image -->
 			    <label class="password">Image:</label>
-			    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-    			    <input type="file" name="fileUpload" id="fileUpload" class="loginInput" style="margin: 10px 0px 0px 60px"><br>
+			    <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> -->
+				<input type="file" name="fileUpload" id="fileUpload" value="" class="loginInput" style="margin: 10px 0px 0px 60px"><br>
 				
 			    <input type="submit" class="loginButton" value="Add Place" id="submit">
             </form>
