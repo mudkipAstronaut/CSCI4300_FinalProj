@@ -46,11 +46,13 @@ session_start();
 	       	   	//get the actual path
 			$fileName = basename($_FILES['fileUpload']['name']);
 
-			if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath)){
+			// if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath)){
+			if(move_uploaded_file($fileName, $targetPath)){
 				echo '<script>alert("Success")</script>';
 			}
 			else{
-				echo $_FILES['fileUpload'];
+				// echo $_FILES['fileUpload']['name'];
+				echo $fileName;
 				echo $noImage;
 				$noImage = true;
 				echo '<script>alert("nah")</script>';
