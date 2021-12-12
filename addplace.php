@@ -2,8 +2,9 @@
 session_start();
 ?>
 <?php
-	require('database.php');	
-
+	require('database.php');
+	
+	
 function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 	if (!$noImage) {
 		//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
@@ -56,18 +57,7 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 			//escape any apostrophes to prevent SQL errors
 			$desc = str_replace('\'','\\\'',$_POST['desc']);
 		}
-
-	// get Image
-		$targetPath = "C:/xampp/htdocs/F/CSCI4300_FinalProj/place_imgs/";
-		$noImage = ($_FILES['fileUpload']['size'] == 0) ? true : false;	
-		$fileName = "";
-		if(!$noImage){
-			//get the actual path
-			$fileName = basename($_FILES['fileUpload']['name']);
-			$targetPath = $targetPath . $fileName;
 			
-			move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath);		
-		} 		
 
         //Check for errors
         if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
@@ -81,8 +71,9 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
                 VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";				
             }
             $data=$db->query($inquery);
-			//inserts pic for place after getting placeID
-			insertPic($noImage, $name, $db, $fileName, $sessionid);
+			
+			//addpicture to db
+			include('picture_add.php');	
 	    //header('Location: ../CSCI4300_FinalProj');
         }
     }
@@ -104,7 +95,7 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<header>
@@ -137,7 +128,6 @@ function insertPic($noImage, $name, $db, $fileName, $sessionid) {
 				
 				<!-- insert image -->
 			    <label class="password">Image:</label>
-			    <!-- <input type="hidden" name="MAX_FILE_SIZE" value="1000000"> -->
 				<input type="file" name="fileUpload" id="fileUpload" value="" class="loginInput" style="margin: 10px 0px 0px 60px"><br>
 				
 			    <input type="submit" class="loginButton" value="Add Place" id="submit">

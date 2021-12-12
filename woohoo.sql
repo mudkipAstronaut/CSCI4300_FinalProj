@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 10:16 PM
+-- Generation Time: Dec 12, 2021 at 09:43 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -74,7 +74,10 @@ INSERT INTO `pictures` (`pictureID`, `image`, `placeID`, `userID`) VALUES
 (31, 'national-monument.jpg', 37, 1),
 (32, 'emu_war_burial.jpeg', 7, 1),
 (33, 'staples_center.jpg', 16, 1),
-(35, 'diogenes_statue1.jpg', 9, 1);
+(35, 'diogenes_statue1.jpg', 9, 1),
+(39, 'space_needle.jpg', 72, 1),
+(43, 'google_hq.jpg', 79, 1),
+(44, 'houston_museum.jpg', 80, 4);
 
 -- --------------------------------------------------------
 
@@ -101,7 +104,7 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (2, 'London Eye', 'London', 'United Kingdom', 'A large Ferris Wheel on the Thames', '3.6', 3),
 (3, 'University of Georgia', 'Athens', 'USA', NULL, '0.0', 4),
 (4, 'Hoover Dam', 'Las Vegas', 'USA', 'Holds back water, bro', NULL, 4),
-(5, 'Sky Tree', 'Tokyo', 'Japan', NULL, NULL, 2),
+(5, 'Sky Tree', 'Tokyo', 'Japan', NULL, '3.6', 2),
 (6, 'Mojang Office', 'Stockholm', 'Sweden', 'Block game', '5.0', 1),
 (7, 'Emu War Burial', 'Outback', 'Australia', 'In the Outback, noone can hear you scream.', '2.5', 4),
 (8, 'Edgar Allan Poe\'s house', 'Philadelphia', 'USA', 'Home of the famous writer', '0.0', 1),
@@ -133,7 +136,10 @@ INSERT INTO `places` (`placeID`, `placeName`, `city`, `country`, `description`, 
 (34, 'Gateway of India', 'Mumbai', 'India', NULL, '1.0', 1),
 (35, 'Gateway Arch', 'St Louis', 'USA', 'A large arch dedicated to the American people, one of the largest monuments in the Western hemisphere', NULL, 1),
 (36, 'Chicago Picasso', 'Chicago', 'USA', 'Also called The Picasso, it is an abstract sculpture made by the famous artist', NULL, 1),
-(37, 'National Monument', 'Jakarta ', 'Indonesia', 'A monument to Indonesia\'s existence as a nation', NULL, 2);
+(37, 'National Monument', 'Jakarta ', 'Indonesia', 'A monument to Indonesia\'s existence as a nation', '3.4', 2),
+(72, 'Space Needle', 'Seattle', 'USA', 'A large hour-glass tower built for the 1962 World\'s Fair', NULL, 1),
+(79, 'WooHoo HQ', 'Athens', 'USA', 'Where our dreams become your reality', NULL, 1),
+(80, 'Houston Museum of Natural Science', 'Houston', 'USA', 'A popular museum that holds many natural specimens', NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -154,7 +160,6 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`reviewID`, `userID`, `placeID`, `score`, `written`) VALUES
-(1, 4, 1, '4.4', 'It was a wonderful site, bigger than I thought it would be. The weather was nice, and you can actually walk up to the top of the statue--if you\'re okay with cardio!'),
 (2, 3, 9, '3.6', 'This man was an insult to greater men, a beggar among giants, and yet it is a wonderfully made statue.'),
 (3, 3, 1, '4.4', 'This is an iconic piece of Americana.'),
 (5, 4, 9, '4.0', 'Based cynic versus acidified bloodthirsty authoritarian'),
@@ -165,7 +170,10 @@ INSERT INTO `reviews` (`reviewID`, `userID`, `placeID`, `score`, `written`) VALU
 (16, 1, 9, '5.0', 'The administration sees hosting this content as a temporary expedient to satiate the passions of the masses.'),
 (17, 2, 22, '2.9', 'The picture resolution is a perfect symbol of the quality of this attraction to a crowded in viewer.'),
 (18, 2, 12, '3.8', 'What a beautiful, organic temple to the cold machinations of the eminent media corporation, gatekeeper of all humanity\'s visually represented passions.'),
-(19, 2, 31, '5.0', 'This triangle is waaaaaaaaaaaack');
+(19, 2, 31, '5.0', 'This triangle is waaaaaaaaaaaack'),
+(22, 6, 37, '3.4', 'truly a monumental stucture heheheheheheheheheheheheheheheheh'),
+(31, 4, 1, '4.4', 'It was a wonderful site, bigger than I thought it would be. The weather was nice, and you can actually walk up to the top of the statue--if you\'re okay with cardio!'),
+(32, 4, 5, '3.6', '');
 
 -- --------------------------------------------------------
 
@@ -214,11 +222,11 @@ INSERT INTO `wishlist` (`wishlistID`, `userID`, `placeID`, `notes`) VALUES
 (4, 2, 1, NULL),
 (5, 2, 4, NULL),
 (6, 3, 5, 'Nani?'),
-(7, 1, 4, ''),
 (8, 1, 3, 'woohoo'),
 (22, 1, 7, NULL),
 (24, 4, 7, NULL),
-(25, 3, 7, NULL);
+(25, 3, 7, NULL),
+(31, 1, 4, NULL);
 
 --
 -- Indexes for dumped tables
@@ -264,31 +272,31 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `pictures`
 --
 ALTER TABLE `pictures`
-  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `pictureID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `placeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `wishlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

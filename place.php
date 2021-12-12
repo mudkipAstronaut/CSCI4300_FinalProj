@@ -34,7 +34,7 @@ $pid = $results['placeID'];
 <!DOCTYPE html> 
 <html>
 <head>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <header>
@@ -151,14 +151,17 @@ function showSlides(n) {
 </script>
 <?php endif; ?>
 </div>
-<h4>Rating: <?php
-if(!is_null($results['reviewScore'])){
-echo $results['reviewScore'];
-}
-else{
-echo 'No ratings yet';
-}
-?></h4>
+<div style="display:inline">
+	<h4>Rating: <?php
+	if(!is_null($results['reviewScore'])){
+	echo $results['reviewScore'];
+	}
+	else{
+	echo 'No ratings yet';
+	}
+	?></h4>
+	
+</div>
 <p>
 <?php echo $results['description']; ?>
 </p>
