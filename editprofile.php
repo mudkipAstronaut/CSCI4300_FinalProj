@@ -115,7 +115,7 @@ if (!isset($_SESSION["uid"])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<?php include('header.php'); ?>
 </head>
 <body>
