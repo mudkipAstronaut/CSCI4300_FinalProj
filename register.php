@@ -17,7 +17,7 @@
 		if (empty($_POST['username'])) {
 			$nameErr = "*Name is required";
 		} else {
-			$name=$_POST['username'];
+			$name=str_replace('\'','\\\'',$_POST['username']);
 		}
 
 		// get email
@@ -34,7 +34,7 @@
 		if (empty($_POST['password'])) {
 			$passwordErr = "*Password is required";
 		} else {
-			$password=$_POST['password'];
+			$password=str_replace('\'','\\\'',$_POST['password']);
 		}
 
 		//Check if there are no errors

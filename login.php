@@ -12,8 +12,8 @@ session_start();
 		// get name
 		if (empty($_POST['username'])) {
 			$nameErr = "*Name is required";
-		} else {
-			$name=$_POST['username'];
+		}else {
+			$name=str_replace('\'','\\\'',$_POST['username']);
 		}
 
 		// get password
