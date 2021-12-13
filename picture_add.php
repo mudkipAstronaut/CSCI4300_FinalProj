@@ -19,6 +19,7 @@ if(!$noImage){
 		move_uploaded_file($_FILES['fileUpload']['tmp_name'], $targetPath);
 	
 		//gets placeID based on name, getting last placeID could introduce issues with simultaneous place addition
+		$name = str_replace('\'','\\\'',$name);
 		$getPlaceID = "SELECT placeID FROM places WHERE places.placeName = '$name'";
 		$s2 = $db->prepare($getPlaceID);
 		$s2->execute();

@@ -21,14 +21,14 @@ if (!isset($_SESSION["uid"])) {
 			$nameErr = "*Name is required";
 		} else {
 			//escape any apostrophes to prevent SQL errors
-			$name= str_replace('\'','\\\'',$_POST['placename']);
+			$name = str_replace('\'','\\\'',$_POST['placename']);
 		}
 
 		// get city
 		if (empty($_POST['city'])) {
 			$cityErr = "*City is required";
 		} else {
-			$city =$_POST['city'];
+			$city = str_replace('\'','\\\'',$_POST['city']);
 		}
 
         // get country

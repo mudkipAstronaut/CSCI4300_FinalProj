@@ -125,7 +125,7 @@ echo 'Added by [Deleted]';
 		  </p>
 		  <?php if ($loggedIn && $user_id == $img['userID']) : ?>
 		  <div style="display:inline-block;">
-			 <a href="<?php echo 'picture_del.php?place=81'.'&image='.$img['image']; ?>" class="deleteProfile" style="margin-left: 4px;margin-top: 0px;">Delete</a>
+			 <a href="<?php echo 'picture_del.php?place='.$place.'&image='.$img['image']; ?>" class="deleteProfile" style="margin-left: 4px;margin-top: 0px;">Delete</a>
 		  </div>
 		  <?php endif; ?>
 		  </div>
