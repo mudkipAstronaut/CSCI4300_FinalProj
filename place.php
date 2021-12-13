@@ -25,10 +25,15 @@ try {
 	} else $results = $results[0];
 } catch (PDOException $ex) {
 	if(!isset($_GET['logout'])) {
+		echo '<script>alert(\'placeID: '.$place.'\')</script>';
 		throw $ex;
-	}
+	} 
+		// echo '<script>alert(\'placeID: '.$place.'\')</script>';
 	echo $ex->getMessage();
 }
+
+//saving placeID for review.php
+$pid = $results['placeID'];
 
 //if this page was reached via the addPic button, it will run picture_add
 if($_SERVER["REQUEST_METHOD"] == "POST") {	
@@ -38,8 +43,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	include('picture_add.php');
 }
 
-//saving placeID for review.php
-$pid = $results['placeID'];
 ?>
 
 <!DOCTYPE html> 
@@ -122,7 +125,7 @@ echo 'Added by [Deleted]';
 		  </p>
 		  <?php if ($loggedIn && $user_id == $img['userID']) : ?>
 		  <div style="display:inline-block;">
-			 <a href="<?php echo 'picture_del.php?place='.$place.'&image='.$img['image']; ?>" class="deleteProfile" style="margin-left: 4px;margin-top: 0px;">Delete</a>
+			 <a href="<?php echo 'picture_del.php?place=81'.'&image='.$img['image']; ?>" class="deleteProfile" style="margin-left: 4px;margin-top: 0px;">Delete</a>
 		  </div>
 		  <?php endif; ?>
 		  </div>
