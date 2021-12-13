@@ -75,7 +75,7 @@ if (count($reviews) != 0) {
 		<input type="hidden" name="placeID" value="<?php echo $place; ?>"/>
 		<div style="margin-top: 5px;">
 			<label style="margin-left: 1em; padding-top: 8px;">Decimal score out of five:
-			<input type="number" step="0.1" name="score" style="margin-left: 1em; width: 50px;" id="rateNum">
+			<input type="number" step="0.1" name="score" style="margin-left: 1em; width: 50px;" id="rateNum" min="0" max="5"/>
 			</label>
 		</div>
 		<!-- <input type="text" name="written" id="revText" style="width: 98%; margin: 8px 10px;"/> -->

@@ -81,7 +81,7 @@ echo 'Added by [Deleted]';
 	$s2->execute();
 	$images = $s2->fetchAll();
 	$s2->closeCursor();
-
+	
 	$numImg = count($images);
 	$counter=1;
 	?>
@@ -103,6 +103,7 @@ echo 'Added by [Deleted]';
 		  ?>" alt="interesting" style="width:100%;">
 		  
 		  <div class="text">
+		  <p>
 		  <?php
 		  $userQ = 'SELECT username FROM users WHERE userID='. $img['userID'] .' LIMIT 1';
 		  $s2 = $db->prepare($userQ);
@@ -118,6 +119,12 @@ echo 'Added by [Deleted]';
 		  echo 'Added by [Deleted]';
 		  }
 		  ?>
+		  </p>
+		  <?php if ($loggedIn && $user_id == $img['userID']) : ?>
+		  <div style="display:inline-block;">
+			 <a href="<?php echo 'picture_del.php?place='.$place.'&image='.$img['image']; ?>" class="deleteProfile" style="margin-left: 4px;margin-top: 0px;">Delete</a>
+		  </div>
+		  <?php endif; ?>
 		  </div>
 	</div>
 
