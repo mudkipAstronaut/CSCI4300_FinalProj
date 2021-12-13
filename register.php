@@ -1,5 +1,9 @@
 <?php
+	session_start();
 
+	if (isset($_SESSION["uid"])) {
+		header('location: ../CSCI4300_FinalProj');
+	}
 	require('database.php');
 
     //Validation
