@@ -11,6 +11,7 @@ if(!$noImage){
 	//make sure same image isn't being uploaded to 
 	$checkSameFileName = "SELECT image FROM pictures WHERE image = :file";
 	$statement = $db->prepare($checkSameFileName);
+	$statement->bindValue(':file',$fileName);
 	$statement->execute();
 	$dupNames = $statement->fetchAll();
 	$statement->closeCursor();	

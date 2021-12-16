@@ -4,6 +4,7 @@ session_start();
 <?php
 require('database.php');
 
+//initialize values
 $places_place_id = filter_input(INPUT_GET, 'places.placeID',FILTER_VALIDATE_INT);
 $wishlist_place_id = filter_input(INPUT_GET, 'wishlist.placeID',FILTER_VALIDATE_INT);
 if(isset($_SESSION["loggedin"])) {

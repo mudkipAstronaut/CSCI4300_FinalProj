@@ -46,39 +46,47 @@ if (!isset($_SESSION["uid"])) {
 		if (!empty($_POST['desc'])) {
 			//escape any apostrophes to prevent SQL errors
 			// $desc = str_replace('\'','\\\'',$_POST['desc']);
-			$desc = $_POST['desc']);
+			$desc = $_POST['desc'];
 		}
 			
-
-        //Check for errors
-        if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
-            $inquery = "";
-			//inserting place with or without a description or image
-            if (empty($desc)) {
-                $inquery = "INSERT INTO places (placeName, city, country, userID)
-                VALUES (:name, :city, :country, :sessionid)";
-				$statement=$db->prepare($inquery);
-				$statement->bindValue(':name',$name);
-				$statement->bindValue(':city',$city);
-				$statement->bindValue(':country',$country);
-				$statement->bindValue(':sessionid',$sessionid);	
-            } else {
-                $inquery = "INSERT INTO places (placeName, city, country, description, userID)
-                VALUES (:name, :city, :country, :desc, :sessionid)";
-				$statement=$db->prepare($inquery);
-				$statement->bindValue(':name',$name);
-				$statement->bindValue(':city',$city);
-				$statement->bindValue(':country',$country);
-				$statement->bindValue(':sessionid',$sessionid);				
-				$statement->bindValue(':desc',$desc);				
-            }
-            // $data=$db->query($inquery);
-			$statement->execute();
-			
-			//addpicture to db
-			include('picture_add.php');	
-	    //header('Location: ../CSCI4300_FinalProj');
-        }
+		//check for redundancy
+		$checkRedundant = "SELECT placeName FROM places where placeName=:name";
+		$statement=$db->prepare($checkRedundant);
+		$statement->bindValue(':name',$name);
+		$statement->execute();
+		$placeCheck = $statement->fetch();
+		if(isset($placeCheck['placeName'])) $nameErr = "*This place already exists";
+		else {
+			//Check for errors
+			if (empty($nameErr) && empty($cityErr) && empty($countryErr)) {
+				$inquery = "";
+				//inserting place with or without a description or image
+				if (empty($desc)) {
+					$inquery = "INSERT INTO places (placeName, city, country, userID)
+					VALUES (:name, :city, :country, :sessionid)";
+					$statement=$db->prepare($inquery);
+					$statement->bindValue(':name',$name);
+					$statement->bindValue(':city',$city);
+					$statement->bindValue(':country',$country);
+					$statement->bindValue(':sessionid',$sessionid);	
+				} else {
+					$inquery = "INSERT INTO places (placeName, city, country, description, userID)
+					VALUES (:name, :city, :country, :desc, :sessionid)";
+					$statement=$db->prepare($inquery);
+					$statement->bindValue(':name',$name);
+					$statement->bindValue(':city',$city);
+					$statement->bindValue(':country',$country);
+					$statement->bindValue(':sessionid',$sessionid);				
+					$statement->bindValue(':desc',$desc);				
+				}
+				// $data=$db->query($inquery);
+				$statement->execute();
+				
+				//addpicture to db
+				include('picture_add.php');	
+			//header('Location: ../CSCI4300_FinalProj');
+			}
+		}
     }
 
 	if(isset($_COOKIE['rememberme'])) {

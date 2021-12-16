@@ -2,6 +2,7 @@
 session_start();
 ?>
 <?php
+//check loggin status
 if(isset($_SESSION["loggedin"])) {
   $user_id = $_SESSION["uid"];
 }
