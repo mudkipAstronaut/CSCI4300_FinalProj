@@ -30,6 +30,8 @@ We used the XAMPP Framework to test and develop the website locally.
 Our database accessor (found in `database.php`) was based on the class assignment 13
 but modified to fit our needs and our specific database.
 
+We used vanilla PHP and JavaScript to make the website.
+
 ## Folder Structure
 
 the main folder contains all the php files and forms. The `place_imgs` folder
