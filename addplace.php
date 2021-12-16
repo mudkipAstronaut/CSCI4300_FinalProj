@@ -21,14 +21,16 @@ if (!isset($_SESSION["uid"])) {
 			$nameErr = "*Name is required";
 		} else {
 			//escape any apostrophes to prevent SQL errors
-			$name = str_replace('\'','\\\'',$_POST['placename']);
+			// $name = str_replace('\'','\\\'',$_POST['placename']);
+			$name = $_POST['placename'];
 		}
 
 		// get city
 		if (empty($_POST['city'])) {
 			$cityErr = "*City is required";
 		} else {
-			$city = str_replace('\'','\\\'',$_POST['city']);
+			// $city = str_replace('\'','\\\'',$_POST['city']);
+			$city = $_POST['city'];
 		}
 
         // get country
@@ -36,13 +38,15 @@ if (!isset($_SESSION["uid"])) {
 			$countryErr = "*Country is required";
 		} else {
 			//escape any apostrophes to prevent SQL errors
-			$country = str_replace('\'','\\\'',$_POST['country']);
+			// $country = str_replace('\'','\\\'',$_POST['country']);
+			$country = $_POST['country'];
 		}
 
         // get description
 		if (!empty($_POST['desc'])) {
 			//escape any apostrophes to prevent SQL errors
-			$desc = str_replace('\'','\\\'',$_POST['desc']);
+			// $desc = str_replace('\'','\\\'',$_POST['desc']);
+			$desc = $_POST['desc']);
 		}
 			
 
@@ -52,12 +56,24 @@ if (!isset($_SESSION["uid"])) {
 			//inserting place with or without a description or image
             if (empty($desc)) {
                 $inquery = "INSERT INTO places (placeName, city, country, userID)
-                VALUES ('$name', '$city', '$country', '$sessionid')";
+                VALUES (:name, :city, :country, :sessionid)";
+				$statement=$db->prepare($inquery);
+				$statement->bindValue(':name',$name);
+				$statement->bindValue(':city',$city);
+				$statement->bindValue(':country',$country);
+				$statement->bindValue(':sessionid',$sessionid);	
             } else {
                 $inquery = "INSERT INTO places (placeName, city, country, description, userID)
-                VALUES ('$name', '$city', '$country', '$desc', '$sessionid')";				
+                VALUES (:name, :city, :country, :desc, :sessionid)";
+				$statement=$db->prepare($inquery);
+				$statement->bindValue(':name',$name);
+				$statement->bindValue(':city',$city);
+				$statement->bindValue(':country',$country);
+				$statement->bindValue(':sessionid',$sessionid);				
+				$statement->bindValue(':desc',$desc);				
             }
-            $data=$db->query($inquery);
+            // $data=$db->query($inquery);
+			$statement->execute();
 			
 			//addpicture to db
 			include('picture_add.php');	
@@ -67,8 +83,9 @@ if (!isset($_SESSION["uid"])) {
 
 	if(isset($_COOKIE['rememberme'])) {
 		// add user id to cookies
-		$idquery = "SELECT userID FROM users WHERE username='$name'";
+		$idquery = "SELECT userID FROM users WHERE username=:name";
 		$row = $db->prepare($idquery);
+		$row->bindValue(':name',$name);
 		$row->execute();
 		$id = $row->fetch();
 		$row->closeCursor();
