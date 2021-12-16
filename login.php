@@ -13,7 +13,8 @@ session_start();
 		if (empty($_POST['username'])) {
 			$nameErr = "*Name is required";
 		}else {
-			$name=str_replace('\'','\\\'',$_POST['username']);
+			// $name=str_replace('\'','\\\'',$_POST['username']);
+			$name=$_POST['username'];
 		}
 
 		// get password
@@ -31,8 +32,10 @@ session_start();
 		//Check if there are no errors
 		if (empty($nameErr) && empty($passwordErr)) {
 
-			$query="SELECT * FROM users WHERE username='$name' AND password='$password'";
-		
+			$query="SELECT * FROM users WHERE username=:name' AND password=:password";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':name',$name);
+			$statement->bindValue(':password',$password);
 			$data=$db->query($query);
 			if ($data->rowCount() >0) {
 				if ($check=='1') {

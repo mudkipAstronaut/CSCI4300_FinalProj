@@ -2,7 +2,7 @@
 $user_id = filter_input(INPUT_POST, 'userID');
 $place_id = filter_input(INPUT_POST, 'placeID');
 $rating_ = filter_input(INPUT_POST, 'score');
-$written_ = str_replace('\'','\\\'',filter_input(INPUT_POST, 'written'));
+$written_ = filter_input(INPUT_POST, 'written');
 
 require_once('database.php');
 

@@ -9,7 +9,7 @@ if(!$noImage){
 	$targetPath = $targetPath . $fileName;
 	
 	//make sure same image isn't being uploaded to 
-	$checkSameFileName = "SELECT image FROM pictures WHERE image = '$fileName'";
+	$checkSameFileName = "SELECT image FROM pictures WHERE image = :file";
 	$statement = $db->prepare($checkSameFileName);
 	$statement->execute();
 	$dupNames = $statement->fetchAll();

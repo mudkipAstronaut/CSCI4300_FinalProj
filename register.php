@@ -43,9 +43,10 @@
 			//Get registered date
 			$date = date("Y-m-d");
 			$query = "INSERT INTO Users (username, email, password, dateRegistered)
-			VALUES ('$name', '$email', '$password', '$date')";
+			VALUES (:name, :email, :password, :date)";
 		
-			$data=$db->query($query);
+			$statement=$db->prepare($query);
+			
 			header('Location: ../CSCI4300_FinalProj');
 		}
 	}

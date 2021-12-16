@@ -8,9 +8,12 @@ $written_ = str_replace('\'','\\\'',$written_);
 require_once('database.php');
 
 //update review 
-$update = "UPDATE reviews SET score = ".$rating_.", written = '".$written_.
-"' WHERE placeID = ".$place_id." AND userID = ".$user_id;
+$update = "UPDATE reviews SET score = :rating , written = :written WHERE placeID = :place AND userID = :user";
 $statement = $db->prepare($update);
+$statement->bindValue(':rating', $rating_);
+$statement->bindValue(':written', $written_);
+$stetement->bindValue(':place', $place_id);
+$stetement->bindValue(':user', $user_id);
 $statement->execute();
 
 //=========================

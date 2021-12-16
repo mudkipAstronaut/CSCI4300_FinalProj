@@ -4,8 +4,12 @@ $place_id = filter_input(INPUT_POST, 'placeID');
 
 require_once('database.php');
 
-$delete = "DELETE FROM reviews WHERE placeID = ".$place_id." AND userID = ".$user_id;
-$db->query($delete);
+$delete = "DELETE FROM reviews WHERE placeID = :place AND userID = :user";
+$statement = $db->prepare($delete);
+$stetement->bindValue(':place', $place_id);
+$stetement->bindValue(':user', $user_id);
+$stetement->execute();
+$statement->closeCursor();
 
 //=========================
 //update score 
