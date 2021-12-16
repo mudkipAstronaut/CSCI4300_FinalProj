@@ -32,19 +32,21 @@ session_start();
 		//Check if there are no errors
 		if (empty($nameErr) && empty($passwordErr)) {
 
-			$query="SELECT * FROM users WHERE username=:name' AND password=:password";
+			$query="SELECT * FROM users WHERE username=:name AND password=:password";
 			$statement = $db->prepare($query);
 			$statement->bindValue(':name',$name);
 			$statement->bindValue(':password',$password);
-			$data=$db->query($query);
-			if ($data->rowCount() >0) {
-				if ($check=='1') {
+			$statement->execute();
+			// $data=$db->query($query);
+			if ($statement->rowCount() >0) {
+				if (isset($check) && $check=='1') {
 					setcookie("rememberme", TRUE, time()+3600);
 				}
 				$_SESSION["loggedin"] = TRUE;
 				// add user id to cookies
-				$idquery = "SELECT userID FROM users WHERE username='$name'";
+				$idquery = "SELECT userID FROM users WHERE username=:name";
 				$row = $db->prepare($idquery);
+				$row->bindValue(':name',$name);
 				$row->execute();
 				$id = $row->fetch();
 				$row->closeCursor();
@@ -59,8 +61,9 @@ session_start();
 
 	if(isset($_COOKIE['rememberme'])) {
 		// add user id to cookies
-		$idquery = "SELECT userID FROM users WHERE username='$name'";
+		$idquery = "SELECT userID FROM users WHERE username=:name";
 		$row = $db->prepare($idquery);
+		$row->bindValue(':name',$name);
 		$row->execute();
 		$id = $row->fetch();
 		$row->closeCursor();
