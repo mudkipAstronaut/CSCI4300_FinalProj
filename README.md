@@ -9,7 +9,13 @@ user-generated database of travel locations, reviews and advice.
 
 ## Usage
 
-The entry point to the website is the `index.php` file
+The entry point to the website is the `index.php` file. 
+
+To access the website, create a new folder in XAMPP's htdocs folder and
+download the website repository into that folder. Then, open XAMPP and 
+start the Apache and MySQL servers. Finally, enter "https://localhost/[NewFolder]/"
+into your web browser. Firefox may give you a warning about the website, but
+this can be ignored.
 
 
 Users can login, register, edit and delete their accounts. They can add
